@@ -1208,18 +1208,30 @@ html:fullscreen #game .money div{
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
 }
 </style>
+<style>
+/* WINNERS: welcome page only — compact + mobile responsive */
+.welcome-winner-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0}
+#welcome .winner-side{
+ position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+ transform:none!important;width:auto!important;min-height:0!important;height:86px!important;
+ padding:7px!important;z-index:2!important;pointer-events:none!important;border-radius:14px!important
+}
+#welcome .winner-title{font-size:12px!important;padding-bottom:3px!important;margin-bottom:3px!important}
+#welcome .winner-names{height:57px!important;max-height:57px!important;overflow:hidden!important}
+#welcome .winner-track{gap:4px!important}
+#welcome .winner-name{height:24px!important;min-height:24px!important;padding:3px!important;font-size:11px!important}
+#welcome .winner-empty{padding-top:7px!important;font-size:10px!important}
+@media(max-width:700px){
+ .welcome-winner-row{gap:5px;margin:5px 0}
+ #welcome .winner-side{height:72px!important;padding:5px!important}
+ #welcome .winner-title{font-size:10px!important}
+ #welcome .winner-names{height:49px!important;max-height:49px!important}
+ #welcome .winner-name{height:20px!important;min-height:20px!important;font-size:9px!important}
+ #welcome .winner-empty{padding-top:5px!important;font-size:8px!important}
+}
+</style>
 </head>
 <body>
-<div id="winnerLeft" class="winner-side winner-left">
-  <div class="winner-title">🏆 WINNERS</div>
-  <div id="winnerLeftNames" class="winner-names">✨ अभी कोई विजेता नहीं ✨</div>
-</div>
-<div id="winnerRight" class="winner-side winner-right">
-  <div class="winner-title">🏆 WINNERS</div>
-  <div id="winnerRightNames" class="winner-names">✨ अभी कोई विजेता नहीं ✨</div>
-</div>
-
-
 <div id="welcome" class="overlay">
  <div class="panel welcome-premium">
   <div class="pm-badge"><div class="pm-star">✦</div><div><b>PM SHRI</b><span>विद्यालय</span></div></div>
@@ -1229,6 +1241,16 @@ html:fullscreen #game .money div{
   <h2 style="color:#ffd85a;margin:8px 0"><span id="quizClassTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span></h2>
   <p class="edition">✨ <b>CLASSROOM CHAMPIONS EDITION</b> ✨</p>
   <div class="welcome-cards"><div>📚<b> CLASS-WISE QUIZ</b><small>RBSE Classes 6–12 + Computer Science</small></div><div>👥<b> AUDIENCE</b><small>कक्षा की मदद</small></div><div>🏆<b> PRIZE LADDER</b><small>हर सही उत्तर पर अगला level</small></div></div>
+  <div class="welcome-winner-row" aria-label="Recent winners">
+   <div id="winnerLeft" class="winner-side winner-left">
+    <div class="winner-title">🏆 WINNERS</div>
+    <div id="winnerLeftNames" class="winner-names">✨ अभी कोई विजेता नहीं ✨</div>
+   </div>
+   <div id="winnerRight" class="winner-side winner-right">
+    <div class="winner-title">🏆 WINNERS</div>
+    <div id="winnerRightNames" class="winner-names">✨ अभी कोई विजेता नहीं ✨</div>
+   </div>
+  </div>
   <div class="rules"><b>🎯 खेल के नियम</b><ul>
 <li>चुनी गई कक्षा के अनुसार class-wise bilingual प्रश्न</li><li>हर सही प्रश्न पर prize ladder का अगला level unlock होगा</li><li>गलत उत्तर = Game Over</li><li>समय समाप्त होने पर भी Game Over</li><li>चुनी गई कक्षा के पूरे question bank के सभी प्रश्न सही होने पर maximum prize मिलेगा।</li></ul></div>
   <div class="class-choice">
