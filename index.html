@@ -1209,7 +1209,7 @@ html:fullscreen #game .money div{
 }
 </style>
 <style>
-/* WINNERS: welcome page only — compact + mobile responsive */
+/* WINNERS CARDS REMOVED */
 .welcome-winner-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0}
 #welcome .winner-side{
  position:relative!important;top:auto!important;left:auto!important;right:auto!important;
@@ -1241,16 +1241,6 @@ html:fullscreen #game .money div{
   <h2 style="color:#ffd85a;margin:8px 0"><span id="quizClassTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span></h2>
   <p class="edition">✨ <b>CLASSROOM CHAMPIONS EDITION</b> ✨</p>
   <div class="welcome-cards"><div>📚<b> CLASS-WISE QUIZ</b><small>RBSE Classes 6–12 + Computer Science</small></div><div>👥<b> AUDIENCE</b><small>कक्षा की मदद</small></div><div>🏆<b> PRIZE LADDER</b><small>हर सही उत्तर पर अगला level</small></div></div>
-  <div class="welcome-winner-row" aria-label="Recent winners">
-   <div id="winnerLeft" class="winner-side winner-left">
-    <div class="winner-title">🏆 WINNERS</div>
-    <div id="winnerLeftNames" class="winner-names">✨ अभी कोई विजेता नहीं ✨</div>
-   </div>
-   <div id="winnerRight" class="winner-side winner-right">
-    <div class="winner-title">🏆 WINNERS</div>
-    <div id="winnerRightNames" class="winner-names">✨ अभी कोई विजेता नहीं ✨</div>
-   </div>
-  </div>
   <div class="rules"><b>🎯 खेल के नियम</b><ul>
 <li>चुनी गई कक्षा के अनुसार class-wise bilingual प्रश्न</li><li>हर सही प्रश्न पर prize ladder का अगला level unlock होगा</li><li>गलत उत्तर = Game Over</li><li>समय समाप्त होने पर भी Game Over</li><li>चुनी गई कक्षा के पूरे question bank के सभी प्रश्न सही होने पर maximum prize मिलेगा।</li></ul></div>
   <div class="class-choice">
@@ -1855,6 +1845,7 @@ function registerFirstRightAnswer(){
 }
 
 function renderWinnerSides(){
+ return; /* winners cards removed */
  let winners=getFirstRightWinners();
  if(!winners.length){
    try{
