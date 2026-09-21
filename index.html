@@ -2,8 +2,8 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>PM SHRI SCHOOL CHAMPIONSHIP</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PM SHRI SCHOOL CHAMPIONSHIP — FINAL UPDATED</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#020625;color:#fff}
 body{background:radial-gradient(circle at 50% 30%,#1a419b,#08194f 48%,#020622);overflow-x:hidden}
@@ -86,8 +86,6 @@ header,.wrap{position:relative;z-index:1}
   #welcome .welcome-cards{grid-template-columns:repeat(3,1fr);gap:5px;margin:6px 0}
   #welcome .welcome-cards div{padding:6px 2px;font-size:12px}
   #welcome .welcome-cards small{font-size:8px}
-  #welcome .rules{font-size:11px;margin:6px 0;padding:6px}
-  #welcome .rules li{margin:2px 0}
   #welcome .name-label{font-size:13px}
   #welcome .panel input{font-size:15px;padding:9px;margin:3px 0 6px}
   #welcome .start{font-size:16px;padding:10px 20px}
@@ -102,8 +100,6 @@ header,.wrap{position:relative;z-index:1}
   #welcome .welcome-premium h1{font-size:18px;margin:3px 0}
   #welcome .welcome-premium h2{font-size:16px!important;margin:3px 0!important}
   #welcome .welcome-cards{margin:4px 0}
-  #welcome .rules{margin:4px 0;font-size:10px;padding:4px}
-  #welcome .rules li{margin:1px 0}
   #welcome .panel input{padding:7px;margin:2px 0 4px}
   #welcome .start{padding:8px 18px;font-size:15px}
   #welcome p:last-child{margin:3px 0 0!important;font-size:9px!important}
@@ -177,7 +173,7 @@ header,.wrap{position:relative;z-index:1}
 
 <style>
 /* FINAL HOME FIT: keep the original look, only reduce vertical footprint */
-@media(min-width:701px){#welcome .panel.welcome-premium{padding:13px 20px;max-height:calc(100vh - 10px)}#welcome .school-icon-row{margin:4px 0 0;font-size:23px}#welcome .welcome-premium h1{font-size:21px;margin:4px 0}#welcome .welcome-premium h2{margin:3px 0!important;font-size:17px!important}#welcome .edition{font-size:12px}.welcome-cards{margin:5px 0}.welcome-cards div{padding:6px 4px;font-size:13px}.rules{margin:5px 0;padding:7px}.rules li{margin:2px 0}.name-label{margin:4px 0 2px}.welcome-premium .panel input,.welcome-premium input{padding:9px;margin:3px 0 5px}.welcome-premium .start{padding:9px 22px;font-size:16px}.welcome-premium #recordsBtn{margin-top:4px!important}.welcome-premium p:last-child{margin:4px 0 0!important;font-size:10px!important}}
+@media(min-width:701px){#welcome .panel.welcome-premium{padding:13px 20px;max-height:calc(100vh - 10px)}#welcome .school-icon-row{margin:4px 0 0;font-size:23px}#welcome .welcome-premium h1{font-size:21px;margin:4px 0}#welcome .welcome-premium h2{margin:3px 0!important;font-size:17px!important}#welcome .edition{font-size:12px}.welcome-cards{margin:5px 0}.welcome-cards div{padding:6px 4px;font-size:13px}.name-label{margin:4px 0 2px}.welcome-premium .panel input,.welcome-premium input{padding:9px;margin:3px 0 5px}.welcome-premium .start{padding:9px 22px;font-size:16px}.welcome-premium #recordsBtn{margin-top:4px!important}.welcome-premium p:last-child{margin:4px 0 0!important;font-size:10px!important}}
 @media(max-height:720px) and (min-width:701px){#welcome .panel.welcome-premium{transform:scale(.91);transform-origin:center center;width:min(700px,96vw)}#welcome{padding:2px}}
 
 
@@ -1110,6 +1106,12 @@ html:fullscreen #game .money div{
   #game .team-turn{padding:3px;font-size:9px}
   #game .team-vs{font-size:14px}
 }
+
+
+/* TEAM BATTLE — manual team switching */
+.team-battle-box .team-card{cursor:pointer}
+.team-battle-box .team-card:active{transform:scale(.98)}
+.team-manual-note{grid-column:1/-1;text-align:center;font-size:11px;color:#ffd85a;font-weight:800;margin-top:2px}
 </style>
 
 <style>
@@ -1208,41 +1210,370 @@ html:fullscreen #game .money div{
   grid-template-columns:repeat(2,minmax(0,1fr))!important;
 }
 </style>
-<style>
-/* WINNERS CARDS REMOVED */
-.welcome-winner-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0}
-#welcome .winner-side{
- position:relative!important;top:auto!important;left:auto!important;right:auto!important;
- transform:none!important;width:auto!important;min-height:0!important;height:86px!important;
- padding:7px!important;z-index:2!important;pointer-events:none!important;border-radius:14px!important
+
+<style id="school-top-banner-fix">
+#schoolTopBanner{position:fixed;top:0;left:0;right:0;z-index:9999;text-align:center;padding:10px 14px 11px;background:linear-gradient(90deg,#120000,#3b0000,#120000);border-bottom:3px solid #ff3030;color:#ff2525;font-size:clamp(20px,3vw,34px);font-weight:1000;letter-spacing:1px;text-shadow:0 0 5px #fff,0 0 12px #ff0000,0 0 24px #ff0000;box-shadow:0 3px 18px rgba(255,0,0,.55);animation:schoolBlink 1s infinite alternate;line-height:1.15;}
+#schoolTopBanner span{display:inline-block;}
+@keyframes schoolBlink{0%,45%{opacity:1;filter:brightness(1.15)}55%,100%{opacity:.35;filter:brightness(.75)}}
+@media(max-width:700px){#schoolTopBanner{font-size:18px;padding:8px 7px 9px;letter-spacing:.3px}}
+#welcome .welcome-premium{padding-top:78px!important}
+#game{padding-top:0!important}
+#game>header{margin-top:64px!important}
+@media(max-width:700px){#game>header{margin-top:52px!important}}
+@media(max-height:600px) and (min-width:701px){#game>header{margin-top:54px!important}}
+</style>
+
+<style id="professional-school-header-final">
+/* PROFESSIONAL HEADER / NO-OVERLAP LAYOUT */
+#schoolTopBanner{
+  position:fixed!important;
+  top:0!important;left:0!important;right:0!important;
+  z-index:100000!important;
+  min-height:64px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:9px 24px!important;
+  background:linear-gradient(135deg,#06143d 0%,#0b225d 48%,#06143d 100%)!important;
+  border-bottom:3px solid #e6b93c!important;
+  color:#ff4a4a!important;
+  font-size:clamp(22px,3vw,34px)!important;
+  font-weight:1000!important;
+  letter-spacing:.5px!important;
+  line-height:1.15!important;
+  text-align:center!important;
+  text-shadow:0 0 2px #fff,0 0 8px rgba(255,65,65,.85),0 0 18px rgba(255,65,65,.38)!important;
+  box-shadow:0 5px 22px rgba(0,0,0,.38)!important;
+  animation:schoolHeaderGlow 2.2s ease-in-out infinite!important;
 }
-#welcome .winner-title{font-size:12px!important;padding-bottom:3px!important;margin-bottom:3px!important}
-#welcome .winner-names{height:57px!important;max-height:57px!important;overflow:hidden!important}
-#welcome .winner-track{gap:4px!important}
-#welcome .winner-name{height:24px!important;min-height:24px!important;padding:3px!important;font-size:11px!important}
-#welcome .winner-empty{padding-top:7px!important;font-size:10px!important}
+#schoolTopBanner:before,#schoolTopBanner:after{
+  content:"✦";
+  color:#ffd85a;
+  font-size:.55em;
+  margin:0 14px;
+  text-shadow:0 0 8px rgba(255,216,90,.75);
+  flex:0 0 auto;
+}
+#schoolTopBanner span{display:block!important;white-space:normal!important}
+@keyframes schoolHeaderGlow{
+  0%,100%{filter:brightness(1);text-shadow:0 0 2px #fff,0 0 8px rgba(255,65,65,.75),0 0 16px rgba(255,65,65,.28)}
+  50%{filter:brightness(1.08);text-shadow:0 0 3px #fff,0 0 12px rgba(255,65,65,1),0 0 25px rgba(255,65,65,.45)}
+}
+/* Welcome is placed BELOW the fixed header, never underneath it. */
+#welcome{
+  position:fixed!important;
+  top:64px!important;right:0!important;bottom:0!important;left:0!important;
+  inset:auto 0 0 0!important;
+  min-height:0!important;
+  padding:12px 14px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:hidden!important;
+}
+#welcome .panel.welcome-premium{
+  width:min(700px,96vw)!important;
+  max-height:calc(100vh - 88px)!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:18px 22px!important;
+  margin:0 auto!important;
+  border:2px solid #f1c84b!important;
+  border-radius:24px!important;
+  background:linear-gradient(160deg,rgba(15,42,105,.98),rgba(8,22,67,.99) 58%,rgba(18,25,76,.99))!important;
+  box-shadow:0 14px 45px rgba(0,0,0,.55),0 0 30px rgba(241,200,75,.14)!important;
+  scrollbar-width:thin;
+}
+#welcome .panel.welcome-premium::-webkit-scrollbar{width:6px}
+#welcome .panel.welcome-premium::-webkit-scrollbar-thumb{background:#d9ad37;border-radius:10px}
+#welcome .pm-badge{margin:0 auto 7px!important}
+#welcome .school-icon-row{margin:6px 0 2px!important}
+#welcome h1{margin:4px 0 2px!important;font-size:clamp(23px,3vw,31px)!important;line-height:1.15!important}
+#welcome h2{line-height:1.2!important}
+#welcome .gold-line{margin:5px auto!important}
+#welcome .welcome-cards{margin:7px 0!important}
+#welcome .class-choice{margin-top:7px!important}
+#welcome .name-label{margin:6px 0 3px!important}
+#welcome .panel input{margin:3px 0 7px!important}
+#welcome .pro-settings{margin:7px 0!important}
+#welcome .game-mode-big{
+  background:linear-gradient(135deg,#2636b9,#1557c8 45%,#0b8f95)!important;
+  border:2px solid #f1c84b!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.28)!important;
+}
+#welcome .start{margin-top:4px!important}
 @media(max-width:700px){
- .welcome-winner-row{gap:5px;margin:5px 0}
- #welcome .winner-side{height:72px!important;padding:5px!important}
- #welcome .winner-title{font-size:10px!important}
- #welcome .winner-names{height:49px!important;max-height:49px!important}
- #welcome .winner-name{height:20px!important;min-height:20px!important;font-size:9px!important}
- #welcome .winner-empty{padding-top:5px!important;font-size:8px!important}
+  #schoolTopBanner{min-height:52px!important;font-size:18px!important;padding:7px 10px!important;letter-spacing:.2px!important}
+  #schoolTopBanner:before,#schoolTopBanner:after{margin:0 6px;font-size:.6em}
+  #welcome{top:52px!important;padding:8px!important}
+  #welcome .panel.welcome-premium{width:min(680px,97vw)!important;max-height:calc(100vh - 64px)!important;padding:13px 13px!important;border-radius:20px!important}
+  #welcome .pm-badge{padding:5px 13px!important}
+  #welcome .school-icon-row{font-size:22px!important}
+  #welcome h1{font-size:21px!important}
+  #welcome h2{font-size:17px!important}
+}
+@media(max-height:600px) and (min-width:701px){
+  #schoolTopBanner{min-height:54px!important;font-size:22px!important;padding:6px 16px!important}
+  #welcome{top:54px!important;padding:7px!important}
+  #welcome .panel.welcome-premium{max-height:calc(100vh - 64px)!important;padding:10px 18px!important}
 }
 </style>
+
+
+<style id="premium-gold-teal-theme">
+/* PREMIUM SCHOOL THEME — navy + royal blue + teal + warm gold */
+:root{
+  --pm-navy:#071536;
+  --pm-blue:#102b68;
+  --pm-blue2:#173f88;
+  --pm-teal:#0b8f86;
+  --pm-teal2:#12b8a6;
+  --pm-gold:#f4c542;
+  --pm-gold2:#ffd968;
+  --pm-white:#f8fbff;
+}
+body{
+  background:radial-gradient(circle at 50% -10%,#173f88 0%,#0b1f50 42%,#050d25 100%) !important;
+}
+#schoolTopBanner{
+  background:linear-gradient(90deg,#06132f 0%,#0b2b61 38%,#0a6f70 68%,#06132f 100%) !important;
+  border-bottom:2px solid var(--pm-gold) !important;
+  color:var(--pm-gold2) !important;
+  text-shadow:0 0 5px rgba(255,217,104,.45),0 0 16px rgba(18,184,166,.28) !important;
+  box-shadow:0 4px 22px rgba(0,0,0,.42),0 1px 12px rgba(244,197,66,.14) !important;
+  animation:premiumSchoolGlow 3.2s ease-in-out infinite !important;
+}
+#schoolTopBanner:before,#schoolTopBanner:after{
+  color:var(--pm-gold2) !important;
+  text-shadow:0 0 8px rgba(244,197,66,.7) !important;
+}
+@keyframes premiumSchoolGlow{
+  0%,100%{filter:brightness(1);text-shadow:0 0 5px rgba(255,217,104,.38),0 0 15px rgba(18,184,166,.22)}
+  50%{filter:brightness(1.07);text-shadow:0 0 7px rgba(255,217,104,.7),0 0 22px rgba(18,184,166,.34)}
+}
+#welcome .panel.welcome-premium{
+  background:linear-gradient(150deg,rgba(8,25,62,.99),rgba(13,39,91,.99) 48%,rgba(7,55,67,.99)) !important;
+  border:2px solid rgba(244,197,66,.95) !important;
+  box-shadow:0 18px 50px rgba(0,0,0,.58),0 0 28px rgba(18,184,166,.10) !important;
+}
+#welcome .pm-badge{
+  background:linear-gradient(135deg,#102b68,#0a6f70) !important;
+  border-color:var(--pm-gold) !important;
+  box-shadow:0 5px 18px rgba(0,0,0,.28),0 0 14px rgba(244,197,66,.15) !important;
+}
+#welcome .pm-badge b,#welcome h1,#welcome h2,
+#welcome .class-choice-title{color:var(--pm-gold2) !important}
+#welcome .edition{color:#a9e7df !important}
+#welcome .gold-line{background:linear-gradient(90deg,transparent,var(--pm-gold),transparent) !important}
+#welcome .welcome-cards>div{
+  background:linear-gradient(145deg,#102b68,#0a5265) !important;
+  border-color:rgba(244,197,66,.62) !important;
+  box-shadow:0 5px 15px rgba(0,0,0,.22) !important;
+}
+#welcome .welcome-cards small{color:#c9d8ee !important}
+#welcome .class-choice{
+  background:linear-gradient(145deg,#10265b,#183b78) !important;
+  border-color:var(--pm-gold) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 8px 20px rgba(0,0,0,.25) !important;
+}
+#welcome .class-choice-btn{
+  background:linear-gradient(145deg,#10285e,#173b7a) !important;
+  border-color:#6c91d8 !important;
+  color:#f5f8ff !important;
+}
+#welcome .class-choice-btn:hover{border-color:var(--pm-gold2) !important;transform:translateY(-1px)}
+#welcome .class-choice-btn.selected{
+  background:linear-gradient(145deg,#d49e16,#f4c542) !important;
+  border-color:#ffeaa2 !important;
+  color:#101b3a !important;
+  box-shadow:0 5px 16px rgba(244,197,66,.32) !important;
+}
+#welcome #classChoiceInfo{color:#d7e1f3 !important}
+#welcome .name-label{color:#dce9ff !important}
+#welcome #nameInput{
+  background:#f8fbff !important;color:#172342 !important;border-color:var(--pm-gold) !important;
+}
+#welcome .game-mode-big{
+  background:linear-gradient(135deg,#123a88 0%,#0d6f7a 55%,#0b9b8d 100%) !important;
+  border:2px solid var(--pm-gold) !important;
+  box-shadow:0 9px 24px rgba(0,0,0,.32),0 0 18px rgba(18,184,166,.13) !important;
+}
+#welcome .game-mode-big>b{color:#fff !important;text-shadow:0 2px 5px rgba(0,0,0,.3)}
+#welcome .game-mode-big select{
+  background:#071b43 !important;color:#fff !important;border-color:#90b3ea !important;
+}
+#welcome .start{
+  background:linear-gradient(135deg,#d69f18,#f4c542 52%,#d69f18) !important;
+  color:#101b3a !important;
+  border:1px solid #ffeaa2 !important;
+  box-shadow:0 7px 18px rgba(244,197,66,.22) !important;
+}
+#welcome #recordsBtn{background:linear-gradient(135deg,#123a88,#0d6f7a) !important;border-color:#7fa5e8 !important;color:#fff !important}
+#welcome .panel p:last-child{color:#c2cee3 !important}
+</style>
+
+<style>
+/* Premium student competition badge */
+#welcome .pm-badge{
+  width:auto!important;
+  max-width:520px!important;
+  min-width:330px!important;
+  min-height:74px!important;
+  margin:4px auto 12px!important;
+  padding:10px 28px!important;
+  box-sizing:border-box!important;
+  justify-content:center!important;
+  gap:14px!important;
+  border:2px solid #f4c95d!important;
+  border-radius:24px!important;
+  background:linear-gradient(135deg,rgba(20,37,84,.96),rgba(8,126,139,.88))!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.25),0 0 18px rgba(244,201,93,.28)!important;
+}
+#welcome .pm-badge b{
+  font-size:clamp(18px,2.3vw,27px)!important;
+  color:#ffe08a!important;
+  letter-spacing:1.5px!important;
+  line-height:1.1!important;
+}
+#welcome .pm-badge span{
+  margin-top:4px!important;
+  font-size:clamp(10px,1.2vw,14px)!important;
+  color:#ffffff!important;
+  letter-spacing:1.2px!important;
+  font-weight:800!important;
+}
+#welcome .pm-star{
+  font-size:clamp(23px,3vw,34px)!important;
+  color:#ffe08a!important;
+  filter:drop-shadow(0 0 5px rgba(244,201,93,.55));
+}
+@media(max-width:520px){
+  #welcome .pm-badge{min-width:0!important;width:92%!important;min-height:66px!important;padding:8px 14px!important;gap:8px!important}
+  #welcome .pm-badge b{font-size:17px!important;letter-spacing:.8px!important}
+  #welcome .pm-badge span{font-size:9px!important;letter-spacing:.5px!important}
+}
+<style>
+/* FINAL POINT SYSTEM + RESPONSIVE CONTROL BAR — CLOSE ALL ONLY */
+#closeAllGroup{position:fixed;left:18px;bottom:18px;z-index:99999;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#closeAllGroup button{min-height:56px;padding:0 18px;border:3px solid #ffd85a;border-radius:16px;color:#fff;font-size:17px;font-weight:1000;cursor:pointer;box-shadow:0 7px 24px rgba(0,0,0,.5);touch-action:manipulation}
+#closeAllGroup #closeAllBtn{position:static!important;min-width:0!important;height:56px!important;background:linear-gradient(145deg,#c92d3d,#77121d)!important}
+.close-choice-box{max-width:650px}
+.close-choice-actions{gap:12px!important;margin-top:18px}
+@media(max-width:700px){#closeAllGroup{left:8px;bottom:8px;right:8px;gap:6px}#closeAllGroup button{flex:1;min-width:0;min-height:50px;padding:0 9px;font-size:13px;border-width:2px;border-radius:13px}}
+@media(max-width:430px){#closeAllGroup{display:grid;grid-template-columns:1fr 1fr}#closeAllGroup button{font-size:11px}}
+@media(min-width:1600px){#game .wrap{max-width:1500px!important}#game #question{font-size:clamp(22px,1.6vw,34px)!important}#game .option{font-size:clamp(17px,1.15vw,24px)!important;min-height:58px!important}}
+@media(min-width:2000px){#game .wrap{max-width:1800px!important}#game .option{min-height:68px!important}}
+@media(max-height:600px){#closeAllGroup button{min-height:42px;font-size:11px}}
+</style>
+
+<style id="final-controls-and-header-fix">
+/* FINAL CONTROL FIX: always-visible Close All + reversible Full Screen */
+#closeAllGroup{
+  position:fixed!important;
+  left:max(12px,env(safe-area-inset-left))!important;
+  bottom:max(12px,env(safe-area-inset-bottom))!important;
+  z-index:2147483646!important;
+  display:flex!important;
+  gap:8px!important;
+  align-items:center!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+#closeAllGroup button{
+  position:relative!important;
+  z-index:2147483647!important;
+  min-height:52px!important;
+  padding:0 16px!important;
+  border:2px solid #ffd85a!important;
+  border-radius:14px!important;
+  font-size:14px!important;
+  font-weight:1000!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.55)!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+#closeAllGroup #closeAllBtn{background:linear-gradient(145deg,#c92d3d,#77121d)!important}
+
+#fullscreenFloat{
+  position:fixed!important;
+  top:max(12px,env(safe-area-inset-top))!important;
+  right:max(12px,env(safe-area-inset-right))!important;
+  z-index:2147483647!important;
+  min-width:132px!important;
+  min-height:48px!important;
+  padding:0 14px!important;
+  border:2px solid #ffd85a!important;
+  border-radius:14px!important;
+  background:linear-gradient(145deg,#245bc9,#102b72)!important;
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:1000!important;
+  cursor:pointer!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.55)!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+#fullscreenFloat:hover{filter:brightness(1.1);transform:scale(1.02)}
+html:fullscreen #fullscreenFloat{background:linear-gradient(145deg,#159b52,#086633)!important}
+
+/* Compact game header: school name and class title stay visually together. */
+#game>header{
+  padding:7px 8px!important;
+  border-bottom-width:2px!important;
+  line-height:1.05!important;
+}
+#game>header .logo{font-size:clamp(18px,2.1vw,26px)!important;line-height:1.08!important}
+#game>header .logo span{font-size:clamp(11px,1.25vw,16px)!important;line-height:1.05!important}
+
+/* Keep fixed controls visible in fullscreen and on short screens. */
+html:fullscreen #closeAllGroup{bottom:max(10px,env(safe-area-inset-bottom))!important}
+html:fullscreen #fullscreenFloat{top:max(10px,env(safe-area-inset-top))!important}
+@media(max-width:700px){
+  #closeAllGroup{left:7px!important;right:7px!important;bottom:max(7px,env(safe-area-inset-bottom))!important;gap:6px!important}
+  #closeAllGroup button{flex:1 1 0!important;min-width:0!important;min-height:48px!important;padding:0 8px!important;font-size:12px!important}
+  #fullscreenFloat{right:7px!important;top:max(7px,env(safe-area-inset-top))!important;min-width:108px!important;min-height:44px!important;padding:0 9px!important;font-size:12px!important}
+  #game>header{padding:5px 5px!important}
+  #game>header .logo{font-size:16px!important}
+  #game>header .logo span{font-size:10px!important}
+}
+@media(max-width:430px){
+  #closeAllGroup{display:grid!important;grid-template-columns:1fr 1fr!important}
+  #closeAllGroup button{font-size:10px!important}
+  #fullscreenFloat{min-width:96px!important;font-size:10px!important}
+}
+</style>
+
+<style id="live-score-only">
+/* LIVE SCORE ONLY — winner marquee/cards removed completely. */
+.winner-marquee,.winner-side,.winner-left,.winner-right,.winner-title,.winner-names,.winner-track,.winner-name,.winner-empty{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+.live-score-marquee{display:block!important;width:100%;height:28px;line-height:28px;overflow:hidden!important;margin:2px auto 0;padding:0 12px;border:2px solid rgba(255,216,90,.65);border-radius:14px;background:linear-gradient(90deg,rgba(18,53,134,.92),rgba(7,24,70,.92));color:#ffd85a;font-size:15px;font-weight:1000;white-space:nowrap;text-shadow:0 0 9px rgba(255,216,90,.35);box-sizing:border-box;}
+.live-score-marquee.single-mode{border-color:#ffd85a;background:linear-gradient(90deg,rgba(65,48,5,.96),rgba(12,30,76,.96));color:#ffe78a;box-shadow:0 0 15px rgba(255,216,90,.22);}
+.live-score-marquee.team-mode{border-color:#79dfff;background:linear-gradient(90deg,rgba(4,65,93,.96),rgba(35,18,84,.96));box-shadow:0 0 16px rgba(79,195,255,.22);}
+.live-score-marquee .live-a{color:#63f0c0;font-weight:1000;text-shadow:0 0 9px rgba(99,240,192,.6);}
+.live-score-marquee .live-b{color:#ff9be9;font-weight:1000;text-shadow:0 0 9px rgba(255,155,233,.55);}
+.live-score-marquee .live-vs{color:#ffd85a;font-weight:1000;padding:0 10px;}
+.live-score-marquee .live-sep{color:#dbe8ff;padding:0 9px;}
+.live-score-marquee .live-single{color:#ffe78a;font-weight:1000;}
+@media(max-width:900px){.live-score-marquee{height:24px;line-height:24px;font-size:12px;border-radius:12px;padding:0 8px}.live-score-marquee .live-vs{padding:0 6px}.live-score-marquee .live-sep{padding:0 5px;}}
+@media(max-width:700px){.live-score-marquee{height:20px;line-height:20px;font-size:9px;border-width:1px;border-radius:10px;padding:0 5px}.live-score-marquee .live-vs{padding:0 4px}.live-score-marquee .live-sep{padding:0 3px;}}
+@media(max-height:650px){.live-score-marquee{height:19px;line-height:19px;font-size:9px;margin-top:1px;}}
+html:fullscreen .live-score-marquee{height:22px;line-height:22px;font-size:11px;margin-top:1px;}
+</style>
 </head>
+</style>
 <body>
+<div id="schoolTopBanner" aria-label="School Name">🏫 <span>पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</span> 🏫</div>
+
 <div id="welcome" class="overlay">
  <div class="panel welcome-premium">
-  <div class="pm-badge"><div class="pm-star">✦</div><div><b>PM SHRI</b><span>विद्यालय</span></div></div>
+  <div class="pm-badge"><div class="pm-star">🏆</div><div><b>KNOWLEDGE BATTLE</b><span>ज्ञान • आत्मविश्वास • विजय</span></div><div class="pm-star">🏆</div></div>
   <div class="school-icon-row"><span>🏫</span><span>📚</span><span>🏆</span><span>🌟</span><span>🎓</span></div>
   <h1 style="color:#ffd85a;letter-spacing:1.5px">PM SHRI SCHOOL CHAMPIONSHIP</h1><h2 style="color:#fff;margin:4px 0 8px;font-size:18px">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</h2>
   <div class="gold-line"></div>
   <h2 style="color:#ffd85a;margin:8px 0"><span id="quizClassTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span></h2>
   <p class="edition">✨ <b>CLASSROOM CHAMPIONS EDITION</b> ✨</p>
-  <div class="welcome-cards"><div>📚<b> CLASS-WISE QUIZ</b><small>RBSE Classes 6–12 + Computer Science</small></div><div>👥<b> AUDIENCE</b><small>कक्षा की मदद</small></div><div>🏆<b> PRIZE LADDER</b><small>हर सही उत्तर पर अगला level</small></div></div>
-  <div class="rules"><b>🎯 खेल के नियम</b><ul>
-<li>चुनी गई कक्षा के अनुसार class-wise bilingual प्रश्न</li><li>हर सही प्रश्न पर prize ladder का अगला level unlock होगा</li><li>गलत उत्तर = Game Over</li><li>समय समाप्त होने पर भी Game Over</li><li>चुनी गई कक्षा के पूरे question bank के सभी प्रश्न सही होने पर maximum prize मिलेगा।</li></ul></div>
+  <div class="welcome-cards"><div>📚<b> CLASS-WISE QUIZ</b><small>RBSE Classes 6–12 + Computer Science</small></div><div>👥<b> AUDIENCE</b><small>कक्षा की मदद</small></div><div>⭐<b> POINTS LADDER</b><small>हर सही उत्तर = 5.00 Points</small></div></div>
+
   <div class="class-choice">
  <div class="class-choice-title">📚 अपनी कक्षा चुनें</div>
  <div class="class-choice-buttons"><button id="computerScienceBtn" class="class-choice-btn" type="button">💻 COMPUTER SCIENCE</button><button id="class6Btn" class="class-choice-btn" type="button">📘 CLASS 6</button><button id="class7Btn" class="class-choice-btn" type="button">📘 CLASS 7</button><button id="class8Btn" class="class-choice-btn" type="button">📘 CLASS 8</button><button id="class9Btn" class="class-choice-btn" type="button">📘 CLASS 9</button><button id="class10Btn" class="class-choice-btn selected" type="button">🎓 CLASS 10</button><button id="class11Btn" class="class-choice-btn" type="button">🎓 CLASS 11</button><button id="class12Btn" class="class-choice-btn" type="button">🎓 CLASS 12</button></div>
@@ -1250,21 +1581,19 @@ html:fullscreen #game .money div{
 </div>
 <label id="nameLabel" for="nameInput" class="name-label">🎓 विद्यार्थी का नाम दर्ज करें</label>
   <input id="nameInput" type="text" maxlength="40" autocomplete="off" placeholder="✍️ यहाँ अपना नाम लिखें…" aria-label="विद्यार्थी का नाम">
-  <div class="pro-settings">
-   <div><b>🎮 GAME MODE</b><select id="gameMode"><option value="classic">🏆 Classic — 50 Questions</option><option value="speed">⚡ Speed Round — 10 Questions</option><option value="team">👥 Team Battle — 2 Teams</option></select></div>
-   <div><b>🧠 QUESTION ORDER</b><select id="questionOrder"><option value="ladder">📈 RBSE Ladder Order</option><option value="random">🎲 Random Order</option></select></div>
-   <div><b>🎙️ VOICE HOST</b><label class="switchline"><input id="voiceHost" type="checkbox"> Host announcements</label></div>
-  </div>
-  <div id="teamNames" class="team-names hidden"><input id="teamA" maxlength="24" placeholder="TEAM A नाम"><input id="teamB" maxlength="24" placeholder="TEAM B नाम"></div>
+   <div class="pro-settings">
+    <div class="game-mode-big"><b>🎮 GAME MODE</b><select id="gameMode"><option value="classic">👤 SINGLE PERSON BATTLE</option><option value="team">👥 TEAM BATTLE</option></select></div>
+   </div>
+   <div id="teamNames" class="team-names hidden"><input id="teamA" maxlength="24" placeholder="TEAM A नाम"><input id="teamB" maxlength="24" placeholder="TEAM B नाम"></div>
   <button id="startBtn" class="start name-start" type="button">🚀 नाम दर्ज करें और खेल शुरू करें</button>
-  <button id="recordsBtn" class="btn gold" type="button" style="margin-top:6px;width:100%;font-size:14px;padding:8px">🏅 PARTICIPATED STUDENTS & PRIZE RECORDS</button>
+  <button id="recordsBtn" class="btn gold" type="button" style="margin-top:6px;width:100%;font-size:14px;padding:8px">🏅 PARTICIPATED STUDENTS & POINT RECORDS</button>
   <div id="recentRecords" style="margin-top:6px;font-size:11px;color:#fff;opacity:.9"></div>
   <p style="opacity:.7;font-size:13px">Start के बाद Intro → Reading → Answer phase. नीचे Game Mode चुनें।</p>
  </div>
 </div>
 
 <div id="recordsModal" class="modal hidden"><div class="modalbox" style="max-width:760px;max-height:82vh;overflow:auto">
- <h2 style="color:#ffd85a">🏅 PARTICIPATED STUDENTS & PRIZE RECORDS</h2>
+ <h2 style="color:#ffd85a">🏅 PARTICIPATED STUDENTS & POINT RECORDS</h2>
  <p class="record-help">🧹 Testing के नाम हटाने के लिए नीचे records select करें। <b>KEEP SELECTED</b> करने पर केवल चुने हुए records बचेंगे।</p>
  <div id="recordsTable" style="margin-top:10px"></div>
  <div class="record-actions">
@@ -1274,13 +1603,23 @@ html:fullscreen #game .money div{
  </div>
  <button id="closeRecords" class="btn blue" type="button" style="margin-top:12px">✖ बंद करें</button>
 </div></div>
-
-
-<div id="timingGuide" class="timing-guide"><div>📖 प्रश्न पढ़ने का समय: 5 सेकंड</div><div>⏱️ उत्तर देने का समय: 20 सेकंड</div></div>
-<button id="closeAllBtn" type="button" title="Close current game and return to first page">🏠 CLOSE ALL</button>
-<button id="pauseGameFloat" type="button" onclick="pauseGame()">⏸️ <span>PAUSE GAME</span></button>
+<div id="closeAllChoice" class="modal hidden">
+  <div class="modalbox close-choice-box">
+    <h2 style="color:#ffd85a">🎮 GAME CONTROL</h2>
+    <p style="font-size:20px;font-weight:900">क्या आप current game को continue करना चाहते हैं?</p>
+    <div class="center close-choice-actions">
+      <button id="continueGameBtn" class="btn green gameover-choice" type="button">▶️ CONTINUE GAME</button>
+      <button id="confirmCloseAllBtn" class="btn red gameover-choice" type="button">🏠 CLOSE ALL</button>
+    </div>
+  </div>
+</div>
+<div id="closeAllGroup">
+  <button id="closeAllBtn" type="button" title="Close current game and return to first page">🏠 CLOSE ALL</button>
+</div>
+<button id="fullscreenFloat" type="button" title="Toggle full screen">⛶ FULL SCREEN</button>
+<button id="pauseGameFloat" type="button">⏸️ <span>PAUSE GAME</span></button>
 <div id="game" class="hidden">
-<header><div class="logo">🏆 पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा<br><span id="gameHeaderTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span></div></header>
+<header><div class="logo">🏆 पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा<br><span id="gameHeaderTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span><br><marquee id="liveScoreMarquee" class="live-score-marquee single-mode" behavior="scroll" direction="left" scrollamount="5" scrolldelay="45">📊 LIVE SCORE • अभी game शुरू नहीं हुआ</marquee></div></header>
 <div class="wrap">
  <div class="meta">
  <div class="student-card"><span class="student-label">🎓 STUDENT NAME</span><div id="player" class="player">👤 विद्यार्थी</div><div id="level" class="level"></div></div>
@@ -1290,19 +1629,20 @@ html:fullscreen #game .money div{
   <div id="teamCardA" class="team-card">
     <span class="team-tag">TEAM A</span>
     <b id="gameTeamA">TEAM A</b>
-    <small>Score: <strong id="teamScoreA">0</strong></small><em id="teamPrizeA" class="team-prize">💰 Prize ₹0</em>
+    <small>Score: <strong id="teamScoreA">0</strong></small><em id="teamPrizeA" class="team-prize">⭐ Points 0</em>
   </div>
   <div class="team-vs">VS</div>
   <div id="teamCardB" class="team-card">
     <span class="team-tag">TEAM B</span>
     <b id="gameTeamB">TEAM B</b>
-    <small>Score: <strong id="teamScoreB">0</strong></small><em id="teamPrizeB" class="team-prize">💰 Prize ₹0</em>
+    <small>Score: <strong id="teamScoreB">0</strong></small><em id="teamPrizeB" class="team-prize">⭐ Points 0</em>
   </div>
   <div id="teamTurn" class="team-turn">🎯 TEAM A की बारी</div>
+  <div class="team-manual-note">👆 Team बदलना हो तो ऊपर TEAM A / TEAM B पर manually click करें</div>
 </div>
 <div class="hostbar"><span class="badge">🎙️ HOT SEAT</span><span class="badge">👥 LIVE AUDIENCE</span><span class="badge">🏫 CLASSROOM KBC</span></div>
 <div class="scorecard">
- <div class="score earned-big"><span>💰 अर्जित राशि</span><b id="earned">₹0</b></div>
+ <div class="score earned-big"><span>⭐ अर्जित POINTS</span><b id="earned">0.00 Points</b></div>
  <div class="score"><span>प्रश्न</span><b id="miniQ">1/10</b></div>
  <div class="score"><span>लाइफलाइन</span><b id="lifeCount">3</b></div>
  <div class="score"><span>MODE / TEAM</span><b id="modeLabel">CLASSIC</b></div>
@@ -1316,6 +1656,7 @@ html:fullscreen #game .money div{
  <div class="controls">
   <button id="fifty" class="btn gold" type="button">🌓 50:50</button>
   <button id="poll" class="btn gold" type="button">👥 Audience Poll</button>
+  <button id="teacherSupport" class="btn gold" type="button">🧑‍🏫 Teacher Support</button>
   
   <button id="bg" class="btn blue" type="button">🎶 Background ON</button>
   <button id="timerToggle" class="btn blue" type="button">⏸️ Timer Stop</button>
@@ -1331,16 +1672,16 @@ html:fullscreen #game .money div{
     <div class="jump-title">🔢 किसी भी प्रश्न पर सीधे Jump करें</div>
     <div id="questionJump" class="jump-buttons"></div>
   </div>
- <div class="ladder"><h3>💰 Prize Money</h3><div id="money" class="money"></div></div>
+ <div class="ladder"><h3>⭐ POINTS LADDER — 5.00 POINTS / CORRECT</h3><div id="money" class="money"></div></div>
 </div>
 </div>
 
 <div id="lifelineChoiceModal" class="modal hidden"><div class="modalbox" style="max-width:520px;text-align:center">
  <h2>🆘 CHOOSE LIFELINE</h2>
- <p id="lifelineChoiceStatus" style="font-weight:900;color:#ffd85a">पहला 50:50 एक बार उपलब्ध • फिर Optional: Audience Poll OR 50:50</p>
+ <p id="lifelineChoiceStatus" style="font-weight:900;color:#ffd85a">50:50 — पूरे game में 1 बार • Teacher Support — पूरे game में 1 बार • Audience Poll — पूरे game में 3 बार</p>
  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px">
-  <button id="choose5050" class="btn gold" type="button" style="font-size:18px;padding:14px">50:50<br><small>1 compulsory + optional later</small></button>
-  <button id="choosePoll" class="btn gold" type="button" style="font-size:18px;padding:14px">👥 AUDIENCE POLL OR 50:50<br><small>1 OPTIONAL CHANCE</small></button>
+  <button id="choose5050" class="btn gold" type="button" style="font-size:18px;padding:14px">50:50<br><small>1 time in whole game</small></button>
+  <button id="choosePoll" class="btn gold" type="button" style="font-size:18px;padding:14px">👥 AUDIENCE POLL<br><small>3 times in whole game</small></button>
  </div>
  <button id="closeLifelineChoice" class="btn blue" type="button" style="margin-top:12px">CANCEL / वापस</button>
 </div></div>
@@ -1610,13 +1951,15 @@ const CLASS12_QUESTIONS=[
  {q:"भारतीय राष्ट्रीय कांग्रेस की स्थापना कब हुई? / When was the Indian National Congress founded?",o:["1885 / 1885","1905 / 1905","1919 / 1919","1947 / 1947"],a:0}];
 let QUESTIONS=CLASS10_QUESTIONS;
 let selectedClass="10";
-const PRIZE=["₹5","₹10","₹15","₹20","₹25","₹30","₹35","₹40","₹45","₹50","₹55","₹60","₹65","₹70","₹75","₹80","₹85","₹90","₹95","₹100","₹105","₹110","₹115","₹120","₹125","₹130","₹135","₹140","₹145","₹150","₹155","₹160","₹165","₹170","₹175","₹180","₹185","₹190","₹195","₹200","₹205","₹210","₹215","₹220","₹225","₹230","₹235","₹240","₹245","₹250"];
+const PRIZE=Array.from({length:50},(_,i)=>((i+1)*5).toFixed(2)+" Points");
 
 let nextMode=false;
-let current=0,selected=-1,locked=false,time=20,timer=null,earned="₹0",audio=null,bgOn=false,bgTimer=null,readTimer=null,reading=true,musicEnabled=true,currentMusicId=null;
+let current=0,selected=-1,locked=false,time=20,timer=null,earned="0.00 Points",audio=null,bgOn=false,bgTimer=null,readTimer=null,reading=true,musicEnabled=true,currentMusicId=null;
 let correctQuestions=new Set(),correctCount=0;
+let teamWrongQuestions=new Set();
 let used5050=false,usedPollCount=0,votes=[0,0,0,0];
-let teamUsed5050=[false,false],teamPollCount=[0,0];
+let teamUsed5050=[false,false],teamPollCount=[0,0],teamUsedTeacher=[false,false];
+let usedTeacherSupport=false;
 let gamePaused=false;
 let gameMode="classic", questionOrder="ladder", voiceHost=false, teamAName="TEAM A", teamBName="TEAM B", currentTeam=0, teamScores=[0,0];
 let gamePhase="idle";
@@ -1755,10 +2098,10 @@ function getRecords(){
 }
 function saveRecord(name,amount,won){
  const records=getRecords();
- records.push({name:name||"प्रतियोगी",amount:amount||"₹0",won:!!won,date:new Date().toLocaleString("hi-IN")});
+ records.push({name:name||"प्रतियोगी",amount:amount||"0.00 Points",won:!!won,date:new Date().toLocaleString("hi-IN")});
  try{localStorage.setItem(RECORD_KEY,JSON.stringify(records))}catch(e){}
  renderRecentRecords();
- renderWinnerSides();
+ 
 }
 function renderRecords(){
  const records=getRecords();
@@ -1779,12 +2122,12 @@ function syncWinnerListWithRecords(){
  const names=new Set(records.map(r=>String(r.name).toLowerCase()));
  const winners=getFirstRightWinners().filter(w=>names.has(String(w.name).toLowerCase()));
  try{localStorage.setItem(WINNER_KEY,JSON.stringify(winners))}catch(e){}
- renderWinnerSides();
+ 
 }
 function saveRecords(records){
  try{localStorage.setItem(RECORD_KEY,JSON.stringify(records))}catch(e){}
  renderRecentRecords();
- renderWinnerSides();
+ 
  renderRecords();
 }
 function keepSelectedRecords(){
@@ -1813,7 +2156,7 @@ function deleteAllRecords(){
    localStorage.removeItem(WINNER_KEY);
  }catch(e){}
  renderRecentRecords();
- renderWinnerSides();
+ 
  renderRecords();
 }
 
@@ -1822,7 +2165,7 @@ function getFirstRightWinners(){
  try{
    let winners=JSON.parse(localStorage.getItem(WINNER_KEY)||"[]");
    // Upgrade older saved winner entries that did not contain an amount.
-   winners=winners.map(w=>({...w,amount:w.amount||"₹10"}));
+   winners=winners.map(w=>({...w,amount:w.amount||"5.00 Points"}));
    return winners;
  }catch(e){return []}
 }
@@ -1832,45 +2175,36 @@ function addFirstRightWinner(name,amount){
  const winners=getFirstRightWinners();
  // Keep one permanent entry per student name.
  if(!winners.some(w=>String(w.name).toLowerCase()===name.toLowerCase())){
-   winners.push({name:name,amount:amount||"₹10",date:new Date().toLocaleString("hi-IN")});
+   winners.push({name:name,amount:amount||"5.00 Points",date:new Date().toLocaleString("hi-IN")});
    try{localStorage.setItem(WINNER_KEY,JSON.stringify(winners))}catch(e){}
  }
- renderWinnerSides();
+ 
 }
 function registerFirstRightAnswer(){
  if(currentStudentFirstRightAdded)return;
  const name=(document.getElementById("player").textContent||"👤 प्रतियोगी").replace(/^👤\s*/,"").trim();
- addFirstRightWinner(name,earned||"₹5");
+ addFirstRightWinner(name,earned||"5.00 Points");
  currentStudentFirstRightAdded=true;
 }
 
 function renderWinnerSides(){
- return; /* winners cards removed */
+ const marquee=document.getElementById("winnerMarquee");
+ if(!marquee)return;
  let winners=getFirstRightWinners();
  if(!winners.length){
    try{
-     const oldWinners=getRecords().filter(r=>r.won&&r.name).map(r=>({name:r.name,amount:r.amount||"₹100",date:r.date}));
-     if(oldWinners.length){
-       winners=oldWinners;
-       localStorage.setItem(WINNER_KEY,JSON.stringify(winners));
-     }
+     winners=getRecords().filter(r=>r.won&&r.name).map(r=>({name:r.name,amount:r.amount||"5.00 Points",date:r.date}));
+     if(winners.length) localStorage.setItem(WINNER_KEY,JSON.stringify(winners));
    }catch(e){}
  }
- const left=document.getElementById("winnerLeftNames");
- const right=document.getElementById("winnerRightNames");
- if(!left||!right)return;
-
  if(!winners.length){
-   const empty='<div class="winner-empty">✨ अभी कोई विजेता नहीं ✨<br><br>पहला सही उत्तर देकर<br>अपना नाम यहाँ पाएँ!</div>';
-   left.innerHTML=empty; right.innerHTML=empty; return;
+   marquee.innerHTML="🏆 अभी कोई विजेता नहीं ✨";
+   marquee.setAttribute("title","अभी कोई विजेता नहीं");
+   return;
  }
-
- const cards=winners.map((w,i)=>
-   '<div class="winner-name"><span>🏆</span> '+escapeHtml(w.name)+'</div>'
- ).join("");
- const scrolling='<div class="winner-track">'+cards+cards+'</div>';
- left.innerHTML=scrolling;
- right.innerHTML=scrolling;
+ const items=winners.map(w=>`<span>🏆 ${escapeHtml(w.name)} <small style="color:#fff;font-weight:800">(${escapeHtml(w.amount||"5.00 Points")})</small> &nbsp; • &nbsp;</span>`).join("");
+ marquee.innerHTML=items+items;
+ marquee.setAttribute("title","विजेताओं की सूची");
 }
 
 function renderRecentRecords(){
@@ -1953,11 +2287,11 @@ function startGame(){
  currentRecordSaved=false;
  correctQuestions=new Set();
  correctCount=0;
- earned="₹0";
+ earned="0.00 Points";
  teamScores=[0,0];
  currentTeam=0;
  used5050=false; usedPollCount=0; usedPollCount=0;
- teamUsed5050=[false,false]; teamPollCount=[0,0];
+ teamUsed5050=[false,false]; teamPollCount=[0,0]; teamUsedTeacher=[false,false]; usedTeacherSupport=false;
  setText("player","👤 "+name);
  document.getElementById("welcome").classList.add("hidden");
  document.getElementById("game").classList.remove("hidden");
@@ -2010,6 +2344,9 @@ function holdQuestionOnTimeout(){
 function pauseTimer(){
  if(locked || timerPaused || gamePaused)return;
  timerPaused=true;
+ stopAllMusic();
+ stopContinuousBuzzer();
+ if(typeof stopBackground==="function") stopBackground();
  document.getElementById("timerToggle").textContent="▶️ Timer Start";
  setText("status","⏸️ Timer रुका हुआ है।");
 }
@@ -2018,6 +2355,7 @@ function resumeTimer(seconds){
  try{updateLifelineUI();}catch(e){}
  document.getElementById("timerToggle").textContent="⏸️ Timer Stop";
  if(seconds!==undefined){time=seconds;setText("timer",""+time);document.getElementById("timer").classList.remove("danger")}
+ if(!locked && !reading && musicEnabled) playMusic("answerMusic");
 }
 function stopAllMusic(){
  ["introMusic","readingMusic","answerMusic"].forEach(id=>{const a=document.getElementById(id);if(a){a.pause();a.currentTime=0;}});
@@ -2053,10 +2391,29 @@ function setDifficultyBadge(){
  else {el.textContent="🔴 HARD • कठिन";el.style.borderColor="#ff7777";el.style.color="#ff7777";}
 }
 
-function teamPrize(score){
- const n=Math.max(0,Number(score)||0);
- return n>0 ? (PRIZE[Math.min(n,PRIZE.length)-1]||PRIZE[PRIZE.length-1]) : "₹0";
+function updateLiveScore(){
+ const el=document.getElementById("liveScoreMarquee");
+ if(!el)return;
+ const q=Math.min(current+1,QUESTIONS.length);
+ if(gameMode==="team"){
+   const a=formatPoints(teamScores[0]||0), b=formatPoints(teamScores[1]||0);
+   const aName=escapeHtml(teamAName||"TEAM A"), bName=escapeHtml(teamBName||"TEAM B");
+   const turn=escapeHtml(currentTeam===0?(teamAName||"TEAM A"):(teamBName||"TEAM B"));
+   el.className="live-score-marquee team-mode";
+   el.innerHTML=`<span class="live-a">👥 ${aName}: ${escapeHtml(a)}</span><span class="live-vs"> 🆚 </span><span class="live-b">${bName}: ${escapeHtml(b)}</span><span class="live-sep"> • </span><span>प्रश्न ${q}/${QUESTIONS.length}</span><span class="live-sep"> • </span><span>🎯 ${turn} की बारी</span>`;
+ }else{
+   const name=(document.getElementById("player")?.textContent||"👤 प्रतियोगी").replace(/^👤\s*/,"").trim()||"प्रतियोगी";
+   const score=formatPoints(correctCount*5);
+   el.className="live-score-marquee single-mode";
+   el.innerHTML=`<span class="live-single">📊 LIVE SCORE • 👤 ${escapeHtml(name)}: ${escapeHtml(score)}</span><span class="live-sep"> • </span><span>सही उत्तर: ${correctCount}</span><span class="live-sep"> • </span><span>प्रश्न ${q}/${QUESTIONS.length}</span>`;
+ }
 }
+
+function formatPoints(n){
+ const v=Number(n)||0;
+ return v.toFixed(2)+" Points";
+}
+function teamPrize(score){ return formatPoints(score); }
 function updateTeamBox(){
  const box=document.getElementById("teamBattleBox");
  if(!box)return;
@@ -2065,14 +2422,25 @@ function updateTeamBox(){
  if(!isTeam)return;
  setText("gameTeamA",teamAName||"TEAM A");
  setText("gameTeamB",teamBName||"TEAM B");
- setText("teamScoreA",teamScores[0]||0);
- setText("teamScoreB",teamScores[1]||0);
- setText("teamPrizeA","💰 Prize "+teamPrize(teamScores[0]));
- setText("teamPrizeB","💰 Prize "+teamPrize(teamScores[1]));
+ setText("teamScoreA",formatPoints(teamScores[0]||0));
+ setText("teamScoreB",formatPoints(teamScores[1]||0));
+ setText("teamPrizeA","⭐ Points "+formatPoints(teamScores[0]||0));
+ setText("teamPrizeB","⭐ Points "+formatPoints(teamScores[1]||0));
  setText("teamTurn","🎯 "+(currentTeam===0?(teamAName||"TEAM A"):(teamBName||"TEAM B"))+" की बारी");
  document.getElementById("teamCardA")?.classList.toggle("active",currentTeam===0);
  document.getElementById("teamCardB")?.classList.toggle("active",currentTeam===1);
+ updateLiveScore();
 }
+// Team Battle: teacher can manually choose the active team.// Team Battle: teacher can manually choose the active team.
+function selectTeamManually(teamIndex){
+  if(gameMode!=="team" || locked) return;
+  currentTeam = teamIndex===1 ? 1 : 0;
+  updateTeamBox();
+  setText("status","👥 "+(currentTeam===0?(teamAName||"TEAM A"):(teamBName||"TEAM B"))+" manually selected — अब यही Team प्रश्न खेलेगी।");
+}
+document.getElementById("teamCardA")?.addEventListener("click",()=>selectTeamManually(0));
+document.getElementById("teamCardB")?.addEventListener("click",()=>selectTeamManually(1));
+
 function loadQuestion(){
  stopContinuousBuzzer(); timeoutHeld=false;
  const ca=document.getElementById("correctAnswerMusic"); if(ca){ca.pause();ca.currentTime=0;}
@@ -2081,8 +2449,9 @@ function loadQuestion(){
  if(current>=QUESTIONS.length){stopAllMusic();endGame(true);return}
  selected=-1;locked=false;timerPaused=false;
  setText("timer","");
+ updateLiveScore();
  setText("qnum","प्रश्न / Question "+(current+1)+" / "+QUESTIONS.length);setDifficultyBadge();
- setText("level","इस प्रश्न की राशि: "+PRIZE[current]);
+ setText("level","इस प्रश्न के लिए: "+PRIZE[current]);
  setText("earned",earned);
  setText("miniQ",(current+1)+"/"+QUESTIONS.length);
  setText("modeLabel",gameMode==="team"?(currentTeam===0?teamAName:teamBName):(gameMode==="speed"?"SPEED":"CLASSIC"));
@@ -2148,22 +2517,36 @@ function lockAnswer(){
   document.getElementById("o"+selected).classList.add(selected===ans?"correct":"wrong");
   if(selected!==ans){
    document.getElementById("o"+ans).classList.add("correct");
-   stopAllMusic();
-   setText("status","❌ गलत उत्तर — GAME OVER!");
+   if(gameMode==="team" && !teamWrongQuestions.has(current)){
+     teamWrongQuestions.add(current);
+     teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)-(5/3);
+     updateTeamBox();
+     setText("earned",formatPoints(teamScores[currentTeam]));
+   }
+   updateLiveScore();
+   stopAllMusic(); disableOptions();
+   setText("status",gameMode==="team"
+     ? "❌ गलत उत्तर — TEAM को 1/3 negative marking: -1.67 points. GAME OVER!"
+     : "❌ गलत उत्तर — GAME OVER! अगला प्रश्न manually चुनें।");
    playNamedSound("gameOverMusic",.95);
-   disableOptions();
    setTimeout(()=>document.getElementById("wrongDecision").classList.remove("hidden"),700);
   }else{
    // Count each question only once, even if the student revisits it using Jump.
    if(!correctQuestions.has(current)){
      correctQuestions.add(current);
      correctCount=correctQuestions.size;
-     earned=PRIZE[correctCount-1]||PRIZE[PRIZE.length-1];
-     if(gameMode==="team"){teamScores[currentTeam]=(teamScores[currentTeam]||0)+1; updateTeamBox();}
+     if(gameMode==="team"){
+       teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)+5;
+       updateTeamBox();
+       earned=formatPoints(teamScores[currentTeam]);
+     }else{
+       earned=formatPoints(correctCount*5);
+     }
    }
    registerFirstRightAnswer();
-   setText("earned",earned);
-   setText("status","🎉 बिल्कुल सही! कुल "+correctCount+" प्रश्न सही — अर्जित राशि "+earned);
+   setText("earned",gameMode==="team"?formatPoints(teamScores[currentTeam]):earned);
+   updateLiveScore();
+   setText("status","🎉 बिल्कुल सही! कुल "+correctCount+" प्रश्न सही — अर्जित POINTS "+(gameMode==="team"?formatPoints(teamScores[currentTeam]):earned));
    playNamedSound("correctAnswerMusic",.95);applause();celebrate();disableOptions();
    nextMode=true;
    document.getElementById("lock").disabled=false;
@@ -2234,6 +2617,9 @@ function nextAfterGameOver(){
   }
 
   current++;
+  // Advance only after the user manually presses NEXT QUESTION.
+  // In Team Battle, the next question is then assigned to the other team.
+  if(gameMode==="team")currentTeam=(currentTeam+1)%2;
   selected=-1;
   locked=false;
   nextMode=false;
@@ -2254,27 +2640,20 @@ document.getElementById("wrongEnd").addEventListener("click",closeAfterGameOver)
 document.getElementById("wrongContinue").addEventListener("click",continueAfterGameOver);
 document.getElementById("wrongNext").addEventListener("click",nextAfterGameOver);
 function getLifeState(){
+ // HARD ONE-USE RULE: 50:50 and Teacher Support are ONE TIME for the ENTIRE game in ALL modes.
  const t=gameMode==="team"?currentTeam:0;
- const pollUsed=gameMode==="team"?teamPollCount[t]:usedPollCount;
- const pollMax=gameMode==="team"?5:3;
- return {
-   team:t,
-   fiftyUsed:gameMode==="team"?!!teamUsed5050[t]:!!used5050,
-   pollUsed:pollUsed,
-   pollMax:pollMax
- };
+ const pollUsed=usedPollCount;
+ const pollMax=3;
+ return {team:t,fiftyUsed:!!used5050,pollUsed,pollMax,teacherUsed:!!usedTeacherSupport};
 }
 function updateLifelineUI(){
  const st=getLifeState();
- const fiftyBtn=document.getElementById("fifty");
- const pollBtn=document.getElementById("poll");
- const fiftyAvailable=!st.fiftyUsed;
- const pollAvailable=st.pollUsed<st.pollMax;
- fiftyBtn.disabled=locked || reading || !fiftyAvailable;
- pollBtn.disabled=locked || reading || !pollAvailable;
- setText("lifeCount",
-   "🌓 50:50: "+(fiftyAvailable?"1 available":"USED ✓")+
-   "  |  👥 Audience Poll: "+st.pollUsed+"/"+st.pollMax);
+ const fiftyBtn=document.getElementById("fifty"),pollBtn=document.getElementById("poll"),teacherBtn=document.getElementById("teacherSupport");
+ const fiftyAvailable=!st.fiftyUsed,pollAvailable=st.pollUsed<st.pollMax,teacherAvailable=!st.teacherUsed;
+ if(fiftyBtn)fiftyBtn.disabled=locked||reading||!fiftyAvailable;
+ if(pollBtn)pollBtn.disabled=locked||reading||!pollAvailable;
+ if(teacherBtn)teacherBtn.disabled=locked||reading||!teacherAvailable;
+ setText("lifeCount","🌓 50:50: "+(fiftyAvailable?"1":"USED ✓")+" | 👥 Poll: "+st.pollUsed+"/"+st.pollMax+" | 🧑‍🏫 Teacher: "+(teacherAvailable?"1":"USED ✓"));
 }
 function openLifelineChooser(){
  if(locked||reading)return;
@@ -2294,8 +2673,7 @@ function openLifelineChooser(){
    : "🌓 50:50<br><small>1 time only</small>";
  bp.innerHTML="👥 AUDIENCE POLL<br><small>"+st.pollUsed+"/"+st.pollMax+" used</small>";
  document.getElementById("lifelineChoiceStatus").textContent =
-   "50:50 केवल 1 बार। Audience Poll "+
-   (gameMode==="team"?"Team Battle में 5 बार":"अन्य modes में 3 बार")+
+   "50:50 — पूरे game में केवल 1 बार। Teacher Support — पूरे game में केवल 1 बार। Audience Poll पूरे game में 3 बार।"+
    " उपयोग किया जा सकता है।";
  m.classList.remove("hidden");
  setText("status","🆘 Lifeline चुनें।");
@@ -2318,6 +2696,9 @@ function use5050(){
    updateLifelineUI();
    return;
  }
+ // Consume the lifeline immediately so the same lifeline cannot be triggered twice.
+ used5050=true;
+ updateLifelineUI();
  const ans=Number(QUESTIONS[current].a);
 
  // Find all wrong options that are still present.
@@ -2327,6 +2708,8 @@ function use5050(){
  });
 
  if(wrong.length<2){
+   used5050=false;
+   updateLifelineUI();
    setText("status","🌓 50:50 इस प्रश्न पर लागू नहीं हो सकता।");
    return;
  }
@@ -2364,9 +2747,6 @@ function use5050(){
    b.removeAttribute("aria-hidden");
    b.onclick=()=>choose(n);
  });
-
- if(gameMode==="team") teamUsed5050[st.team]=true;
- else used5050=true;
 
  if(selected<0) document.getElementById("lock").disabled=true;
  setText("status","🌓 50:50 used — केवल 2 OPTIONS बचे हैं: 1 RIGHT + 1 WRONG.");
@@ -2448,7 +2828,7 @@ function playCelebrationMusic(){
 function saveCurrentStudentRecord(){
  if(currentRecordSaved)return;
  const name=(document.getElementById("player").textContent||"👤 प्रतियोगी").replace(/^👤\s*/,"").trim()||"प्रतियोगी";
- const amount=earned||"₹0";
+ const amount=earned||"0.00 Points";
  saveRecord(name,amount,false);
  currentRecordSaved=true;
 }
@@ -2476,8 +2856,8 @@ function endGame(won){
  stopContinuousBuzzer(); timeoutHeld=false;
  stopAllMusic();
  clearInterval(timer);stopBackground();
- const amount=earned||"₹0";
  const isTeamGame=gameMode==="team";
+ const amount=isTeamGame ? formatPoints(Math.max(teamScores[0],teamScores[1])) : (earned||"0.00 Points");
  const displayName=isTeamGame ? ((teamAName||"TEAM A")+" vs "+(teamBName||"TEAM B")) : ((document.getElementById("player").textContent||"👤 प्रतियोगी").replace(/^👤\s*/,""));
  if(!currentRecordSaved){
    saveRecord(displayName,amount,won);
@@ -2490,22 +2870,22 @@ function endGame(won){
  let teamResult='';
  if(isTeamGame){
    const winner=getTeamWinner();
-   const winnerText=winner==='DRAW / TIE'?'🤝 MATCH DRAW / TIE':('🏆 WINNER: '+escapeHtml(winner));
+   const winnerText=winner==='DRAW / TIE'?'🤝 FINAL RESULT: MATCH DRAW / TIE':('🏆 FINAL RESULT: '+escapeHtml(winner)+' — CHAMPION');
    const prizeA=teamPrize(teamScores[0]), prizeB=teamPrize(teamScores[1]);
-   const winnerPrize=teamScores[0]===teamScores[1]?'₹0':(teamScores[0]>teamScores[1]?prizeA:prizeB);
+   const winnerPrize=teamScores[0]===teamScores[1]?'0.00 Points':(teamScores[0]>teamScores[1]?prizeA:prizeB);
    teamResult='<div class="final-team-result"><div class="final-team-title">⚔️ TEAM BATTLE FINAL SCORE</div><div class="final-team-grid">'+
-     '<div class="final-team-card '+(teamScores[0]>=teamScores[1]?'team-top':'')+'"><span>TEAM A</span><b>'+escapeHtml(teamAName||'TEAM A')+'</b><strong class="final-score-big">'+teamScores[0]+' CORRECT</strong><em class="final-prize">💰 PRIZE: '+prizeA+'</em></div>'+ 
+     '<div class="final-team-card '+(teamScores[0]>=teamScores[1]?'team-top':'')+'"><span>TEAM A</span><b>'+escapeHtml(teamAName||'TEAM A')+'</b><strong class="final-score-big">'+formatPoints(teamScores[0])+'</strong><em class="final-prize">⭐ POINTS: '+prizeA+'</em></div>'+ 
      '<div class="final-team-vs">VS</div>'+ 
-     '<div class="final-team-card '+(teamScores[1]>=teamScores[0]?'team-top':'')+'"><span>TEAM B</span><b>'+escapeHtml(teamBName||'TEAM B')+'</b><strong class="final-score-big">'+teamScores[1]+' CORRECT</strong><em class="final-prize">💰 PRIZE: '+prizeB+'</em></div></div>'+ 
-     '<div class="final-team-winner">'+winnerText+(winner!=='DRAW / TIE'?' • 💰 WINNING PRIZE: '+winnerPrize:'')+'</div></div>';
+     '<div class="final-team-card '+(teamScores[1]>=teamScores[0]?'team-top':'')+'"><span>TEAM B</span><b>'+escapeHtml(teamBName||'TEAM B')+'</b><strong class="final-score-big">'+formatPoints(teamScores[1])+'</strong><em class="final-prize">⭐ POINTS: '+prizeB+'</em></div></div>'+ 
+     '<div class="final-team-winner">'+winnerText+(winner!=='DRAW / TIE'?' • ⭐ WINNING POINTS: '+winnerPrize:'')+'</div></div>';
  }
  document.querySelector("#game .wrap").innerHTML='<div class="panel final-result-panel">'+
-   '<div style="font-size:55px">'+(won?"🏆":"❌")+'</div><h1 style="color:#ffd85a">'+(isTeamGame?("🏆 TEAM BATTLE COMPLETE"): (won?"बधाई हो!":"GAME OVER"))+'</h1>'+ 
-   '<p style="color:#ffd85a;font-weight:bold">PM SHRI SCHOOL CHAMPIONSHIP</p>'+ 
+   '<h1 class="final-result-heading">PM SHRI GSSS AJEETPURA<br><span>CHAMPIONSHIP FINAL RESULT</span></h1>'+ 
+   '<p style="color:#ffd85a;font-weight:bold">'+(isTeamGame?'CLASS 10 • TEAM BATTLE':'CLASS 10 • SINGLE BATTLE')+'</p>'+ 
    '<p style="font-size:20px;font-weight:900">📚 '+escapeHtml(quizName)+' • '+(gameMode==="speed"?"Speed Round":(isTeamGame?"Team Battle":"Classic"))+'</p>'+ 
    (isTeamGame?teamResult:'<p style="font-size:22px;font-weight:900">👤 '+escapeHtml(displayName)+'</p>')+
-   '<p>'+resultMessage+'</p><p class="earned-label-final">'+(isTeamGame?'कुल टीम स्कोर / FINAL TEAM SCORE':'कुल अर्जित राशि / TOTAL EARNED AMOUNT')+'</p>'+ 
-   '<div style="font-size:46px;color:#ffd85a;font-weight:bold">'+(isTeamGame?(teamScores[0]+" : "+teamScores[1]):amount)+'</div>'+ 
+   '<p>'+resultMessage+'</p><p class="earned-label-final">'+(isTeamGame?'कुल टीम स्कोर / FINAL TEAM SCORE':'कुल अर्जित POINTS / TOTAL EARNED POINTS')+'</p>'+ 
+   '<div style="font-size:46px;color:#ffd85a;font-weight:bold">'+(isTeamGame?(formatPoints(teamScores[0])+" : "+formatPoints(teamScores[1])):amount)+'</div>'+ 
    '<div class="final-note">🏅 Result saved • Certificate नीचे Print Certificate से तैयार करें</div>'+ 
    '<div class="result-actions"><button id="certificateBtn" class="start" type="button">🎓 Print Certificate</button><button id="restart" class="start" type="button">🔄 फिर से खेलें</button></div></div>';
  document.getElementById("restart").addEventListener("click",()=>location.reload());
@@ -2515,11 +2895,35 @@ function endGame(won){
  if(won){playCelebrationMusic();celebrate();}
 }
 
-document.getElementById("closeAllBtn").addEventListener("click",()=>{
+function openCloseAllChoice(){
+  const m=document.getElementById("closeAllChoice");
+  if(m)m.classList.remove("hidden");
+  try{ if(timer) clearInterval(timer); stopContinuousBuzzer(); stopAllMusic(); }catch(e){}
+}
+function continueCurrentGame(){
+  const m=document.getElementById("closeAllChoice");
+  if(m)m.classList.add("hidden");
+  if(!document.getElementById("game").classList.contains("hidden")){
+    gamePaused=false;
+    if(!locked && !reading) startQuestionTimer(Math.max(1,time||20));
+    setText("status","▶️ Game continue हो गया।");
+  }
+}
+function confirmCloseAll(){
+  const m=document.getElementById("closeAllChoice");
+  if(m)m.classList.add("hidden");
   try{ clearInterval(timer); clearTimeout(readTimer); stopContinuousBuzzer(); stopAllMusic(); stopBackground(); }catch(e){}
   saveCurrentStudentRecord();
   showRecordsAfterClose();
-});
+}
+document.getElementById("closeAllBtn").addEventListener("click",openCloseAllChoice);
+document.getElementById("continueGameBtn").addEventListener("click",continueCurrentGame);
+document.getElementById("confirmCloseAllBtn").addEventListener("click",confirmCloseAll);
+(function keepFinalControlsVisible(){
+  const group=document.getElementById("closeAllGroup");
+  if(group){group.style.display="flex";group.style.visibility="visible";group.style.opacity="1";}
+})();
+
 document.getElementById("computerScienceBtn").addEventListener("click",function(e){
  e.preventDefault(); e.stopPropagation(); selectQuizClass("cs12");
 });
@@ -2576,6 +2980,12 @@ document.getElementById("startBtn").addEventListener("click",(e)=>{
       return;
     }
     if(questionOrder==="random") pool.sort(()=>Math.random()-.5);
+    // Randomize answer positions independently for every question while preserving the correct answer.
+    pool=pool.map(q=>{
+      const opts=(q.o||[]).map((text,idx)=>({text,idx}));
+      for(let k=opts.length-1;k>0;k--){const r=Math.floor(Math.random()*(k+1));[opts[k],opts[r]]=[opts[r],opts[k]];}
+      return Object.assign({},q,{o:opts.map(x=>x.text),a:opts.findIndex(x=>x.idx===Number(q.a))});
+    });
     if(gameMode==="speed") pool=pool.slice(0,10);
     QUESTIONS=pool;
 
@@ -2586,7 +2996,9 @@ document.getElementById("startBtn").addEventListener("click",(e)=>{
     usedPollCount=0;
     teamUsed5050=[false,false];
     teamPollCount=[0,0];
-    earned="₹0";
+    teamUsedTeacher=[false,false];
+    usedTeacherSupport=false;
+    earned="0.00 Points";
     correctCount=0;
     correctQuestions=new Set();
     currentRecordSaved=false;
@@ -2615,7 +3027,7 @@ document.getElementById("keepSelectedRecords").addEventListener("click",keepSele
 document.getElementById("deleteSelectedRecords").addEventListener("click",deleteSelectedRecords);
 document.getElementById("deleteAllRecords").addEventListener("click",deleteAllRecords);
 renderRecentRecords();
-renderWinnerSides();
+
 try{
  if(localStorage.getItem("pmShriOpenRecordsAfterReload")==="1"){
    localStorage.removeItem("pmShriOpenRecordsAfterReload");
@@ -2657,16 +3069,19 @@ document.getElementById("closeResult").addEventListener("click",resumeAfterPoll)
 <div id="teacherModal" class="modal hidden"><div class="modalbox teacher-box">
 <h2 style="color:#ffd85a">🧑‍🏫 TEACHER / HOST CONTROL</h2>
 <div class="teacher-grid">
-<button id="teacherPlus10" class="btn gold" type="button">⏱️ +10 Seconds</button>
-<button id="teacherPause" class="btn blue" type="button">⏸️ Pause / Resume</button>
 <button id="teacherSkip" class="btn blue" type="button">⏭️ Skip Question</button>
-<button id="teacherAward" class="btn green" type="button">🏅 Award Current Question</button>
-<button id="teacherVoice" class="btn gold" type="button">🎙️ Read Question</button>
-<button id="teacherClose" class="btn red" type="button">✖ Close Panel</button>
+<button id="teacherAward" class="btn green" type="button">⭐ Bonus Point</button>
 </div>
 <p id="teacherInfo" class="teacher-info">Teacher tools are active only during a game.</p>
 </div></div>
 
+<div id="teacherSupportModal" class="modal hidden"><div class="modalbox" style="max-width:620px;text-align:center">
+ <h2 style="color:#ffd85a">🧑‍🏫 TEACHER SUPPORT</h2>
+ <p style="font-weight:900;color:#e8efff">Teacher केवल अपनी opinion / suggestion देंगे। Final answer आपको खुद select करके <b>Lock Answer</b> करना है।</p>
+ <div id="teacherSupportOptions" class="pollgrid" style="margin-top:14px"></div>
+ <p id="teacherSupportInfo" style="margin:10px 0 0;color:#ffd85a;font-weight:900">Teacher की राय लेने के लिए कोई option चुनें।</p>
+ <button id="closeTeacherSupport" class="btn blue" type="button" style="margin-top:12px">CLOSE / वापस</button>
+</div></div>
 <div id="rulesModal" class="modal hidden"><div class="modalbox">
 <h2>📋 CLASSROOM KBC RULES</h2>
 <div class="rules"><ol>
@@ -2674,24 +3089,54 @@ document.getElementById("closeResult").addEventListener("click",resumeAfterPoll)
 <li>Lock करने से पहले Audience Poll/50:50 इस्तेमाल किया जा सकता है।</li>
 <li>गलत उत्तर = तुरंत Game Over.</li>
 <li>Time out = कोई उत्तर न देने पर तुरंत Game Over और शांत voice announcement होगा।</li>
-<li>हर सही उत्तर पर prize अगले level पर जाता है।</li>
-<li>Computer Science mode में कुल 50 bilingual प्रश्न हैं; सभी 50 सही = ₹250.</li>
+<li>हर सही उत्तर पर 5.00 Points मिलेंगे।</li>
+<li>Computer Science mode में कुल 50 bilingual प्रश्न हैं; सभी 50 सही = 250.00 Points.</li>
 </ol></div>
 <button id="closeRules" class="start" type="button">समझ गया 👍</button>
 </div></div>
 <div id="confetti" class="confetti"></div>
 <script>
-document.getElementById("full").addEventListener("click",async()=>{
- try{if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();}catch(e){}
-});
+async function toggleFullscreen(){
+  try{
+    if(document.fullscreenElement){
+      if(document.exitFullscreen) await document.exitFullscreen();
+    }else if(document.documentElement.requestFullscreen){
+      await document.documentElement.requestFullscreen();
+    }
+  }catch(e){ console.warn("Fullscreen toggle failed",e); }
+  updateFullscreenButtons();
+}
+function updateFullscreenButtons(){
+  const fs=!!document.fullscreenElement;
+  const text=fs?"↙️ MINIMIZE":"⛶ FULL SCREEN";
+  const a=document.getElementById("full");
+  const b=document.getElementById("fullscreenFloat");
+  if(a){a.textContent=text;a.title=fs?"Exit full screen":"Enter full screen";}
+  if(b){b.textContent=text;b.title=fs?"Exit full screen":"Enter full screen";}
+}
+document.getElementById("full").addEventListener("click",toggleFullscreen);
+document.getElementById("fullscreenFloat").addEventListener("click",toggleFullscreen);
+document.addEventListener("fullscreenchange",updateFullscreenButtons);
+updateFullscreenButtons();
 document.getElementById("rulesBtn").addEventListener("click",()=>document.getElementById("rulesModal").classList.remove("hidden"));
 document.getElementById("closeRules").addEventListener("click",()=>{
  document.getElementById("rulesModal").classList.add("hidden");
 });
 function celebrate(){
- const box=document.getElementById("confetti");box.innerHTML="";
- for(let i=0;i<90;i++){const p=document.createElement("i");p.className="piece";p.style.left=Math.random()*100+"%";p.style.animationDelay=Math.random()*.6+"s";p.style.transform="rotate("+Math.random()*360+"deg)";p.style.background=["#ffd85a","#4fc3ff","#ff6b6b","#70e07b","#fff"][i%5];box.appendChild(p)}
- setTimeout(()=>box.innerHTML="",3200);
+ const box=document.getElementById("confetti");
+ if(!box)return;
+ box.innerHTML="";
+ // Lightweight celebration to keep the game smooth, especially on phones.
+ for(let i=0;i<32;i++){
+   const p=document.createElement("i");
+   p.className="piece";
+   p.style.left=Math.random()*100+"%";
+   p.style.animationDelay=Math.random()*.35+"s";
+   p.style.transform="rotate("+Math.random()*360+"deg)";
+   p.style.background=["#ffd85a","#4fc3ff","#ff6b6b","#70e07b","#fff"][i%5];
+   box.appendChild(p);
+ }
+ setTimeout(()=>box.innerHTML="",1900);
 }
 </script>
 <audio id="introMusic" src="01_intro_music.mp3" preload="auto"></audio>
@@ -2729,12 +3174,33 @@ function celebrate(){
 @keyframes teamWinnerPulse{from{transform:scale(1);filter:brightness(1)}to{transform:scale(1.025);filter:brightness(1.28)}}
 .earned-label-final{font-size:18px!important;color:#ffd85a;font-weight:1000;margin:4px 0!important}
 .final-note{text-align:center;font-size:11px;opacity:.8;margin:4px 0 7px}
+
+/* FINAL RESULT HEADING — clean championship declaration */
+.final-result-heading{color:#ffd85a!important;text-align:center;font-size:30px!important;line-height:1.08!important;font-weight:1000!important;letter-spacing:.4px!important;margin:2px 0 5px!important;text-shadow:0 2px 8px rgba(0,0,0,.55)}
+.final-result-heading span{font-size:.72em;display:inline-block;margin-top:4px;letter-spacing:1px}
+.final-team-winner{border:2px solid #ffd85a!important;border-radius:12px!important;padding:7px 10px!important;background:linear-gradient(90deg,rgba(255,216,90,.14),rgba(255,255,255,.05),rgba(255,216,90,.14))!important;box-shadow:0 0 12px rgba(255,216,90,.22)!important}
+@media(max-width:700px){.final-result-heading{font-size:22px!important}.final-result-heading span{font-size:.76em}.final-team-winner{font-size:15px!important;padding:6px!important}}
+@media(max-height:650px) and (min-width:701px){.final-result-heading{font-size:23px!important;margin:0 0 3px!important}.final-result-heading span{margin-top:2px}.final-team-winner{font-size:15px!important}}
+
 .final-result-panel{display:flex!important;flex-direction:column;justify-content:center;min-height:0!important;max-height:calc(100vh - 12px)!important;overflow:hidden!important;padding:10px 14px!important;box-sizing:border-box}
 .final-result-panel .result-actions{margin-top:6px;flex:0 0 auto}
 @media(max-height:720px) and (min-width:701px){.final-result-panel{transform:scale(.9);transform-origin:center center}.final-team-result{margin:4px auto;padding:6px}.final-team-card{min-height:95px;padding:6px}.final-score-big{font-size:24px!important}.final-prize{font-size:15px}}
 @media(max-height:650px) and (min-width:701px){.final-result-panel{transform:scale(.82)}.final-team-card{min-height:82px!important}.final-score-big{font-size:21px!important}.final-prize{font-size:13px!important}.final-team-winner{font-size:17px!important}}
 @media(max-width:700px){.final-result-panel{padding:8px!important}.final-result-panel h1{font-size:25px!important}.final-result-panel p{margin:3px 0!important}.final-team-grid{grid-template-columns:1fr!important}.final-team-vs{margin:0!important}.final-team-card{min-height:95px}.final-score-big{font-size:23px!important}.final-prize{font-size:15px}.earned-label-final{font-size:15px!important}}
 </style>
+<style id="game-mode-big-fix">
+/* GAME MODE ONLY — expand into the space freed by Question Order + Voice Host */
+#welcome .pro-settings{grid-template-columns:1fr!important;width:100%!important;gap:0!important;margin:8px 0!important}
+#welcome .pro-settings .game-mode-big{width:100%!important;padding:10px 14px!important;text-align:center!important;background:linear-gradient(135deg,#5b21b6,#2563eb,#0891b2,#059669)!important;border:2px solid rgba(255,216,90,.75)!important;border-radius:16px!important;box-shadow:0 0 18px rgba(37,99,235,.35),inset 0 0 18px rgba(255,255,255,.08)!important}
+#welcome .pro-settings .game-mode-big b{display:block!important;font-size:18px!important;color:#fff!important;text-shadow:0 2px 6px rgba(0,0,0,.45)!important;margin-bottom:6px!important}
+#welcome .pro-settings .game-mode-big select{height:58px!important;margin-top:0!important;padding:8px 14px!important;font-size:18px!important;font-weight:900!important;text-align:center!important;border:2px solid rgba(255,255,255,.7)!important;border-radius:12px!important;background:rgba(4,18,58,.82)!important;color:#fff!important;box-shadow:0 4px 12px rgba(0,0,0,.25)!important}
+@media(max-width:700px){
+ #welcome .pro-settings .game-mode-big{padding:9px 10px!important;border-radius:14px!important}
+ #welcome .pro-settings .game-mode-big b{font-size:16px!important}
+ #welcome .pro-settings .game-mode-big select{height:52px!important;font-size:15px!important}
+}
+</style>
+
 <script>
 (function(){
  const mode=document.getElementById("gameMode");
@@ -2805,35 +3271,43 @@ function celebrate(){
  }
  if(tb)tb.addEventListener("click",openTeacher);
 
+ const teacherSupportModal=document.getElementById("teacherSupportModal");
+ const teacherSupportOptions=document.getElementById("teacherSupportOptions");
+ const teacherSupportInfo=document.getElementById("teacherSupportInfo");
+ function openTeacherSupport(){
+  if(locked||reading){setText("status","🧑‍🏫 Teacher Support केवल answer phase में इस्तेमाल करें।");return;}
+  const st=getLifeState();
+  if(st.teacherUsed){setText("status","🧑‍🏫 Teacher Support इस Player/Team के लिए पहले ही इस्तेमाल हो चुका है।");updateLifelineUI();return;}
+  pauseTimer();
+  if(teacherSupportOptions){
+   teacherSupportOptions.innerHTML=QUESTIONS[current].o.map((txt,n)=>{const ob=document.getElementById("o"+n);return (!ob||ob.hidden||ob.style.display==="none")?"":'<button type="button" class="vote teacher-support-option" data-teacher-option="'+n+'"><span>'+String.fromCharCode(65+n)+'</span>'+renderOptionBI(txt)+'</button>';}).join("");
+   teacherSupportOptions.querySelectorAll("[data-teacher-option]").forEach(b=>b.addEventListener("click",()=>chooseTeacherSupport(Number(b.dataset.teacherOption))));
+  }
+  if(teacherSupportModal)teacherSupportModal.classList.remove("hidden");
+  if(teacherSupportInfo)teacherSupportInfo.textContent="Teacher केवल opinion देंगे — answer automatically lock नहीं होगा।";
+  setText("status","🧑‍🏫 Teacher Support खुला है — Teacher की राय चुनें।");
+ }
+ function chooseTeacherSupport(n){
+  if(locked)return;const st=getLifeState();if(st.teacherUsed)return;
+  const btn=document.getElementById("o"+n);if(!btn)return;
+  selected=n;for(let x=0;x<4;x++)document.getElementById("o"+x).classList.toggle("selected",x===n);
+  usedTeacherSupport=true;
+  updateLifelineUI();
+  if(teacherSupportModal)teacherSupportModal.classList.add("hidden");
+  document.getElementById("lock").disabled=false;
+  setText("status","🧑‍🏫 Teacher Support: Teacher ने Option "+String.fromCharCode(65+n)+" suggest किया है। अब केवल Lock Answer करें।");
+  updateLifelineUI();resumeTimer(gameMode==="speed"?15:20);playMusic("answerMusic");
+ }
+ const tsb=document.getElementById("teacherSupport");if(tsb)tsb.addEventListener("click",openTeacherSupport);
+ const closeTeacherSupport=document.getElementById("closeTeacherSupport");
+ if(closeTeacherSupport)closeTeacherSupport.addEventListener("click",()=>{if(teacherSupportModal)teacherSupportModal.classList.add("hidden");if(!locked&&!reading){resumeTimer(gameMode==="speed"?15:20);playMusic("answerMusic");}});
+
  const closeTeacher=()=>{if(tm)tm.classList.add("hidden")};
  const tc=document.getElementById("teacherClose");
  if(tc)tc.addEventListener("click",closeTeacher);
  if(tm)tm.addEventListener("click",e=>{if(e.target===tm)closeTeacher()});
-
- const plus=document.getElementById("teacherPlus10");
- if(plus)plus.addEventListener("click",()=>{
-   if(locked){teacherStatus("यह प्रश्न lock हो चुका है। पहले Next Question करें.");return;}
-   if(gamePhase!=="answer"){teacherStatus("⏱️ +10 Seconds केवल Answer phase में उपलब्ध है.");return;}
-   time+=10;
-   setText("timer",time);
-   teacherStatus("⏱️ 10 seconds added • अब "+time+" sec बाकी हैं।");
- });
-
- const pause=document.getElementById("teacherPause");
- if(pause)pause.addEventListener("click",()=>{
-   if(gamePaused){
-     resumeGame();
-     pause.textContent="⏸️ Pause Game";
-     teacherStatus("▶️ Game resumed • Q "+(current+1)+"/"+QUESTIONS.length+" • "+(time||0)+" sec");
-   }else{
-     pauseGame();
-     pause.textContent="▶️ Resume Game";
-     teacherStatus("⏸️ Game paused • Click Resume Game to continue.");
-     if(tm)tm.classList.remove("hidden");
-   }
- });
-
- const skip=document.getElementById("teacherSkip");
+  const pause=document.getElementById("teacherPause");
+  const skip=document.getElementById("teacherSkip");
  if(skip)skip.addEventListener("click",()=>{
    if(gamePaused)resumeGame();
    document.getElementById("wrongDecision")?.classList.add("hidden");
@@ -2863,40 +3337,143 @@ function celebrate(){
    if(!correctQuestions.has(current)){
      correctQuestions.add(current);
      correctCount=correctQuestions.size;
-     earned=PRIZE[correctCount-1]||PRIZE[PRIZE.length-1];
-     if(gameMode==="team"){teamScores[currentTeam]=(teamScores[currentTeam]||0)+1;updateTeamBox();}
+     if(gameMode==="team"){teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)+5;updateTeamBox();earned=formatPoints(teamScores[currentTeam]);}
+     else{earned=formatPoints(correctCount*5);}
    }
-   setText("earned",earned);
-   setText("status","🏅 Teacher ने current question को CORRECT award किया।");
+   setText("earned",gameMode==="team"?formatPoints(teamScores[currentTeam]):earned);
+   setText("status","🏅 Teacher ने current question को CORRECT award किया — +5.00 Points।");
    document.getElementById("lock").disabled=false;
    document.getElementById("lock").textContent=current===QUESTIONS.length-1
       ?"🏆 FINISH & VIEW RESULT":"➡️ NEXT QUESTION";
-   teacherStatus("✅ Awarded as correct • "+(gameMode==="team"?(currentTeam===0?teamAName:teamBName)+" +1 point":"Prize "+earned));
+   teacherStatus("✅ Awarded as correct • "+(gameMode==="team"?(currentTeam===0?teamAName:teamBName)+" +5.00 Points":"+5.00 Points"));
  });
 
- const tv=document.getElementById("teacherVoice");
- if(tv)tv.addEventListener("click",()=>{
-   if(!QUESTIONS[current])return;
-   speakHost(QUESTIONS[current].q,true);
-   teacherStatus("🎙️ प्रश्न read किया जा रहा है।");
- });
 
  // Certificate
  window.printCertificate=function(name,amount,count,won,meta={} ){
- const w=window.open("","_blank","width=900,height=700");
+ const w=window.open("","_blank","width=1100,height=800");
  if(!w)return;
  const safe=String(name||"प्रतियोगी").replace(/[<>]/g,"");
  const quiz=String(meta.quizName||getQuizDisplayName()).replace(/[<>]/g,"");
  const isTeam=!!meta.isTeam;
  const scoreA=Number(meta.scoreA||0), scoreB=Number(meta.scoreB||0);
  const prizeA=teamPrize(scoreA), prizeB=teamPrize(scoreB);
+ const scoreAText=scoreA.toFixed(2), scoreBText=scoreB.toFixed(2);
  const teamWinner=scoreA===scoreB?'DRAW / TIE':(scoreA>scoreB?(meta.teamA||'TEAM A'):(meta.teamB||'TEAM B'));
  const subjectLine=isTeam ? ('Team Battle: '+String(meta.teamA||'TEAM A')+' vs '+String(meta.teamB||'TEAM B')) : ('Quiz: '+quiz);
- const resultLine=isTeam ? ('Final Score: '+scoreA+' - '+scoreB+' | '+(teamWinner==='DRAW / TIE'?'Result: DRAW / TIE':'Winner: '+teamWinner)) : ('Correct Answers: '+Number(count||0)+' | कुल अर्जित राशि / Total Earned Amount: '+String(amount||'₹0'));
- const teamBlock=isTeam ? ('<div class="teams"><div class="team"><small>TEAM A</small><h2>'+escapeHtml(meta.teamA||'TEAM A')+'</h2><div class="score">'+scoreA+'</div><b>CORRECT ANSWERS</b><div class="prize">💰 PRIZE: '+prizeA+'</div></div><div class="vs">VS</div><div class="team"><small>TEAM B</small><h2>'+escapeHtml(meta.teamB||'TEAM B')+'</h2><div class="score">'+scoreB+'</div><b>CORRECT ANSWERS</b><div class="prize">💰 PRIZE: '+prizeB+'</div></div></div><h2 class="winner">'+(teamWinner==='DRAW / TIE'?'🤝 MATCH DRAW / TIE':'🏆 WINNER: '+escapeHtml(teamWinner)+'<br>💰 WINNING PRIZE: '+(scoreA>scoreB?prizeA:prizeB))+'</h2>') : ('<div class="amount">💰 '+String(amount||'₹0')+'</div>');
- w.document.write('<html><head><title>Certificate - '+quiz+'</title><style>body{font-family:Arial,sans-serif;text-align:center;padding:20px;color:#123;background:#f8f5e9}.cert{border:10px double #c99a25;padding:25px;background:white;max-width:820px;margin:auto}.cert h1{font-size:34px;color:#9a7410;margin:5px}.cert h2{font-size:24px;margin:8px}.cert p{font-size:17px;margin:7px}.school{font-weight:900;color:#6d5210;font-size:16px}.amount{font-size:42px;color:#9a7410;font-weight:900;margin:14px}.teams{display:grid;grid-template-columns:1fr 55px 1fr;gap:8px;align-items:center;margin:14px 0}.team{border:3px solid #d09b20;border-radius:15px;padding:10px;background:#fffaf0}.team h2{font-size:20px}.team .score{font-size:44px;font-weight:1000;color:#9a7410}.team b{font-size:12px}.team .prize{font-size:20px;font-weight:1000;color:#b12a2a;margin-top:7px}.vs{font-size:22px;font-weight:1000;color:#9a7410}.winner{color:#9a7410;font-size:25px!important}@media(max-width:650px){.teams{grid-template-columns:1fr}.vs{margin:-3px}.cert{padding:16px}.cert h1{font-size:25px}}</style></head><body><div class="cert"><h1>🏆 PM SHRI SCHOOL CHAMPIONSHIP</h1><h2>Certificate of Achievement</h2><p>This certificate is proudly presented to</p><h2>'+safe+'</h2><p><b>'+subjectLine+'</b></p><p>'+resultLine+'</p>'+teamBlock+'<p>'+(won?'🏆 Successfully completed the challenge':'👏 Thank you for participating')+'</p><p class="school">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</p></div><script>window.print()<\/script></body></html>');
+ const resultLine=isTeam ? ('Final Score: '+scoreAText+' Points - '+scoreBText+' Points | '+(teamWinner==='DRAW / TIE'?'Result: DRAW / TIE':'Winner: '+teamWinner)) : ('Correct Answers: '+Number(count||0)+' | कुल अर्जित POINTS / Total Earned Points: '+String(amount||'0.00 Points'));
+ const teamBlock=isTeam ? ('<div class="teams"><div class="team"><small>TEAM A</small><h2>'+escapeHtml(meta.teamA||'TEAM A')+'</h2><div class="score">'+scoreAText+'</div><b>FINAL SCORE</b><div class="prize">⭐ POINTS: '+prizeA+'</div></div><div class="vs">VS</div><div class="team"><small>TEAM B</small><h2>'+escapeHtml(meta.teamB||'TEAM B')+'</h2><div class="score">'+scoreBText+'</div><b>FINAL SCORE</b><div class="prize">⭐ POINTS: '+prizeB+'</div></div></div><h2 class="winner">'+(teamWinner==='DRAW / TIE'?'🤝 MATCH DRAW / TIE':'🏆 WINNER: '+escapeHtml(teamWinner)+'<br>⭐ WINNING POINTS: '+(scoreA>scoreB?prizeA:prizeB))+'</h2>') : ('<div class="amount">⭐ '+String(amount||'0.00 Points')+'</div>');
+ w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Certificate - '+quiz+'</title><style>@page{size:A4 landscape;margin:.28in}*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;height:100%;font-family:Arial,"Noto Sans Devanagari",sans-serif;text-align:center;color:#17254d;background:#fff}.cert{width:100%;min-height:100%;height:100%;border:9px double #c99a25;padding:24px 34px;background:linear-gradient(135deg,#fffdf6,#fff,#fff9e8);display:flex;flex-direction:column;justify-content:center;align-items:center}.cert h1{font-size:34px;color:#8e6a0b;margin:0 0 4px;font-weight:1000}.cert h2{font-size:23px;margin:5px 0;color:#243b73}.cert p{font-size:16px;margin:5px 0;line-height:1.2}.school{font-weight:900;color:#6d5210;font-size:16px!important;margin-top:8px!important}.amount{font-size:42px;color:#9a7410;font-weight:900;margin:10px}.teams{width:92%;display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:center;margin:10px auto}.team{border:3px solid #d09b20;border-radius:16px;padding:12px 10px;background:#fffaf0;min-height:150px;display:flex;flex-direction:column;justify-content:center}.team small{font-size:13px;font-weight:900;color:#6d5210}.team h2{font-size:23px;margin:4px 0}.team .score{font-size:43px;font-weight:1000;color:#9a7410;line-height:1.05}.team b{font-size:12px;margin-top:3px}.team .prize{font-size:19px;font-weight:1000;color:#b12a2a;margin-top:6px}.vs{font-size:24px;font-weight:1000;color:#9a7410}.winner{color:#9a7410;font-size:23px!important;margin:7px 0!important}.cert .footer-note{font-size:14px;margin-top:5px}@media(max-width:800px){.cert{padding:14px}.cert h1{font-size:25px}.cert h2{font-size:19px}.teams{width:100%;grid-template-columns:1fr;gap:4px}.vs{margin:-1px}.team{min-height:100px}.team .score{font-size:34px}.winner{font-size:18px!important}}</style></head><body><div class="cert"><h1>🏆 PM SHRI SCHOOL CHAMPIONSHIP</h1><h2>Certificate of Achievement</h2><p>This certificate is proudly presented to</p><h2>'+safe+'</h2><p><b>'+subjectLine+'</b></p><p>'+resultLine+'</p>'+teamBlock+'<p class="footer-note">'+(won?'🏆 Successfully completed the challenge':'👏 Thank you for participating')+'</p><p class="school">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</p></div><script>window.onload=function(){window.print()}<\/script></body></html>');
  w.document.close();
 }
+})();
+</script>
+
+
+
+
+
+<style id="final-mobile-professional-fix-v11">
+/* V11: restore the live-page mobile CSS (previous V10 block was accidentally inside certificate HTML). */
+#game .scorecard .score:has(#modeLabel){display:none!important}
+#game #full{display:none!important}
+#game{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important}
+#game .wrap{height:calc(100dvh - 74px)!important;overflow:hidden!important}
+
+/* Keep the useful team battle panel; hide only the redundant MODE/TEAM score tile. */
+@media(max-width:700px){
+  #game .wrap{padding:4px 7px 68px!important;overflow:hidden!important}
+  #game header{padding:5px 4px!important}
+  #game .logo{font-size:17px!important;line-height:1.05!important}
+  #game .logo span{font-size:11px!important}
+  #game .meta{margin:2px 0!important}
+  #game .student-card{min-width:0!important;max-width:72%!important;padding:5px 9px!important;margin:0!important}
+  #game .student-label{font-size:10px!important}
+  #game .player{font-size:15px!important}
+  #game .level{font-size:10px!important}
+  #game .timer{width:46px!important;height:46px!important;font-size:19px!important;border-width:4px!important}
+
+  #teamBattleBox{width:100%!important;margin:2px 0!important;padding:5px!important;gap:4px!important;border-radius:14px!important}
+  #teamBattleBox .team-card{padding:5px!important;min-width:0!important}
+  #teamBattleBox .team-card b{font-size:15px!important}
+  #teamBattleBox .team-card small{font-size:9px!important}
+  #teamBattleBox .team-prize{font-size:9px!important}
+  #teamBattleBox .team-vs{font-size:15px!important}
+  #teamBattleBox .team-turn{font-size:10px!important;padding:4px!important}
+  #teamBattleBox .team-manual-note{font-size:8px!important;line-height:1.05!important}
+
+  #game .hostbar{margin:2px 0!important;gap:3px!important}
+  #game .badge{font-size:8px!important;padding:2px 5px!important}
+  #game .scorecard{gap:4px!important;margin:2px 0!important;flex-wrap:nowrap!important}
+  #game .scorecard .score{min-width:0!important;flex:1 1 0!important;padding:4px 4px!important}
+  #game .scorecard .earned-big{flex:1.5 1 0!important;min-width:0!important;transform:none!important}
+  #game .score span{font-size:9px!important}
+  #game .score b{font-size:13px!important}
+  #game .earned-big span{font-size:10px!important}
+  #game .earned-big b{font-size:22px!important}
+  #game .progress{height:4px!important;margin:2px 0!important}
+
+  #game .questionbox{padding:8px 9px!important;min-height:0!important;margin:3px 0!important;border-width:2px!important;border-radius:18px!important}
+  #game .qnum{font-size:11px!important;margin-bottom:3px!important}
+  #game .question{font-size:17px!important;line-height:1.15!important}
+  #game .options{grid-template-columns:1fr 1fr!important;gap:5px!important;margin-top:5px!important}
+  #game .option{min-height:45px!important;padding:7px 8px!important;border-radius:17px!important;font-size:12px!important;line-height:1.12!important}
+  #game .controls{gap:4px!important;margin:5px 0 3px!important}
+  #game .controls .btn{font-size:10px!important;padding:6px 7px!important}
+  #game .next-big{min-width:210px!important;padding:9px 14px!important;font-size:16px!important}
+  #game .status{font-size:10px!important;min-height:14px!important}
+  #game .jumpbox{padding:4px!important;margin-top:2px!important}
+  #game .jump-title{font-size:9px!important;margin-bottom:2px!important}
+  #game .jump-buttons{gap:2px!important;max-height:44px!important}
+  #game .jump-btn{width:23px!important;height:21px!important;font-size:9px!important}
+  #game .ladder{padding:4px!important;margin-top:2px!important}
+  #game .ladder h3{font-size:11px!important}
+  #game .money div{font-size:8px!important;padding:2px!important}
+
+  /* Fixed bottom controls sit above Android safe area and never cover content. */
+  #closeAllGroup{left:7px!important;right:7px!important;bottom:max(6px,env(safe-area-inset-bottom))!important;gap:6px!important;z-index:2147483646!important}
+  #closeAllGroup #closeAllBtn,
+  #pauseGameFloat{width:calc(50vw - 10px)!important;min-width:0!important;max-width:none!important;height:48px!important;min-height:48px!important;padding:0 7px!important;border-radius:15px!important;font-size:13px!important;line-height:1!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent!important;pointer-events:auto!important}
+  #pauseGameFloat{right:7px!important;bottom:max(6px,env(safe-area-inset-bottom))!important;z-index:2147483647!important;display:flex!important;align-items:center!important;justify-content:center!important}
+  #pauseGameFloat span{font-size:12px!important}
+
+  /* Lifeline / Teacher / Poll modals: compact, scroll only inside modal if necessary. */
+  #audienceModal,#teacherSupportModal,#teacherModal,#lifelineChoiceModal,#resultModal,#pauseModal{padding:8px!important;align-items:center!important}
+  #audienceModal .modalbox,#teacherSupportModal .modalbox,#teacherModal .teacher-box,#lifelineChoiceModal .modalbox,#resultModal .modalbox,#pauseModal .modalbox{width:96vw!important;max-width:520px!important;max-height:88dvh!important;overflow:auto!important;padding:12px!important;border-radius:18px!important}
+  #audienceModal h2,#teacherSupportModal h2,#teacherModal h2,#lifelineChoiceModal h2,#resultModal h2,#pauseModal h2{font-size:18px!important;margin:3px 0 7px!important}
+  #pollQuestion{padding:8px 9px!important;margin:5px 0 8px!important}
+  #pollQText{font-size:14px!important;line-height:1.18!important}
+  #audienceModal .pollgrid{grid-template-columns:1fr 1fr!important;gap:6px!important}
+  #audienceModal .vote{min-height:55px!important;padding:7px!important;font-size:12px!important;border-radius:13px!important}
+  #audienceModal .vote span{font-size:20px!important}
+  #audienceModal .bar{height:16px!important;margin:3px 0 6px!important}
+  #teacherSupportModal .pollgrid{grid-template-columns:1fr 1fr!important;gap:6px!important}
+  #teacherSupportModal .vote{min-height:54px!important;padding:7px!important;font-size:12px!important;border-radius:13px!important}
+  #teacherSupportModal .vote span{font-size:20px!important}
+  #teacherModal .teacher-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}
+  #teacherModal .teacher-grid .btn{min-height:44px!important;font-size:11px!important;padding:6px!important}
+  #teacherInfo{font-size:10px!important;margin:6px 0 0!important;padding:6px!important}
+  #lifelineChoiceModal .btn{min-height:48px!important;font-size:12px!important;padding:7px!important}
+
+  /* Reduce expensive visual work on phones. */
+  #game .questionbox:after{animation:none!important}
+  #teamBattleBox .team-card.active:after{animation:none!important}
+}
+</style>
+<script id="final-mobile-professional-js-v11">
+(function(){
+  const p=document.getElementById('pauseGameFloat');
+  if(!p)return;
+  let last=0;
+  const trigger=function(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    const now=Date.now(); if(now-last<300)return; last=now;
+    if(typeof pauseGame==='function') pauseGame();
+  };
+  p.removeAttribute('onclick');
+  p.addEventListener('pointerup',trigger,{passive:false});
+  p.addEventListener('touchend',trigger,{passive:false});
+  p.addEventListener('click',trigger,{passive:false});
 })();
 </script>
 </body>
