@@ -1559,6 +1559,48 @@ html:fullscreen #fullscreenFloat{top:max(10px,env(safe-area-inset-top))!importan
 @media(max-height:650px){.live-score-marquee{height:19px;line-height:19px;font-size:9px;margin-top:1px;}}
 html:fullscreen .live-score-marquee{height:22px;line-height:22px;font-size:11px;margin-top:1px;}
 </style>
+
+<style id="four-team-kbc-overrides">
+/* KBC Team Battle always shows ONLY the two teams playing the current match. */
+#welcome .team-names{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr)!important;align-items:center!important}
+#welcome .team-names::before{content:"👥 TEAM BATTLE — TEAM NAME  VS  TEAM NAME";grid-column:1/-1}
+#welcome .team-names .team-vs-input{display:flex;align-items:center;justify-content:center;color:#ffd85a;font-size:18px;font-weight:1000;text-shadow:0 0 8px rgba(255,216,90,.45)}
+@media(max-width:700px){#welcome .team-names{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important}#welcome .team-names .team-vs-input{font-size:13px}}
+#teamBattleBox{grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr)!important;gap:7px!important;padding-top:8px!important}
+#teamBattleBox .team-card{min-width:0!important}
+#teamBattleBox .team-turn,#teamBattleBox .team-manual-note{grid-column:1/-1}
+#teamBattleBox .team-vs{display:block!important}
+.final-team-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+@media(max-width:700px){#welcome .team-names{grid-template-columns:1fr 1fr!important}#teamBattleBox{grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr)!important}#teamBattleBox .team-turn,#teamBattleBox .team-manual-note{grid-column:1/-1}}
+</style>
+<style id="compact-two-team-inputs">
+/* COMPACT 2-TEAM MATCH UI — only two teams, face-to-face, minimum vertical space. */
+#welcome .team-names{
+  grid-template-columns:minmax(0,1fr) 42px minmax(0,1fr)!important;
+  gap:5px!important;
+  margin:2px 0 4px!important;
+  padding:4px 6px!important;
+  border:1px solid rgba(255,216,90,.65)!important;
+  border-radius:11px!important;
+  background:rgba(7,23,65,.72)!important;
+  box-shadow:none!important;
+  align-items:center!important;
+}
+#welcome .team-names::before{display:none!important;content:none!important}
+#welcome .team-names input{height:34px!important;min-width:0!important;padding:5px 8px!important;border-width:2px!important;border-radius:9px!important;font-size:13px!important}
+#welcome .team-names .team-vs-input{display:flex!important;align-items:center!important;justify-content:center!important;font-size:15px!important;line-height:1!important;color:#ffd85a!important;font-weight:1000!important}
+@media(max-width:700px){
+  #welcome .team-names{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;gap:3px!important;padding:3px 4px!important;margin:2px 0 4px!important}
+  #welcome .team-names input{height:32px!important;font-size:11px!important;padding:4px 6px!important}
+  #welcome .team-names .team-vs-input{font-size:12px!important}
+}
+</style>
+<style id="final-two-team-match-display">
+/* FINAL 2-TEAM MATCH DISPLAY: only the two teams in the current match are shown. */
+#teamBattleBox #teamCardC,#teamBattleBox #teamCardD{display:none!important}
+#teamBattleBox{grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr)!important}
+#teamBattleBox .team-card{min-width:0!important}
+</style>
 </head>
 </style>
 <body>
@@ -1568,23 +1610,23 @@ html:fullscreen .live-score-marquee{height:22px;line-height:22px;font-size:11px;
  <div class="panel welcome-premium">
   <div class="pm-badge"><div class="pm-star">🏆</div><div><b>KNOWLEDGE BATTLE</b><span>ज्ञान • आत्मविश्वास • विजय</span></div><div class="pm-star">🏆</div></div>
   <div class="school-icon-row"><span>🏫</span><span>📚</span><span>🏆</span><span>🌟</span><span>🎓</span></div>
-  <h1 style="color:#ffd85a;letter-spacing:1.5px">PM SHRI SCHOOL CHAMPIONSHIP</h1><h2 style="color:#fff;margin:4px 0 8px;font-size:18px">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</h2>
+  <h1 style="color:#ffd85a;letter-spacing:1.5px">PM SHRI SCHOOL CHAMPIONSHIP</h1>
   <div class="gold-line"></div>
-  <h2 style="color:#ffd85a;margin:8px 0"><span id="quizClassTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span></h2>
+  <h2 style="color:#ffd85a;margin:8px 0"><span id="quizClassTitle">SEMI FINAL 01 — SCHOOL CHAMPIONSHIP KBC QUIZ</span></h2>
   <p class="edition">✨ <b>CLASSROOM CHAMPIONS EDITION</b> ✨</p>
-  <div class="welcome-cards"><div>📚<b> CLASS-WISE QUIZ</b><small>RBSE Classes 6–12 + Computer Science</small></div><div>👥<b> AUDIENCE</b><small>कक्षा की मदद</small></div><div>⭐<b> POINTS LADDER</b><small>हर सही उत्तर = 5.00 Points</small></div></div>
+  <div class="welcome-cards"><div>📚<b> CLASS-WISE QUIZ</b><small>Classes 6–9 + Competition Tests + Computer Science</small></div><div>👥<b> AUDIENCE</b><small>कक्षा की मदद</small></div><div>⭐<b> POINTS LADDER</b><small>हर सही उत्तर = 5.00 Points</small></div></div>
 
   <div class="class-choice">
- <div class="class-choice-title">📚 अपनी कक्षा चुनें</div>
- <div class="class-choice-buttons"><button id="computerScienceBtn" class="class-choice-btn" type="button">💻 COMPUTER SCIENCE</button><button id="class6Btn" class="class-choice-btn" type="button">📘 CLASS 6</button><button id="class7Btn" class="class-choice-btn" type="button">📘 CLASS 7</button><button id="class8Btn" class="class-choice-btn" type="button">📘 CLASS 8</button><button id="class9Btn" class="class-choice-btn" type="button">📘 CLASS 9</button><button id="class10Btn" class="class-choice-btn selected" type="button">🎓 CLASS 10</button><button id="class11Btn" class="class-choice-btn" type="button">🎓 CLASS 11</button><button id="class12Btn" class="class-choice-btn" type="button">🎓 CLASS 12</button></div>
- <div id="classChoiceInfo">Class 10 — Class-wise Questions</div>
+ <div class="class-choice-title">🏆 COMPETITION ROUND चुनें</div>
+ <div class="class-choice-buttons"><button id="computerScienceBtn" class="class-choice-btn" type="button">💻 COMPUTER SCIENCE</button><button id="class6Btn" class="class-choice-btn" type="button">📘 CLASS 6</button><button id="class7Btn" class="class-choice-btn" type="button">📘 CLASS 7</button><button id="class8Btn" class="class-choice-btn" type="button">📘 CLASS 8</button><button id="class9Btn" class="class-choice-btn" type="button">📘 CLASS 9</button><button id="semiFinal01Btn" class="class-choice-btn selected" type="button">🏆 SEMI FINAL 01</button><button id="semiFinal02Btn" class="class-choice-btn" type="button">⚔️ SEMI FINAL 02</button><button id="finalTestBtn" class="class-choice-btn" type="button">👑 FINAL TEST</button></div>
+ <div id="classChoiceInfo">Semi Final 01 — Common + Stream Questions</div>
 </div>
 <label id="nameLabel" for="nameInput" class="name-label">🎓 विद्यार्थी का नाम दर्ज करें</label>
   <input id="nameInput" type="text" maxlength="40" autocomplete="off" placeholder="✍️ यहाँ अपना नाम लिखें…" aria-label="विद्यार्थी का नाम">
    <div class="pro-settings">
     <div class="game-mode-big"><b>🎮 GAME MODE</b><select id="gameMode"><option value="classic">👤 SINGLE PERSON BATTLE</option><option value="team">👥 TEAM BATTLE</option></select></div>
    </div>
-   <div id="teamNames" class="team-names hidden"><input id="teamA" maxlength="24" placeholder="TEAM A नाम"><input id="teamB" maxlength="24" placeholder="TEAM B नाम"></div>
+   <div id="teamNames" class="team-names hidden"><input id="teamA" maxlength="24" placeholder="TEAM NAME"><div class="team-vs-input" aria-hidden="true">VS</div><input id="teamB" maxlength="24" placeholder="TEAM NAME"></div>
   <button id="startBtn" class="start name-start" type="button">🚀 नाम दर्ज करें और खेल शुरू करें</button>
   <button id="recordsBtn" class="btn gold" type="button" style="margin-top:6px;width:100%;font-size:14px;padding:8px">🏅 PARTICIPATED STUDENTS & POINT RECORDS</button>
   <div id="recentRecords" style="margin-top:6px;font-size:11px;color:#fff;opacity:.9"></div>
@@ -1619,31 +1661,25 @@ html:fullscreen .live-score-marquee{height:22px;line-height:22px;font-size:11px;
 <button id="fullscreenFloat" type="button" title="Toggle full screen">⛶ FULL SCREEN</button>
 <button id="pauseGameFloat" type="button">⏸️ <span>PAUSE GAME</span></button>
 <div id="game" class="hidden">
-<header><div class="logo">🏆 पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा<br><span id="gameHeaderTitle">CLASS 10 — CLASS-WISE RBSE KBC QUIZ</span><br><marquee id="liveScoreMarquee" class="live-score-marquee single-mode" behavior="scroll" direction="left" scrollamount="5" scrolldelay="45">📊 LIVE SCORE • अभी game शुरू नहीं हुआ</marquee></div></header>
+<header><div class="logo"><span id="gameHeaderTitle">SEMI FINAL 01 — SCHOOL CHAMPIONSHIP KBC QUIZ</span><br><marquee id="liveScoreMarquee" class="live-score-marquee single-mode" behavior="scroll" direction="left" scrollamount="5" scrolldelay="45">📊 LIVE SCORE • अभी game शुरू नहीं हुआ</marquee></div></header>
 <div class="wrap">
  <div class="meta">
  <div class="student-card"><span class="student-label">🎓 STUDENT NAME</span><div id="player" class="player">👤 विद्यार्थी</div><div id="level" class="level"></div></div>
  <div id="timer" class="timer">20</div>
 </div>
 <div id="teamBattleBox" class="team-battle-box hidden">
-  <div id="teamCardA" class="team-card">
-    <span class="team-tag">TEAM A</span>
-    <b id="gameTeamA">TEAM A</b>
-    <small>Score: <strong id="teamScoreA">0</strong></small><em id="teamPrizeA" class="team-prize">⭐ Points 0</em>
-  </div>
-  <div class="team-vs">VS</div>
-  <div id="teamCardB" class="team-card">
-    <span class="team-tag">TEAM B</span>
-    <b id="gameTeamB">TEAM B</b>
-    <small>Score: <strong id="teamScoreB">0</strong></small><em id="teamPrizeB" class="team-prize">⭐ Points 0</em>
-  </div>
+  <div id="teamCardA" class="team-card"><span class="team-tag">TEAM</span><b id="gameTeamA">TEAM A</b><small>Score: <strong id="teamScoreA">0</strong></small><em id="teamPrizeA" class="team-prize">⭐ Points 0</em></div>
+  <div class="team-vs" aria-hidden="true">VS</div>
+  <div id="teamCardB" class="team-card"><span class="team-tag">TEAM</span><b id="gameTeamB">TEAM B</b><small>Score: <strong id="teamScoreB">0</strong></small><em id="teamPrizeB" class="team-prize">⭐ Points 0</em></div>
+  <div id="teamCardC" class="team-card"><span class="team-tag">TEAM C</span><b id="gameTeamC">TEAM C</b><small>Score: <strong id="teamScoreC">0</strong></small><em id="teamPrizeC" class="team-prize">⭐ Points 0</em></div>
+  <div id="teamCardD" class="team-card"><span class="team-tag">TEAM D</span><b id="gameTeamD">TEAM D</b><small>Score: <strong id="teamScoreD">0</strong></small><em id="teamPrizeD" class="team-prize">⭐ Points 0</em></div>
   <div id="teamTurn" class="team-turn">🎯 TEAM A की बारी</div>
-  <div class="team-manual-note">👆 Team बदलना हो तो ऊपर TEAM A / TEAM B पर manually click करें</div>
+  <div class="team-manual-note">👆 ऊपर किसी Team पर click करके teacher active Team बदल सकते हैं</div>
 </div>
 <div class="hostbar"><span class="badge">🎙️ HOT SEAT</span><span class="badge">👥 LIVE AUDIENCE</span><span class="badge">🏫 CLASSROOM KBC</span></div>
 <div class="scorecard">
  <div class="score earned-big"><span>⭐ अर्जित POINTS</span><b id="earned">0.00 Points</b></div>
- <div class="score"><span>प्रश्न</span><b id="miniQ">1/10</b></div>
+ <div class="score"><span>प्रश्न</span><b id="miniQ">1/20</b></div>
  <div class="score"><span>लाइफलाइन</span><b id="lifeCount">3</b></div>
  <div class="score"><span>MODE / TEAM</span><b id="modeLabel">CLASSIC</b></div>
 </div>
@@ -1811,14 +1847,14 @@ const CLASS6_QUESTIONS=[
  {q:"श्वसन के लिए किस गैस की आवश्यकता होती है? / Which gas is needed for respiration?",o:["ऑक्सीजन / Oxygen","नाइट्रोजन / Nitrogen","हाइड्रोजन / Hydrogen","हीलियम / Helium"],a:0},
  {q:"कौन-सा बल वस्तुओं को पृथ्वी की ओर खींचता है? / Which force pulls objects towards Earth?",o:["घर्षण बल / Friction","चुंबकीय बल / Magnetic force","गुरुत्वाकर्षण बल / Gravity","पेशीय बल / Muscular force"],a:2},
  {q:"निम्न में से विद्युत का सुचालक कौन-सा है? / Which is a conductor of electricity?",o:["रबर / Rubber","प्लास्टिक / Plastic","तांबा / Copper","लकड़ी / Wood"],a:2},
- {q:"‘जल्दी’ का विलोम है:",o:["शीघ्र","देर से","तुरंत","अब"],a:1},
- {q:"‘राम और मोहन’ में ‘और’ है:",o:["संज्ञा","समुच्चयबोधक","क्रिया","विशेषण"],a:1},
- {q:"‘लड़कियाँ खेल रही हैं।’ में क्रिया है:",o:["लड़कियाँ","खेल","खेल रही हैं","हैं"],a:2},
- {q:"‘ईमानदारी’ किस प्रकार की संज्ञा है?",o:["व्यक्तिवाचक","भाववाचक","जातिवाचक","द्रव्यवाचक"],a:1},
- {q:"Past tense of ‘go’ is:",o:["goed","went","gone","going"],a:1},
- {q:"Choose the correct article: ‘___ honest man’.",o:["A","An","The","No article"],a:1},
- {q:"Synonym of ‘begin’ is:",o:["end","start","stop","close"],a:1},
- {q:"‘They were playing.’ is:",o:["Past Continuous","Present Continuous","Simple Past","Future"],a:0},
+ {q:"‘जल्दी’ का विलोम क्या है? / What is the antonym of ‘जल्दी’?",o:["शीघ्र / Soon","देर से / Late","तुरंत / Immediately","अब / Now"],a:1},
+ {q:"‘राम और मोहन’ में ‘और’ कौन-सा शब्द-भेद है? / What part of speech is ‘और’ in ‘Ram and Mohan’?",o:["संज्ञा / Noun","समुच्चयबोधक / Conjunction","क्रिया / Verb","विशेषण / Adjective"],a:1},
+ {q:"‘लड़कियाँ खेल रही हैं।’ में क्रिया कौन-सी है? / Which is the verb in ‘The girls are playing’?",o:["लड़कियाँ / Girls","खेल / Play","खेल रही हैं / Are playing","हैं / Are"],a:2},
+ {q:"‘ईमानदारी’ किस प्रकार की संज्ञा है? / What type of noun is ‘ईमानदारी’?",o:["व्यक्तिवाचक / Proper noun","भाववाचक / Abstract noun","जातिवाचक / Common noun","द्रव्यवाचक / Material noun"],a:1},
+ {q:"‘go’ का Past tense क्या है? / What is the past tense of ‘go’?",o:["goed / गया (गलत रूप)","went / गया","gone / गया हुआ","going / जा रहा"],a:1},
+ {q:"सही article चुनें: ‘___ honest man’. / Choose the correct article: ‘___ honest man’.",o:["A / एक","An / एक","The / वह","No article / कोई article नहीं"],a:1},
+ {q:"‘begin’ का synonym क्या है? / What is the synonym of ‘begin’?",o:["end / समाप्त करना","start / शुरू करना","stop / रोकना","close / बंद करना"],a:1},
+ {q:"‘They were playing.’ कौन-सा tense है? / Which tense is ‘They were playing.’?",o:["Past Continuous / भूतकाल निरंतर","Present Continuous / वर्तमान निरंतर","Simple Past / साधारण भूतकाल","Future / भविष्य"],a:0},
  {q:"भारत में ग्राम स्तर की स्थानीय संस्था कौन-सी है? / Which is the local institution at the village level in India?",o:["ग्राम पंचायत / Gram Panchayat","लोकसभा / Lok Sabha","राज्यसभा / Rajya Sabha","सर्वोच्च न्यायालय / Supreme Court"],a:0},
  {q:"विश्व का सबसे बड़ा महासागर कौन-सा है? / Which is the largest ocean in the world?",o:["अटलांटिक महासागर / Atlantic Ocean","प्रशांत महासागर / Pacific Ocean","हिंद महासागर / Indian Ocean","आर्कटिक महासागर / Arctic Ocean"],a:1},
  {q:"भारत का राष्ट्रीय फूल कौन-सा है? / What is the national flower of India?",o:["गुलाब / Rose","कमल / Lotus","चमेली / Jasmine","कमलिनी / Water lily"],a:1},
@@ -1832,14 +1868,14 @@ const CLASS7_QUESTIONS=[
  {q:"नीला लिटमस किसमें लाल हो जाता है? / Blue litmus turns red in:",o:["क्षार / Base","अम्ल / Acid","केवल लवण / Salt only","जल / Water"],a:1},
  {q:"सीधे संपर्क से ऊष्मा का स्थानांतरण क्या कहलाता है? / Heat transfer through direct contact is:",o:["चालन / Conduction","संवहन / Convection","विकिरण / Radiation","परावर्तन / Reflection"],a:0},
  {q:"जीवन की सबसे छोटी सक्षम इकाई क्या है? / The smallest unit capable of life is:",o:["परमाणु / Atom","कोशिका / Cell","ऊतक / Tissue","अंग / Organ"],a:1},
- {q:"‘नीलकमल’ में समास है:",o:["कर्मधारय","द्वंद्व","अव्ययीभाव","द्विगु"],a:0},
- {q:"‘आँखों का तारा’ का अर्थ:",o:["बहुत प्रिय","बहुत दूर","बहुत क्रोधित","बहुत तेज"],a:0},
- {q:"‘सुंदरता’ है:",o:["भाववाचक संज्ञा","सर्वनाम","क्रिया","विशेषण"],a:0},
- {q:"‘जो मेहनत करता है, वह सफल होता है।’ है:",o:["सरल","संयुक्त","मिश्र","आज्ञार्थक"],a:2},
- {q:"Comparative of ‘bad’:",o:["badder","worse","worst","more bad"],a:1},
- {q:"Passive: ‘The teacher praised Ravi.’",o:["Ravi was praised by the teacher.","Ravi is praised by the teacher.","Ravi praised the teacher.","The teacher was praised by Ravi."],a:0},
- {q:"Choose: ‘She has ___ her homework.’",o:["do","did","done","doing"],a:2},
- {q:"Antonym of ‘ancient’:",o:["old","modern","historic","past"],a:1},
+ {q:"‘नीलकमल’ में कौन-सा समास है? / Which type of compound is ‘नीलकमल’?",o:["कर्मधारय / Karmadharaya","द्वंद्व / Dvandva","अव्ययीभाव / Avyayibhava","द्विगु / Dvigu"],a:0},
+ {q:"‘आँखों का तारा’ का अर्थ क्या है? / What does ‘आँखों का तारा’ mean?",o:["बहुत प्रिय / Very dear","बहुत दूर / Very far","बहुत क्रोधित / Very angry","बहुत तेज / Very fast"],a:0},
+ {q:"‘सुंदरता’ किस प्रकार का शब्द है? / What type of word is ‘सुंदरता’?",o:["भाववाचक संज्ञा / Abstract noun","सर्वनाम / Pronoun","क्रिया / Verb","विशेषण / Adjective"],a:0},
+ {q:"‘जो मेहनत करता है, वह सफल होता है।’ कौन-सा वाक्य है? / What type of sentence is ‘जो मेहनत करता है, वह सफल होता है।’?",o:["सरल / Simple","संयुक्त / Compound","मिश्र / Complex","आज्ञार्थक / Imperative"],a:2},
+ {q:"‘bad’ का comparative degree क्या है? / What is the comparative degree of ‘bad’?",o:["badder / अधिक खराब","worse / अधिक खराब","worst / सबसे खराब","more bad / अधिक खराब"],a:1},
+ {q:"‘The teacher praised Ravi.’ का passive voice चुनें। / Choose the passive voice of ‘The teacher praised Ravi.’",o:["Ravi was praised by the teacher. / शिक्षक द्वारा रवि की प्रशंसा की गई।","Ravi is praised by the teacher. / शिक्षक द्वारा रवि की प्रशंसा की जाती है।","Ravi praised the teacher. / रवि ने शिक्षक की प्रशंसा की।","The teacher was praised by Ravi. / रवि द्वारा शिक्षक की प्रशंसा की गई।"],a:0},
+ {q:"सही विकल्प चुनें: ‘She has ___ her homework.’ / Choose the correct option: ‘She has ___ her homework.’",o:["do / करना","did / किया","done / किया हुआ","doing / कर रही"],a:2},
+ {q:"‘ancient’ का antonym क्या है? / What is the antonym of ‘ancient’?",o:["old / पुराना","modern / आधुनिक","historic / ऐतिहासिक","past / अतीत"],a:1},
  {q:"भारत का संविधान कब लागू हुआ? / When did the Constitution of India come into effect?",o:["15 अगस्त 1947 / 15 August 1947","26 जनवरी 1950 / 26 January 1950","26 नवंबर 1949 / 26 November 1949","2 अक्टूबर 1950 / 2 October 1950"],a:1},
  {q:"लोकतंत्र में सरकार चुनने का माध्यम क्या है? / What is the means of choosing a government in a democracy?",o:["चुनाव / Elections","वंशानुक्रम / Inheritance","लॉटरी / Lottery","युद्ध / War"],a:0},
  {q:"वायुमंडल में सबसे अधिक मात्रा में कौन-सी गैस है? / Which gas is most abundant in the atmosphere?",o:["ऑक्सीजन / Oxygen","नाइट्रोजन / Nitrogen","कार्बन डाइऑक्साइड / Carbon dioxide","हाइड्रोजन / Hydrogen"],a:1},
@@ -1853,14 +1889,14 @@ const CLASS8_QUESTIONS=[
  {q:"कोशिका का नियंत्रण केंद्र कौन-सा है? / What is the control centre of the cell?",o:["नाभिक / Nucleus","रसधानी / Vacuole","कोशिका भित्ति / Cell wall","कोशिकाद्रव्य / Cytoplasm"],a:0},
  {q:"तनु अम्ल के साथ धातु सामान्यतः कौन-सी गैस छोड़ती है? / Metal + dilute acid generally releases:",o:["ऑक्सीजन / Oxygen","हाइड्रोजन / Hydrogen","नाइट्रोजन / Nitrogen","कार्बन डाइऑक्साइड / Carbon dioxide"],a:1},
  {q:"दाब की SI इकाई क्या है? / What is the SI unit of pressure?",o:["न्यूटन / Newton","पास्कल / Pascal","जूल / Joule","वाट / Watt"],a:1},
- {q:"‘राजपुत्र’ में समास है:",o:["तत्पुरुष","द्वंद्व","बहुव्रीहि","अव्ययीभाव"],a:0},
- {q:"‘नाक कटना’ का अर्थ:",o:["अपमान होना","खुश होना","बीमार होना","तेज दौड़ना"],a:0},
- {q:"‘गंगा’ है:",o:["जातिवाचक","व्यक्तिवाचक","भाववाचक","समूहवाचक"],a:1},
- {q:"‘वह पढ़ रहा है।’ काल है:",o:["भूत","वर्तमान निरंतर","भविष्य","पूर्ण भूत"],a:1},
- {q:"Correct: ‘If I ___ you, I would study.’",o:["am","was","were","be"],a:2},
- {q:"Synonym of ‘rapid’:",o:["slow","quick","weak","late"],a:1},
- {q:"Reported speech: She said, ‘I am tired.’",o:["She said that she was tired.","She said I am tired.","She says she was tired.","She said that she is tired."],a:0},
- {q:"Adverb in ‘He spoke politely’:",o:["He","spoke","politely","none"],a:2},
+ {q:"‘राजपुत्र’ में कौन-सा समास है? / Which type of compound is ‘राजपुत्र’?",o:["तत्पुरुष / Tatpurusha","द्वंद्व / Dvandva","बहुव्रीहि / Bahuvrihi","अव्ययीभाव / Avyayibhava"],a:0},
+ {q:"‘नाक कटना’ का अर्थ क्या है? / What does ‘नाक कटना’ mean?",o:["अपमान होना / To be insulted","खुश होना / To be happy","बीमार होना / To become ill","तेज दौड़ना / To run fast"],a:0},
+ {q:"‘गंगा’ किस प्रकार की संज्ञा है? / What type of noun is ‘गंगा’?",o:["जातिवाचक / Common noun","व्यक्तिवाचक / Proper noun","भाववाचक / Abstract noun","समूहवाचक / Collective noun"],a:1},
+ {q:"‘वह पढ़ रहा है।’ कौन-सा काल है? / Which tense is ‘वह पढ़ रहा है।’?",o:["भूत / Past","वर्तमान निरंतर / Present Continuous","भविष्य / Future","पूर्ण भूत / Past Perfect"],a:1},
+ {q:"सही विकल्प चुनें: ‘If I ___ you, I would study.’ / Choose the correct option: ‘If I ___ you, I would study.’",o:["am / हूँ","was / था","were / होता","be / होना"],a:2},
+ {q:"‘rapid’ का synonym क्या है? / What is the synonym of ‘rapid’?",o:["slow / धीमा","quick / तेज","late / देर से","weak / कमजोर"],a:1},
+ {q:"Reported speech चुनें: She said, ‘I am tired.’ / Choose the reported speech of: She said, ‘I am tired.’",o:["She said that she was tired. / उसने कहा कि वह थकी हुई थी।","She said I am tired. / उसने कहा मैं थकी हूँ।","She says she was tired. / वह कहती है कि वह थकी थी।","She said that she is tired. / उसने कहा कि वह थकी है।"],a:0},
+ {q:"‘He spoke politely’ में adverb कौन-सा है? / Which is the adverb in ‘He spoke politely’?",o:["He / वह","spoke / बोला","politely / विनम्रता से","none / कोई नहीं"],a:2},
  {q:"मौलिक अधिकार संविधान के किस भाग में हैं? / In which Part of the Constitution are Fundamental Rights given?",o:["भाग I / Part I","भाग II / Part II","भाग III / Part III","भाग IV / Part IV"],a:2},
  {q:"1857 का विद्रोह मुख्यतः किसके विरुद्ध था? / The Revolt of 1857 was mainly against:",o:["ब्रिटिश शासन / British rule","फ्रांसीसी शासन / French rule","मराठा शासन / Maratha rule","रूसी शासन / Russian rule"],a:0},
  {q:"काली मिट्टी किस फसल के लिए प्रसिद्ध है? / Black soil is famous for which crop?",o:["कपास / Cotton","चाय / Tea","जूट / Jute","कॉफी / Coffee"],a:0},
@@ -1874,83 +1910,117 @@ const CLASS9_QUESTIONS=[
  {q:"ओम का नियम क्या है? / Ohm’s law is:",o:["V = IR / V = IR","P = VI / P = VI","F = ma / F = ma","E = mc² / E = mc²"],a:0},
  {q:"ऑक्सीजन का मुख्यतः परिवहन किसके द्वारा होता है? / Oxygen is mainly transported by:",o:["हीमोग्लोबिन / Haemoglobin","प्लेटलेट्स / Platelets","केवल प्लाज्मा / Plasma only","श्वेत रक्त कोशिकाएँ / WBC"],a:0},
  {q:"अम्लीय विलयन का pH होता है: / An acidic solution has a pH:",o:["7 / 7",">7 / >7","<7 / <7","14 / 14"],a:2},
- {q:"‘यथाशक्ति’ में समास:",o:["अव्ययीभाव","द्वंद्व","बहुव्रीहि","कर्मधारय"],a:0},
- {q:"‘हाथ मलना’ का अर्थ:",o:["पछताना","हँसना","मेहनत करना","सोना"],a:0},
- {q:"‘सीता को’ in ‘राम ने सीता को फल दिया’ is:",o:["कर्ता","कर्म","संप्रदान","अपादान"],a:2},
- {q:"‘नीर’ का अर्थ:",o:["जल","अग्नि","वायु","आकाश"],a:0},
- {q:"Modal showing necessity:",o:["may","must","might","could"],a:1},
- {q:"Past perfect is:",o:["has gone","had gone","was going","goes"],a:1},
- {q:"Passive: ‘People speak Hindi here.’",o:["Hindi is spoken here.","Hindi was spoken here.","Hindi has spoken here.","Hindi speaks here."],a:0},
- {q:"Synonym of ‘rapid’:",o:["slow","quick","late","weak"],a:1},
+ {q:"‘यथाशक्ति’ में कौन-सा समास है? / Which type of compound is ‘यथाशक्ति’?",o:["अव्ययीभाव / Avyayibhava","द्वंद्व / Dvandva","बहुव्रीहि / Bahuvrihi","कर्मधारय / Karmadharaya"],a:0},
+ {q:"‘हाथ मलना’ का अर्थ क्या है? / What does ‘हाथ मलना’ mean?",o:["पछताना / To regret","हँसना / To laugh","मेहनत करना / To work hard","सोना / To sleep"],a:0},
+ {q:"‘राम ने सीता को फल दिया’ में ‘सीता को’ क्या है? / In ‘Ram gave fruit to Sita’, what is ‘सीता को’?",o:["कर्ता / Subject","कर्म / Object","संप्रदान / Indirect object","अपादान / Ablative"],a:2},
+ {q:"‘नीर’ का अर्थ क्या है? / What is the meaning of ‘नीर’?",o:["जल / Water","अग्नि / Fire","वायु / Air","आकाश / Sky"],a:0},
+ {q:"आवश्यकता दर्शाने वाला modal कौन-सा है? / Which modal shows necessity?",o:["may / सकता है","must / अवश्य चाहिए","might / शायद","could / सकता था"],a:1},
+ {q:"Past perfect का उदाहरण कौन-सा है? / Which is an example of past perfect?",o:["has gone / जा चुका है","had gone / जा चुका था","was going / जा रहा था","goes / जाता है"],a:1},
+ {q:"‘People speak Hindi here.’ का passive voice चुनें। / Choose the passive voice of ‘People speak Hindi here.’",o:["Hindi is spoken here. / यहाँ हिंदी बोली जाती है।","Hindi was spoken here. / यहाँ हिंदी बोली जाती थी।","Hindi has spoken here. / हिंदी ने यहाँ बोला है।","Hindi speaks here. / हिंदी यहाँ बोलती है।"],a:0},
+ {q:"‘rapid’ का synonym क्या है? / What is the synonym of ‘rapid’?",o:["slow / धीमा","quick / तेज","late / देर से","weak / कमजोर"],a:1},
  {q:"लोकतंत्र की प्रमुख विशेषता क्या है? / What is a major feature of democracy?",o:["स्वतंत्र एवं निष्पक्ष चुनाव / Free and fair elections","एक परिवार का शासन / Rule by one family","विपक्ष पर रोक / Ban on opposition","जनभागीदारी का अभाव / Absence of public participation"],a:0},
  {q:"भारत की संसद के दो सदन कौन-से हैं? / What are the two Houses of the Parliament of India?",o:["लोकसभा और राज्यसभा / Lok Sabha and Rajya Sabha","केवल लोकसभा / Lok Sabha only","केवल राज्यसभा / Rajya Sabha only","विधानसभा और लोकसभा / Legislative Assembly and Lok Sabha"],a:0},
  {q:"मानव पूंजी का निर्माण किससे होता है? / What helps in building human capital?",o:["शिक्षा व स्वास्थ्य / Education and health","केवल भूमि / Land only","केवल मशीन / Machines only","केवल मुद्रा / Money only"],a:0},
  {q:"मानसून कृषि के लिए महत्वपूर्ण है क्योंकि: / Why is the monsoon important for agriculture?",o:["कई फसलों को जल मिलता है / It provides water for many crops","वर्षा कभी नहीं होती / It never rains","केवल सर्दियों में होती है / It occurs only in winter","केवल रेगिस्तान में होती है / It occurs only in deserts"],a:0}];
-const CLASS10_QUESTIONS=[
- {q:"निकट दृष्टिदोष को ठीक करने के लिए कौन-सा लेंस प्रयोग होता है? / Which lens corrects myopia?",o:["उत्तल / Convex","अवतल / Concave","बेलनाकार / Cylindrical","समतल / Plane"],a:1},
- {q:"प्रकाश संश्लेषण के दौरान कौन-सी गैस निकलती है? / Which gas is released during photosynthesis?",o:["नाइट्रोजन / Nitrogen","ऑक्सीजन / Oxygen","हाइड्रोजन / Hydrogen","कार्बन मोनोऑक्साइड / Carbon monoxide"],a:1},
- {q:"‘हिंद स्वराज’ किसने लिखा? / Who wrote ‘Hind Swaraj’?",o:["महात्मा गांधी / Mahatma Gandhi","जवाहरलाल नेहरू / Jawaharlal Nehru","बी. आर. आंबेडकर / B. R. Ambedkar","सुभाष चंद्र बोस / Subhas Chandra Bose"],a:0},
- {q:"सतत विकास का मुख्य उद्देश्य क्या है? / What is the main aim of sustainable development?",o:["केवल तेज उत्पादन / Only rapid production","भविष्य को नुकसान पहुँचाए बिना वर्तमान जरूरतें पूरी करना / Meet present needs without harming future needs","सभी उद्योग बंद करना / Stop all industries","सभी संसाधन जल्दी उपयोग करना / Use all resources quickly"],a:1},
- {q:"विद्युत शक्ति का सूत्र क्या है? / What is the formula for electric power?",o:["P = VI / P = VI","P = V/I / P = V/I","P = I/V / P = I/V","P = IR² / P = IR²"],a:0},
- {q:"मानव नेत्र में प्रतिबिंब कहाँ बनता है? / Where is the image formed in the human eye?",o:["रेटिना / Retina","कॉर्निया / Cornea","आइरिस / Iris","पुतली / Pupil"],a:0},
- {q:"आनुवंशिकता की इकाई क्या है? / What is the unit of heredity?",o:["जीन / Gene","कोशिका / Cell","ऊतक / Tissue","अंग / Organ"],a:0},
- {q:"pH 7 वाला विलयन कैसा होता है? / A solution with pH 7 is:",o:["अम्लीय / Acidic","क्षारीय / Basic","उदासीन / Neutral","केवल संतृप्त / Only saturated"],a:2},
- {q:"‘कामायनी’ के लेखक:",o:["जयशंकर प्रसाद","प्रेमचंद","दिनकर","महादेवी वर्मा"],a:0},
- {q:"‘आँखों में धूल झोंकना’:",o:["धोखा देना","सहायता करना","सच बोलना","बहुत रोना"],a:0},
- {q:"‘चंद्रमा सा मुख’ में अलंकार:",o:["उपमा","रूपक","यमक","अनुप्रास"],a:0},
- {q:"‘क्योंकि परीक्षा थी’ किसका उदाहरण है?",o:["उपवाक्य","संज्ञा","विशेषण","समास"],a:0},
- {q:"Correct meaning: ‘too weak to walk’:",o:["so weak that he cannot walk","strong enough to walk","weak but runs","not weak"],a:0},
- {q:"‘The moon smiled’ is:",o:["Personification","Simile","Alliteration","Oxymoron"],a:0},
- {q:"Reported speech: He said, ‘I will help you.’",o:["He said that he would help me.","He said I will help him.","He says he would help me.","He said he will help me."],a:0},
- {q:"Passive: ‘The teacher praised the student.’",o:["The student was praised by the teacher.","The student is praised by the teacher.","The student praised the teacher.","The teacher was praised by the student."],a:0},
- {q:"दांडी मार्च किससे संबंधित था? / The Dandi March was related to:",o:["नमक सत्याग्रह / Salt Satyagraha","भारत छोड़ो आंदोलन / Quit India Movement","स्वदेशी आंदोलन / Swadeshi Movement","असहयोग आंदोलन / Non-Cooperation Movement"],a:0},
- {q:"संघवाद का अर्थ क्या है? / What does federalism mean?",o:["विभिन्न स्तरों में सत्ता का विभाजन / Division of power among different levels","केवल केंद्र की सत्ता / Power only with the Centre","राज्यों की कोई शक्ति नहीं / No power for states","केवल स्थानीय शासन / Only local government"],a:0},
- {q:"मुद्रा का प्रमुख कार्य क्या है? / What is a major function of money?",o:["विनिमय का माध्यम / Medium of exchange","फसल उगाना / Growing crops","कर लगाना / Imposing taxes","मशीन चलाना / Running machines"],a:0},
- {q:"लोकतंत्र में विपक्ष का मुख्य कार्य क्या है? / What is the main role of the opposition in a democracy?",o:["सरकार की नीतियों की समीक्षा / Reviewing government policies","चुनाव रोकना / Stopping elections","न्यायालय चलाना / Running courts","कर वसूलना / Collecting taxes"],a:0}];
-const CLASS11_QUESTIONS=[
- {q:"निम्न में से कौन-सी अदिश राशि है? / Which quantity is a scalar?",o:["विस्थापन / Displacement","वेग / Velocity","चाल / Speed","बल / Force"],a:2},
- {q:"बस अचानक रुकने पर व्यक्ति आगे क्यों झुकता है? / Why does a person move forward when a bus suddenly stops?",o:["जड़त्व / Inertia","अपवर्तन / Refraction","उत्प्लावन / Buoyancy","विसरण / Diffusion"],a:0},
- {q:"इलेक्ट्रॉनों की साझेदारी से कौन-सा बंध बनता है? / Which bond is formed by sharing electrons?",o:["आयनिक बंध / Ionic bond","सहसंयोजक बंध / Covalent bond","धात्विक बंध / Metallic bond","हाइड्रोजन बंध / Hydrogen bond"],a:1},
- {q:"किस कोशिकांग को कोशिका का पावरहाउस कहा जाता है? / Which organelle is called the powerhouse of the cell?",o:["नाभिक / Nucleus","माइटोकॉन्ड्रिया / Mitochondria","राइबोसोम / Ribosome","गॉल्जी तंत्र / Golgi body"],a:1},
- {q:"न्यूटन का द्वितीय नियम क्या है? / What is Newton’s second law?",o:["F = ma / F = ma","F = m/a / F = m/a","F = mv / F = mv","F = a/m / F = a/m"],a:0},
- {q:"गतिज ऊर्जा का सूत्र क्या है? / What is the formula for kinetic energy?",o:["mv / mv","½mv² / ½mv²","mgh / mgh","Fh / Fh"],a:1},
- {q:"परमाणु क्रमांक किसकी संख्या के बराबर होता है? / Atomic number equals the number of:",o:["न्यूट्रॉन / Neutrons","प्रोटॉन / Protons","न्यूक्लिऑन / Nucleons","अणु / Molecules"],a:1},
- {q:"कोशिका झिल्ली का मुख्य कार्य क्या है? / What is the main function of the cell membrane?",o:["पदार्थों के प्रवेश और निकास को नियंत्रित करना / Controls entry and exit of substances","केवल DNA संग्रहित करना / Stores DNA only","हड्डियाँ बनाना / Makes bones","ध्वनि उत्पन्न करना / Produces sound"],a:0},
- {q:"‘कामायनी’ के रचयिता:",o:["जयशंकर प्रसाद","सूरदास","कबीर","दिनकर"],a:0},
- {q:"वीर रस का स्थायी भाव:",o:["रति","शोक","उत्साह","भय"],a:2},
- {q:"‘अदृश्य’ का अर्थ:",o:["जो दिखाई न दे","जो सुनाई न दे","जो लिखा न हो","जो जाना न जाए"],a:0},
- {q:"‘नीर’ का अर्थ:",o:["जल","अग्नि","वायु","आकाश"],a:0},
- {q:"Correct: Neither of the boys ___ ready.",o:["are","is","were","be"],a:1},
- {q:"‘I know where he lives.’ contains a:",o:["Noun clause","Adjective clause","Main clause only","Prepositional phrase"],a:0},
- {q:"She has worked ___ Monday.",o:["for","since","by","at"],a:1},
- {q:"‘Meticulous’ means:",o:["Careless","Very careful","Angry","Fast"],a:1},
- {q:"अवसर लागत क्या है? / What is opportunity cost?",o:["छोड़ा गया अगला सर्वोत्तम विकल्प / Next best alternative forgone","कुल आय / Total income","कुल उत्पादन / Total output","बाजार मूल्य / Market price"],a:0},
- {q:"मौलिक अधिकार मुख्यतः किसकी रक्षा करते हैं? / Fundamental Rights mainly protect:",o:["मूलभूत स्वतंत्रताओं की / Basic freedoms","फसल कीमतों की / Crop prices","करों की / Taxes","आयात की / Imports"],a:0},
- {q:"जनसंख्या घनत्व का अर्थ क्या है? / What does population density mean?",o:["प्रति इकाई क्षेत्र में जनसंख्या / Population per unit area","प्रति वर्ष जन्म / Births per year","क्षेत्रफल के अनुसार वर्षा / Rainfall per area","प्रति खेत फसल / Crops per field"],a:0},
- {q:"औद्योगिक क्रांति का व्यापक विकास सबसे पहले कहाँ हुआ? / Where did the Industrial Revolution first develop widely?",o:["ब्रिटेन / Britain","भारत / India","रूस / Russia","जापान / Japan"],a:0}];
-const CLASS12_QUESTIONS=[
- {q:"बल और त्वरण के बीच संबंध कौन-सा नियम देता है? / Which law relates force and acceleration?",o:["न्यूटन का द्वितीय नियम / Newton’s second law","ओम का नियम / Ohm’s law","बॉयल का नियम / Boyle’s law","फैराडे का नियम / Faraday’s law"],a:0},
- {q:"कमरे के तापमान पर उदासीन जलीय विलयन का pH लगभग कितना होता है? / The pH of a neutral aqueous solution is approximately:",o:["0 / 0","5 / 5","7 / 7","14 / 14"],a:2},
- {q:"अधिकांश जीवों में आनुवंशिक सूचना कौन-सा अणु वहन करता है? / Which molecule carries genetic information in most organisms?",o:["प्रोटीन / Protein","DNA / DNA","स्टार्च / Starch","लिपिड / Lipid"],a:1},
- {q:"भारत में मौद्रिक नीति को कौन-सी संस्था नियंत्रित करती है? / Which institution controls monetary policy in India?",o:["सेबी / SEBI","RBI / RBI","नीति आयोग / NITI Aayog","निर्वाचन आयोग / Election Commission"],a:1},
- {q:"विद्युत क्षेत्र की SI इकाई क्या है? / What is the SI unit of electric field?",o:["न्यूटन/कूलॉम / N/C","जूल/कूलॉम / J/C","कूलॉम/न्यूटन / C/N","वाट/एम्पियर / W/A"],a:0},
- {q:"निर्वात में प्रकाश की चाल कितनी होती है? / What is the speed of light in vacuum?",o:["3×10⁶ m/s / 3×10⁶ m/s","3×10⁸ m/s / 3×10⁸ m/s","3×10¹⁰ m/s / 3×10¹⁰ m/s","3×10⁵ m/s / 3×10⁵ m/s"],a:1},
- {q:"संधारित्र में ऊर्जा कहाँ संचित होती है? / Where is energy stored in a capacitor?",o:["विद्युत क्षेत्र में / Electric field","ध्वनि क्षेत्र में / Sound field","केवल ऊष्मा के रूप में / Heat only","गुरुत्वीय क्षेत्र में / Gravity field"],a:0},
- {q:"प्रथम कोटि अभिक्रिया की अर्ध-आयु मुख्यतः किस पर निर्भर करती है? / The half-life of a first-order reaction mainly depends on:",o:["वेग स्थिरांक / Rate constant","प्रारंभिक सांद्रता / Initial concentration","आयतन / Volume","द्रव्यमान / Mass"],a:0},
- {q:"pH 7 वाला विलयन कैसा होता है? / A solution with pH 7 is:",o:["अम्लीय / Acidic","क्षारीय / Basic","उदासीन / Neutral","ऑक्सीकारक / Oxidising"],a:2},
- {q:"DNA की संरचना सामान्यतः किस रूप में वर्णित की जाती है? / How is the structure of DNA commonly described?",o:["द्वि-कुंडली / Double helix","केवल एकल कुंडली / Single helix only","प्रोटीन शृंखला / Protein chain","कार्बोहाइड्रेट शृंखला / Carbohydrate chain"],a:0},
- {q:"प्रकाश अभिक्रियाएँ मुख्यतः कहाँ होती हैं? / Where do light reactions mainly occur?",o:["थायलाकोइड झिल्लियों में / Thylakoid membranes","स्ट्रोमा में / Stroma","नाभिक में / Nucleus","राइबोसोम में / Ribosomes"],a:0},
- {q:"एक कोडॉन में कितने न्यूक्लियोटाइड होते हैं? / How many nucleotides does a codon contain?",o:["2 / 2","3 / 3","4 / 4","5 / 5"],a:1},
- {q:"Correct: Had I known, I ___ helped.",o:["would have","will have","would","had"],a:0},
- {q:"‘Ubiquitous’ means:",o:["Present everywhere","Rare","Temporary","Uncertain"],a:0},
- {q:"‘The crown decided’ uses:",o:["Metonymy","Simile","Alliteration","Oxymoron"],a:0},
- {q:"No sooner ___ he arrived than it rained.",o:["had","has","did","was"],a:0},
- {q:"राजकोषीय नीति किससे संबंधित है? / Fiscal policy concerns:",o:["सरकारी कराधान और व्यय / Government taxation and expenditure","केवल बैंक जमा / Only bank deposits","केवल निर्यात / Only exports","केवल जनसंख्या / Only population"],a:0},
- {q:"मूल संरचना सिद्धांत किसकी शक्ति को सीमित करता है? / The basic structure doctrine limits:",o:["संसद की संशोधन शक्ति / Parliament’s amending power","निर्वाचन आयोग की शक्ति / Election Commission","वित्त आयोग की शक्ति / Finance Commission","स्थानीय निकायों की शक्ति / Local bodies"],a:0},
- {q:"हरित क्रांति से मुख्यतः किसका उत्पादन बढ़ा? / The Green Revolution mainly increased the production of:",o:["गेहूँ और चावल / Wheat and rice","केवल चाय / Tea only","केवल जूट / Jute only","खनिज / Minerals"],a:0},
- {q:"भारतीय राष्ट्रीय कांग्रेस की स्थापना कब हुई? / When was the Indian National Congress founded?",o:["1885 / 1885","1905 / 1905","1919 / 1919","1947 / 1947"],a:0}];
-let QUESTIONS=CLASS10_QUESTIONS;
-let selectedClass="10";
+const SEMIFINAL01_QUESTIONS=[
+ {q:"राजस्थान में लूणी नदी का उद्गम किस क्षेत्र से माना जाता है? / The Luni River is generally considered to originate from which region?",o:["नाग पहाड़, अजमेर / Nag Pahar, Ajmer","माउंट आबू / Mount Abu","कुम्भलगढ़ / Kumbhalgarh","अलवर / Alwar"],a:0},
+ {q:"केवलादेव राष्ट्रीय उद्यान किस जिले में स्थित है? / Keoladeo National Park is located in which district?",o:["भरतपुर / Bharatpur","अलवर / Alwar","कोटा / Kota","बाड़मेर / Barmer"],a:0},
+ {q:"राजस्थान का राज्य पक्षी कौन-सा है? / What is the State Bird of Rajasthan?",o:["गोडावण / Great Indian Bustard","मोर / Peacock","सारस / Sarus Crane","कुरजां / Demoiselle Crane"],a:0},
+ {q:"यदि किसी वस्तु पर बल दोगुना कर दिया जाए और द्रव्यमान समान रहे, तो त्वरण पर क्या प्रभाव पड़ेगा? / If force is doubled while mass remains the same, what happens to acceleration?",o:["दोगुना होगा / It doubles","आधा होगा / It halves","कोई परिवर्तन नहीं / No change","चार गुना होगा / Four times"],a:0},
+ {q:"रक्त में ऑक्सीजन के परिवहन में मुख्य भूमिका किसकी है? / Which mainly transports oxygen in blood?",o:["हीमोग्लोबिन / Haemoglobin","प्लेटलेट्स / Platelets","इंसुलिन / Insulin","पित्त / Bile"],a:0},
+ {q:"AI में training data का मुख्य उपयोग क्या है? / What is the main use of training data in AI?",o:["मॉडल को पैटर्न सीखने में मदद करना / Helping a model learn patterns","स्क्रीन चमकाना / Increasing brightness","बैटरी चार्ज करना / Charging battery","प्रिंटर चलाना / Running printer"],a:0},
+ {q:"Two-factor authentication में दूसरे चरण का उद्देश्य क्या है? / What is the purpose of the second step in two-factor authentication?",o:["पहचान की अतिरिक्त पुष्टि / Additional identity verification","इंटरनेट तेज करना / Increasing internet speed","पासवर्ड हटाना / Removing password","स्टोरेज बढ़ाना / Increasing storage"],a:0},
+ {q:"भारतीय संविधान में मौलिक कर्तव्य किस भाग में दिए गए हैं? / Fundamental Duties are given in which Part?",o:["Part III / भाग III","Part IV-A / भाग IV-A","Part V / भाग V","Part VI / भाग VI"],a:1},
+ {q:"धन विधेयक के संबंध में अंतिम निर्णय किसका होता है? / Who has the final decision on whether a Bill is a Money Bill?",o:["राज्यसभा सभापति / Chairman of Rajya Sabha","लोकसभा अध्यक्ष / Speaker of Lok Sabha","राष्ट्रपति / President","प्रधानमंत्री / Prime Minister"],a:1},
+ {q:"सितंबर 2026 में 20वें एशियाई खेल कहाँ आयोजित हो रहे हैं? / Where are the 20th Asian Games being held in September 2026?",o:["दोहा / Doha","आइची-नागोया, जापान / Aichi-Nagoya, Japan","बीजिंग / Beijing","नई दिल्ली / New Delhi"],a:1},
+ {q:"2026 एशियाई खेलों में भारत ने महिला T20 क्रिकेट में किस देश को हराकर स्वर्ण जीता? / Which country did India defeat to win women’s T20 cricket gold at the 2026 Asian Games?",o:["श्रीलंका / Sri Lanka","जापान / Japan","चीन / China","दक्षिण कोरिया / South Korea"],a:0},
+ {q:"2026 में BRICS की अध्यक्षता किस देश के पास है? / Which country holds the BRICS chairship in 2026?",o:["भारत / India","चीन / China","ब्राज़ील / Brazil","दक्षिण अफ्रीका / South Africa"],a:0},
+ {q:"भारत ने 2026 में BRICS की अध्यक्षता कितनीवीं बार संभाली? / In 2026, India held the BRICS chairship for which time?",o:["दूसरी / Second","तीसरी / Third","चौथी / Fourth","पाँचवीं / Fifth"],a:2},
+ {q:"यदि 3 : 5 = 18 : x, तो x का मान क्या होगा? / If 3 : 5 = 18 : x, what is x?",o:["24 / 24","30 / 30","36 / 36","45 / 45"],a:1},
+ {q:"कृषि प्रश्न: फसल चक्र अपनाने का एक प्रमुख लाभ क्या है? / One major benefit of crop rotation is:",o:["Continuous depletion of one nutrient / एक ही पोषक तत्व का लगातार क्षय","Better soil health and pest management / बेहतर मृदा स्वास्थ्य और कीट प्रबंधन","Eliminating all irrigation / सभी सिंचाई समाप्त करना","Increasing only weed growth / केवल खरपतवार बढ़ाना"],a:1},
+ {q:"कृषि प्रश्न: मृदा का pH मुख्यतः किसका संकेत देता है? / Soil pH mainly indicates:",o:["Soil colour / मृदा का रंग","Acidity or alkalinity / अम्लीयता या क्षारीयता","Soil temperature / मृदा का तापमान","Seed size / बीज का आकार"],a:1},
+ {q:"Science प्रश्न: न्यूटन का दूसरा नियम किससे संबंधित है? / Newton's second law relates force to:",o:["Mass and acceleration / द्रव्यमान और त्वरण","Only velocity / केवल वेग","Only distance / केवल दूरी","Only temperature / केवल तापमान"],a:0},
+ {q:"Science प्रश्न: Catalyst का मुख्य प्रभाव क्या है? / What is the main effect of a catalyst?",o:["Raises activation energy / सक्रियण ऊर्जा बढ़ाता है","Lowers activation energy without being consumed / बिना स्वयं खर्च हुए सक्रियण ऊर्जा घटाता है","Stops every reaction / हर अभिक्रिया रोकता है","Changes all products / सभी उत्पाद बदलता है"],a:1},
+ {q:"Arts प्रश्न: भारतीय संविधान में राज्य के नीति-निर्देशक तत्व किस भाग में हैं? / DPSPs are in which Part?",o:["Part III / भाग III","Part IV / भाग IV","Part V / भाग V","Part VI / भाग VI"],a:1},
+ {q:"Arts प्रश्न: 'Drain of Wealth' theory is mainly associated with whom? / 'Drain of Wealth' theory is mainly associated with:",o:["Dadabhai Naoroji / दादाभाई नौरोजी","B. R. Ambedkar / बी. आर. आंबेडकर","Rajendra Prasad / राजेंद्र प्रसाद","Sardar Patel / सरदार पटेल"],a:0}
+];
+const SEMIFINAL02_QUESTIONS=[
+ {q:"इंदिरा गांधी नहर परियोजना का मुख्य उद्देश्य राजस्थान के किस क्षेत्र में सिंचाई सुविधाएँ बढ़ाना था? / The main objective of the Indira Gandhi Canal Project was to expand irrigation facilities in which region of Rajasthan?",o:["पश्चिमी राजस्थान / Western Rajasthan","दक्षिणी राजस्थान / Southern Rajasthan","मेवाड़ का पहाड़ी भाग / Hilly Mewar","हाड़ौती / Hadoti"],a:0},
+ {q:"सांभर झील किस प्रकार की झील है? / Sambhar Lake is mainly a:",o:["खारे पानी की झील / Saltwater lake","मीठे पानी की झील / Freshwater lake","हिमानी झील / Glacial lake","क्रेटर झील / Crater lake"],a:0},
+ {q:"अरावली पर्वतमाला राजस्थान के भूगोल में क्यों महत्वपूर्ण है? / Why is the Aravalli Range important in Rajasthan geography?",o:["यह राज्य के भू-आकृतिक और जलवायु क्षेत्रों को प्रभावित करती है / It influences landforms and climate","यह केवल एक नदी है / It is only a river","यह केवल समुद्री तट है / It is a coastline","यह केवल रेगिस्तानी रेत है / It is only desert sand"],a:0},
+ {q:"विद्युत शक्ति की SI इकाई क्या है? / What is the SI unit of electric power?",o:["वोल्ट / Volt","वाट / Watt","ओम / Ohm","कूलॉम / Coulomb"],a:1},
+ {q:"DNA की संरचना सामान्यतः किस रूप में वर्णित की जाती है? / DNA structure is commonly described as:",o:["डबल हेलिक्स / Double helix","सिंगल रिंग / Single ring","सीधी श्रृंखला / Straight chain","घन / Cube"],a:0},
+ {q:"क्लाउड कंप्यूटिंग का एक प्रमुख लाभ क्या है? / What is a major benefit of cloud computing?",o:["दूर से डेटा/सेवाओं तक पहुँच / Remote access to data/services","बिना बिजली के कंप्यूटर चलाना / Running without electricity","केवल ऑफलाइन काम करना / Working only offline","स्क्रीन का आकार बढ़ाना / Increasing screen size"],a:0},
+ {q:"AI में prompt किसे कहा जाता है? / What is a prompt in AI?",o:["AI को दिया गया निर्देश या प्रश्न / An instruction or question given to AI","कंप्यूटर की बैटरी / Computer battery","एक वायरस / A virus","प्रिंटर की स्याही / Printer ink"],a:0},
+ {q:"राज्यसभा के सदस्य का सामान्य कार्यकाल कितना होता है? / What is the normal term of a Rajya Sabha member?",o:["4 वर्ष / 4 years","5 वर्ष / 5 years","6 वर्ष / 6 years","7 वर्ष / 7 years"],a:2},
+ {q:"भारत के राष्ट्रपति का चुनाव किसके द्वारा होता है? / Who elects the President of India?",o:["सीधे सभी मतदाता / Directly by all voters","निर्वाचक मंडल / Electoral college","केवल लोकसभा / Lok Sabha only","केवल राज्यसभा / Rajya Sabha only"],a:1},
+ {q:"2026 एशियाई खेलों की मेजबानी किस देश ने की? / Which country is hosting the 2026 Asian Games?",o:["भारत / India","जापान / Japan","चीन / China","इंडोनेशिया / Indonesia"],a:1},
+ {q:"2026 एशियाई खेलों में भारत ने महिला T20 क्रिकेट फाइनल में किस टीम को हराया? / Which team did India beat in the women’s T20 cricket final?",o:["श्रीलंका / Sri Lanka","पाकिस्तान / Pakistan","जापान / Japan","बांग्लादेश / Bangladesh"],a:0},
+ {q:"भारत ने 2026 में BRICS की अध्यक्षता किस देश से संभाली? / From which country did India take over the BRICS chairship in 2026?",o:["ब्राज़ील / Brazil","रूस / Russia","चीन / China","दक्षिण अफ्रीका / South Africa"],a:0},
+ {q:"2026 में BRICS की अध्यक्षता भारत के लिए कौन-सी बार थी? / India’s 2026 BRICS chairship was its:",o:["पहली / First","दूसरी / Second","तीसरी / Third","चौथी / Fourth"],a:3},
+ {q:"यदि किसी संख्या का 25% = 60 है, तो संख्या क्या है? / If 25% of a number is 60, what is the number?",o:["180 / 180","200 / 200","240 / 240","300 / 300"],a:2},
+ {q:"Agriculture: खरीफ फसल का सामान्य उदाहरण कौन-सा है? / Which is a common Kharif crop?",o:["Wheat / गेहूँ","Mustard / सरसों","Soybean / सोयाबीन","Gram / चना"],a:2},
+ {q:"Agriculture: बीजोपचार का प्रमुख उद्देश्य क्या है? / A major purpose of seed treatment is:",o:["Protect seed from seed-borne/soil-borne pests and diseases / बीज एवं मृदा जनित कीटों और रोगों से बीज की रक्षा करना","Increase stone content / पत्थर की मात्रा बढ़ाना","Stop germination / अंकुरण रोकना","Remove all nutrients / सभी पोषक तत्व हटाना"],a:0},
+ {q:"Science: विद्युत शक्ति की SI unit क्या है? / What is the SI unit of electric power?",o:["Volt / वोल्ट","Ampere / एम्पियर","Watt / वाट","Ohm / ओम"],a:2},
+ {q:"Science: pH 7 वाला विलयन सामान्यतः कैसा होता है? / A solution with pH 7 is generally:",o:["Acidic / अम्लीय","Neutral / उदासीन","Strongly basic / प्रबल क्षारीय","Always salty / हमेशा लवणीय"],a:1},
+ {q:"Arts: 'Sovereignty' का सामान्य अर्थ क्या है? / What does sovereignty generally mean?",o:["Supreme authority of the state / राज्य की सर्वोच्च सत्ता","Only local administration / केवल स्थानीय प्रशासन","Economic profit / आर्थिक लाभ","Judicial review only / केवल न्यायिक पुनरावलोकन"],a:0},
+ {q:"Arts: भारतीय राष्ट्रीय आंदोलन में असहयोग आंदोलन किस वर्ष शुरू हुआ? / The Non-Cooperation Movement began in:",o:["1915 / 1915","1920 / 1920","1930 / 1930","1942 / 1942"],a:1}
+];
+const FINAL_TEST_QUESTIONS=[
+ {q:"राजस्थान में मकराना किसके लिए प्रसिद्ध है? / Makrana in Rajasthan is famous for:",o:["संगमरमर / Marble","कोयला / Coal","चाय / Tea","रबर / Rubber"],a:0},
+ {q:"राजस्थान का कौन-सा शहर “झीलों की नगरी” कहलाता है? / Which Rajasthan city is known as the City of Lakes?",o:["उदयपुर / Udaipur","बीकानेर / Bikaner","अजमेर / Ajmer","भरतपुर / Bharatpur"],a:0},
+ {q:"राजस्थान की सबसे ऊँची चोटी गुरु शिखर किस पर्वतमाला में है? / Guru Shikhar is in which range?",o:["अरावली / Aravalli","विंध्य / Vindhya","सतपुड़ा / Satpura","हिमालय / Himalaya"],a:0},
+ {q:"भारतीय संविधान का अनुच्छेद 21 किस अधिकार से संबंधित है? / Article 21 relates to which right?",o:["समानता / Equality","जीवन और व्यक्तिगत स्वतंत्रता / Life and personal liberty","धर्म की स्वतंत्रता / Freedom of religion","संवैधानिक उपचार / Constitutional remedies"],a:1},
+ {q:"₹500 की लागत पर 20% लाभ हो तो विक्रय मूल्य क्या होगा? / If cost price is ₹500 and profit is 20%, selling price is:",o:["₹550 / ₹550","₹580 / ₹580","₹600 / ₹600","₹620 / ₹620"],a:2},
+ {q:"Cloud computing में data सामान्यतः कहाँ access किया जाता है? / In cloud computing, data is generally accessed:",o:["नेटवर्क से जुड़ी सेवाओं के माध्यम से / Through network-connected services","केवल एक कंप्यूटर से / One computer only","केवल ऑफलाइन / Offline only","केवल प्रिंटर से / Printer only"],a:0},
+ {q:"Machine Learning में classification किस प्रकार की समस्या है? / Classification in Machine Learning is a:",o:["Supervised learning task / Supervised learning कार्य","Hardware repair task / Hardware repair कार्य","File deletion task / File deletion कार्य","Network cable task / Network cable कार्य"],a:0},
+ {q:"मौलिक अधिकारों की रक्षा के लिए सर्वोच्च न्यायालय किस प्रकार की शक्ति का प्रयोग कर सकता है? / To protect Fundamental Rights, the Supreme Court can use:",o:["Writ jurisdiction / रिट अधिकारिता","केवल बजट शक्ति / Budget power","केवल चुनाव शक्ति / Election power","केवल कर शक्ति / Tax power"],a:0},
+ {q:"लोकसभा का सामान्य कार्यकाल कितने वर्ष का होता है? / What is the normal term of the Lok Sabha?",o:["4 वर्ष / 4 years","5 वर्ष / 5 years","6 वर्ष / 6 years","7 वर्ष / 7 years"],a:1},
+ {q:"2026 एशियाई खेल किस क्षेत्र में आयोजित हो रहे हैं? / The 2026 Asian Games are being held in which region?",o:["आइची-नागोया, जापान / Aichi-Nagoya, Japan","दक्षिण कोरिया / South Korea","कतर / Qatar","भारत / India"],a:0},
+ {q:"2026 एशियाई खेलों में भारत का पहला स्वर्ण किस खेल में आया? / In which sport did India win its first gold at the 2026 Asian Games?",o:["महिला T20 क्रिकेट / Women’s T20 cricket","हॉकी / Hockey","बैडमिंटन / Badminton","कबड्डी / Kabaddi"],a:0},
+ {q:"2026 में BRICS की अध्यक्षता किस देश के पास है? / Which country holds the BRICS chairship in 2026?",o:["भारत / India","चीन / China","ब्राज़ील / Brazil","दक्षिण अफ्रीका / South Africa"],a:0},
+ {q:"18वाँ BRICS Summit 2026 में किस शहर में आयोजित हुआ? / In which city was the 18th BRICS Summit held in 2026?",o:["नई दिल्ली / New Delhi","मुंबई / Mumbai","जयपुर / Jaipur","चेन्नई / Chennai"],a:0},
+ {q:"यदि ₹800 पर 10% छूट मिले, तो विक्रय मूल्य क्या होगा? / If ₹800 has a 10% discount, what is the sale price?",o:["₹700 / ₹700","₹720 / ₹720","₹740 / ₹740","₹760 / ₹760"],a:1},
+ {q:"Agriculture: सिंचाई की drip प्रणाली का एक प्रमुख लाभ क्या है? / A major benefit of drip irrigation is:",o:["Higher water-use efficiency / जल उपयोग दक्षता अधिक होना","Flooding the entire field / पूरे खेत में बाढ़ करना","More evaporation / अधिक वाष्पीकरण","No need for crop management / फसल प्रबंधन की आवश्यकता न होना"],a:0},
+ {q:"Agriculture: nitrogen की कमी का सामान्य लक्षण क्या हो सकता है? / A common symptom of nitrogen deficiency is:",o:["Older leaves becoming pale/yellow / पुरानी पत्तियों का पीला या फीका होना","Blue flowers only / केवल नीले फूल आना","Larger roots in every case / हर स्थिति में बड़ी जड़ें होना","Instant fruit ripening / फल तुरंत पकना"],a:0},
+ {q:"Science: DNA का full form क्या है? / What is the full form of DNA?",o:["Deoxyribonucleic Acid / डीऑक्सीराइबोन्यूक्लिक अम्ल","Dynamic Nuclear Acid / डायनेमिक न्यूक्लियर अम्ल","Double Nitrogen Atom / डबल नाइट्रोजन परमाणु","Deoxygenated Nucleic Array / डीऑक्सीजनयुक्त न्यूक्लिक ऐरे"],a:0},
+ {q:"Science: lens की power किस unit में मापी जाती है? / Lens power is measured in:",o:["Tesla / टेस्ला","Dioptre / डायॉप्टर","Pascal / पास्कल","Joule / जूल"],a:1},
+ {q:"Arts: भारत के संविधान में संघ और राज्यों के बीच शक्तियों का विभाजन किस अनुसूची से संबंधित है? / The division of powers between Union and States is detailed through:",o:["Seventh Schedule / सातवीं अनुसूची","First Schedule / पहली अनुसूची","Ninth Schedule / नौवीं अनुसूची","Tenth Schedule / दसवीं अनुसूची"],a:0},
+ {q:"Arts: अर्थशास्त्र में inflation का सामान्य अर्थ क्या है? / In economics, inflation generally means:",o:["A sustained rise in the general price level / सामान्य मूल्य स्तर में लगातार वृद्धि","A fall in all prices / सभी कीमतों में गिरावट","Only an increase in exports / केवल निर्यात में वृद्धि","Only a rise in population / केवल जनसंख्या में वृद्धि"],a:0}
+];
+
+// Each test has exactly 20 questions: 14 common + 6 stream-subject questions.
+// Subject questions are intentionally mixed in three consecutive pairs so that
+// the two teams in the active match each face Agriculture, Science and Arts once.
+function buildCompetitionBank(bank){
+  // Each source test already contains exactly 20 questions:
+  // 14 common questions followed by 2 Agriculture + 2 Science + 2 Arts.
+  // Re-order only the test flow so the 6 stream questions are mixed into the paper.
+  const common=bank.slice(0,14);
+  const agriculture=bank.slice(14,16);
+  const science=bank.slice(16,18);
+  const arts=bank.slice(18,20);
+  return [
+    ...common.slice(0,4),
+    ...agriculture,
+    ...common.slice(4,8),
+    ...science,
+    ...common.slice(8,12),
+    ...arts,
+    ...common.slice(12,14)
+  ];
+}
+const TEST_BANKS={
+  sf1:buildCompetitionBank(SEMIFINAL01_QUESTIONS),
+  sf2:buildCompetitionBank(SEMIFINAL02_QUESTIONS),
+  final:buildCompetitionBank(FINAL_TEST_QUESTIONS)
+};
+let QUESTIONS=TEST_BANKS.sf1;
+
+let selectedClass="sf1";
+let competitionStage="sf1";
+let activeMatchTeams=[0,2];
+let finalistNames=[];
 const PRIZE=Array.from({length:50},(_,i)=>((i+1)*5).toFixed(2)+" Points");
 
 let nextMode=false;
@@ -1958,10 +2028,10 @@ let current=0,selected=-1,locked=false,time=20,timer=null,earned="0.00 Points",a
 let correctQuestions=new Set(),correctCount=0;
 let teamWrongQuestions=new Set();
 let used5050=false,usedPollCount=0,votes=[0,0,0,0];
-let teamUsed5050=[false,false],teamPollCount=[0,0],teamUsedTeacher=[false,false];
+let teamUsed5050=[false,false,false,false],teamPollCount=[0,0,0,0],teamUsedTeacher=[false,false,false,false];
 let usedTeacherSupport=false;
 let gamePaused=false;
-let gameMode="classic", questionOrder="ladder", voiceHost=false, teamAName="TEAM A", teamBName="TEAM B", currentTeam=0, teamScores=[0,0];
+let gameMode="classic", questionOrder="ladder", voiceHost=false, teamAName="TEAM A", teamBName="TEAM B", teamCName="TEAM C", teamDName="TEAM D", currentTeam=0, teamScores=[0,0,0,0];
 let gamePhase="idle";
 let phaseDeadline=0;
 let phaseRemaining=0;
@@ -2217,12 +2287,19 @@ function escapeHtml(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':
 
 function selectQuizClass(cls){
  selectedClass=String(cls);
- QUESTIONS=({cs12:COMPUTER_SCIENCE_QUESTIONS,6:CLASS6_QUESTIONS,7:CLASS7_QUESTIONS,8:CLASS8_QUESTIONS,9:CLASS9_QUESTIONS,10:CLASS10_QUESTIONS,11:CLASS11_QUESTIONS,12:CLASS12_QUESTIONS})[selectedClass]||COMPUTER_SCIENCE_QUESTIONS;
+ competitionStage=selectedClass;
+ const bank=({cs12:COMPUTER_SCIENCE_QUESTIONS,6:CLASS6_QUESTIONS,7:CLASS7_QUESTIONS,8:CLASS8_QUESTIONS,9:CLASS9_QUESTIONS,sf1:TEST_BANKS.sf1,sf2:TEST_BANKS.sf2,final:TEST_BANKS.final})[selectedClass]||COMPUTER_SCIENCE_QUESTIONS;
+ QUESTIONS=bank;
  const csBtn=document.getElementById("computerScienceBtn"); if(csBtn)csBtn.classList.toggle("selected",selectedClass==="cs12");
- for(let c=6;c<=12;c++){const b=document.getElementById("class"+c+"Btn");if(b)b.classList.toggle("selected",String(c)===selectedClass);}
- const bank=({cs12:COMPUTER_SCIENCE_QUESTIONS,6:CLASS6_QUESTIONS,7:CLASS7_QUESTIONS,8:CLASS8_QUESTIONS,9:CLASS9_QUESTIONS,10:CLASS10_QUESTIONS,11:CLASS11_QUESTIONS,12:CLASS12_QUESTIONS})[selectedClass]||COMPUTER_SCIENCE_QUESTIONS;
- const info=document.getElementById("classChoiceInfo");if(info)info.textContent=selectedClass==="cs12"?"Class 12 Computer Science — RBSE • Bilingual • 50 Questions":"Class "+selectedClass+" — Class-wise Questions • "+bank.length+" Questions";
- const title=document.getElementById("quizClassTitle");if(title)title.textContent=selectedClass==="cs12"?"CLASS 12 COMPUTER SCIENCE — RBSE KBC QUIZ":"CLASS "+selectedClass+" — CLASS-WISE KBC QUIZ"; const gh=document.getElementById("gameHeaderTitle");if(gh)gh.textContent=selectedClass==="cs12"?"CLASS 12 COMPUTER SCIENCE — RBSE KBC QUIZ":"CLASS "+selectedClass+" — CLASS-WISE RBSE KBC QUIZ";
+ for(let c=6;c<=9;c++){const b=document.getElementById("class"+c+"Btn");if(b)b.classList.toggle("selected",String(c)===selectedClass);}
+ ["semiFinal01Btn","semiFinal02Btn","finalTestBtn"].forEach(id=>{const b=document.getElementById(id);if(b)b.classList.remove("selected")});
+ const btnMap={sf1:"semiFinal01Btn",sf2:"semiFinal02Btn",final:"finalTestBtn"};
+ if(btnMap[selectedClass])document.getElementById(btnMap[selectedClass]).classList.add("selected");
+ const names={sf1:"SEMI FINAL 01",sf2:"SEMI FINAL 02",final:"FINAL TEST"};
+ const info=document.getElementById("classChoiceInfo");
+ if(info)info.textContent=names[selectedClass]?names[selectedClass]+" — 20 Questions • 14 Common + 6 Stream Subject Questions":(selectedClass==="cs12"?"Class 12 Computer Science — RBSE • Bilingual • 50 Questions":"Class "+selectedClass+" — Class-wise Questions • "+bank.length+" Questions");
+ const title=document.getElementById("quizClassTitle");if(title)title.textContent=names[selectedClass]?names[selectedClass]+" — SCHOOL CHAMPIONSHIP KBC QUIZ":selectedClass==="cs12"?"CLASS 12 COMPUTER SCIENCE — RBSE KBC QUIZ":"CLASS "+selectedClass+" — CLASS-WISE KBC QUIZ";
+ const gh=document.getElementById("gameHeaderTitle");if(gh)gh.textContent=names[selectedClass]?names[selectedClass]+" — SCHOOL CHAMPIONSHIP KBC QUIZ":selectedClass==="cs12"?"CLASS 12 COMPUTER SCIENCE — RBSE KBC QUIZ":"CLASS "+selectedClass+" — CLASS-WISE RBSE KBC QUIZ";
 }
 
 
@@ -2265,19 +2342,11 @@ function biTranslate(s){
  return reverseBI(raw);
 }
 function renderBI(s){
- const raw=String(s);
- const isHindiSubject=(current>=8 && current<=11 && Number(selectedClass)<=11);
- const isEnglishSubject=(current>=12 && current<=15);
- if(isHindiSubject) return escapeHtml(raw.split(" / ")[0]);
- if(isEnglishSubject) return escapeHtml(raw.split(" / ").slice(-1)[0]);
+ const raw=String(s||"");
  return escapeHtml(raw);
 }
 function renderOptionBI(s){
- const raw=String(s);
- const isHindiSubject=(current>=8 && current<=11 && Number(selectedClass)<=11);
- const isEnglishSubject=(current>=12 && current<=15);
- if(isHindiSubject) return escapeHtml(raw.split(" / ")[0]);
- if(isEnglishSubject) return escapeHtml(raw.split(" / ").slice(-1)[0]);
+ const raw=String(s||"");
  return escapeHtml(raw);
 }
 function startGame(){
@@ -2288,18 +2357,27 @@ function startGame(){
  correctQuestions=new Set();
  correctCount=0;
  earned="0.00 Points";
- teamScores=[0,0];
+ teamScores=[0,0,0,0];
  currentTeam=0;
  used5050=false; usedPollCount=0; usedPollCount=0;
- teamUsed5050=[false,false]; teamPollCount=[0,0]; teamUsedTeacher=[false,false]; usedTeacherSupport=false;
+ teamUsed5050=[false,false,false,false]; teamPollCount=[0,0,0,0]; teamUsedTeacher=[false,false,false,false]; usedTeacherSupport=false;
  setText("player","👤 "+name);
  document.getElementById("welcome").classList.add("hidden");
  document.getElementById("game").classList.remove("hidden");
  document.getElementById("pauseGameFloat").style.display="flex";
  playTune();
  document.body.classList.toggle("team-mode-active",gameMode==="team");
- if(gameMode==="team"){setText("player","👥 "+teamAName+" vs "+teamBName);}
- if(voiceHost) speakHost("स्वागत है "+(gameMode==="team"?(teamAName+" और "+teamBName):name)+"। पहला प्रश्न शुरू हो रहा है।");
+ if(gameMode==="team"){
+   const active=getActiveMatchTeams();
+   const names=[teamAName,teamBName,teamCName,teamDName];
+   setText("player","👥 "+active.map(i=>names[i]).join(" 🆚 "));
+ }
+ if(voiceHost){ const activeNames=getActiveMatchTeams().map(i=>[teamAName,teamBName,teamCName,teamDName][i]||("TEAM "+String.fromCharCode(65+i))); speakHost("स्वागत है "+(gameMode==="team"?activeNames.join(" और "):name)+"। पहला प्रश्न शुरू हो रहा है।"); }
+ // Final safety guard: competition tests always use exactly 20 questions.
+ if(gameMode==="team" && ["sf1","sf2","final"].includes(String(selectedClass)) && (!Array.isArray(QUESTIONS) || QUESTIONS.length!==20)){
+   const raw=selectedClass==="sf1"?SEMIFINAL01_QUESTIONS:(selectedClass==="sf2"?SEMIFINAL02_QUESTIONS:FINAL_TEST_QUESTIONS);
+   QUESTIONS=buildCompetitionBank(raw).slice(0,20);
+ }
  loadQuestion();
 }
 function startQuestionTimer(seconds){
@@ -2392,15 +2470,15 @@ function setDifficultyBadge(){
 }
 
 function updateLiveScore(){
- const el=document.getElementById("liveScoreMarquee");
- if(!el)return;
+ const el=document.getElementById("liveScoreMarquee"); if(!el)return;
  const q=Math.min(current+1,QUESTIONS.length);
  if(gameMode==="team"){
-   const a=formatPoints(teamScores[0]||0), b=formatPoints(teamScores[1]||0);
-   const aName=escapeHtml(teamAName||"TEAM A"), bName=escapeHtml(teamBName||"TEAM B");
-   const turn=escapeHtml(currentTeam===0?(teamAName||"TEAM A"):(teamBName||"TEAM B"));
+   const names=[teamAName,teamBName,teamCName,teamDName];
+   const active=getActiveMatchTeams();
+   const html=active.map(i=>`<span class="live-${String.fromCharCode(97+i)}">👥 ${escapeHtml(names[i]||("TEAM "+String.fromCharCode(65+i)))}: ${escapeHtml(formatPoints(teamScores[i]||0))}</span>`).join('<span class="live-sep"> • </span>');
+   const turn=escapeHtml(names[currentTeam]||("TEAM "+String.fromCharCode(65+currentTeam)));
    el.className="live-score-marquee team-mode";
-   el.innerHTML=`<span class="live-a">👥 ${aName}: ${escapeHtml(a)}</span><span class="live-vs"> 🆚 </span><span class="live-b">${bName}: ${escapeHtml(b)}</span><span class="live-sep"> • </span><span>प्रश्न ${q}/${QUESTIONS.length}</span><span class="live-sep"> • </span><span>🎯 ${turn} की बारी</span>`;
+   el.innerHTML=html+'<span class="live-sep"> • </span><span>प्रश्न '+q+'/'+QUESTIONS.length+'</span><span class="live-sep"> • </span><span>🎯 '+turn+' की बारी</span>';
  }else{
    const name=(document.getElementById("player")?.textContent||"👤 प्रतियोगी").replace(/^👤\s*/,"").trim()||"प्रतियोगी";
    const score=formatPoints(correctCount*5);
@@ -2415,31 +2493,48 @@ function formatPoints(n){
 }
 function teamPrize(score){ return formatPoints(score); }
 function updateTeamBox(){
- const box=document.getElementById("teamBattleBox");
- if(!box)return;
- const isTeam=gameMode==="team";
- box.classList.toggle("hidden",!isTeam);
- if(!isTeam)return;
- setText("gameTeamA",teamAName||"TEAM A");
- setText("gameTeamB",teamBName||"TEAM B");
- setText("teamScoreA",formatPoints(teamScores[0]||0));
- setText("teamScoreB",formatPoints(teamScores[1]||0));
- setText("teamPrizeA","⭐ Points "+formatPoints(teamScores[0]||0));
- setText("teamPrizeB","⭐ Points "+formatPoints(teamScores[1]||0));
- setText("teamTurn","🎯 "+(currentTeam===0?(teamAName||"TEAM A"):(teamBName||"TEAM B"))+" की बारी");
- document.getElementById("teamCardA")?.classList.toggle("active",currentTeam===0);
- document.getElementById("teamCardB")?.classList.toggle("active",currentTeam===1);
+ const box=document.getElementById("teamBattleBox"); if(!box)return;
+ const isTeam=gameMode==="team"; box.classList.toggle("hidden",!isTeam); if(!isTeam)return;
+ const names=[teamAName,teamBName,teamCName,teamDName];
+ const active=getActiveMatchTeams();
+ // Reuse the original two-card UI: the left card is active[0], the right card is active[1].
+ const left=active[0]??0, right=active[1]??1;
+ const leftCard=document.getElementById("teamCardA"), rightCard=document.getElementById("teamCardB");
+ if(leftCard){leftCard.style.display="flex";leftCard.classList.toggle("active",currentTeam===left);leftCard.querySelector(".team-tag")?.replaceChildren(document.createTextNode("TEAM"));setText("gameTeamA",names[left]||("TEAM "+String.fromCharCode(65+left)));setText("teamScoreA",formatPoints(teamScores[left]||0));setText("teamPrizeA","⭐ Points "+formatPoints(teamScores[left]||0));}
+ if(rightCard){rightCard.style.display="flex";rightCard.classList.toggle("active",currentTeam===right);rightCard.querySelector(".team-tag")?.replaceChildren(document.createTextNode("TEAM"));setText("gameTeamB",names[right]||("TEAM "+String.fromCharCode(65+right)));setText("teamScoreB",formatPoints(teamScores[right]||0));setText("teamPrizeB","⭐ Points "+formatPoints(teamScores[right]||0));}
+ const c=document.getElementById("teamCardC"),d=document.getElementById("teamCardD"); if(c)c.style.display="none"; if(d)d.style.display="none";
+ const matchText=(names[left]||("TEAM "+String.fromCharCode(65+left)))+" VS "+(names[right]||("TEAM "+String.fromCharCode(65+right)));
+ setText("teamTurn","🎯 "+getCurrentTeamName()+" की बारी • "+matchText);
  updateLiveScore();
 }
-// Team Battle: teacher can manually choose the active team.// Team Battle: teacher can manually choose the active team.
+
 function selectTeamManually(teamIndex){
-  if(gameMode!=="team" || locked) return;
-  currentTeam = teamIndex===1 ? 1 : 0;
-  updateTeamBox();
-  setText("status","👥 "+(currentTeam===0?(teamAName||"TEAM A"):(teamBName||"TEAM B"))+" manually selected — अब यही Team प्रश्न खेलेगी।");
+ if(gameMode!=="team" || locked) return;
+ const idx=Number(teamIndex)||0;
+ if(!getActiveMatchTeams().includes(idx)) return;
+ currentTeam=idx;
+ updateTeamBox();
+ setText("status","👥 "+getCurrentTeamName()+" manually selected — अब यही Team प्रश्न खेलेगी।");
 }
-document.getElementById("teamCardA")?.addEventListener("click",()=>selectTeamManually(0));
-document.getElementById("teamCardB")?.addEventListener("click",()=>selectTeamManually(1));
+[0,1,2,3].forEach(i=>document.getElementById("teamCard"+String.fromCharCode(65+i))?.addEventListener("click",()=>selectTeamManually(i)));
+
+function getActiveMatchTeams(){
+ if(gameMode!=="team") return [0];
+ const stage=String(selectedClass||competitionStage||"");
+ if(stage==="sf1") return [0,2];
+ if(stage==="sf2") return [1,3];
+ if(stage==="final") return [0,1];
+ return [0,1];
+}
+function getCurrentTeamName(){
+ const names=[teamAName,teamBName,teamCName,teamDName];
+ return names[currentTeam]||("TEAM "+String.fromCharCode(65+currentTeam));
+}
+function setMatchFromStage(){
+ const active=getActiveMatchTeams();
+ activeMatchTeams=active.slice();
+ currentTeam=active[0]||0;
+}
 
 function loadQuestion(){
  stopContinuousBuzzer(); timeoutHeld=false;
@@ -2454,7 +2549,7 @@ function loadQuestion(){
  setText("level","इस प्रश्न के लिए: "+PRIZE[current]);
  setText("earned",earned);
  setText("miniQ",(current+1)+"/"+QUESTIONS.length);
- setText("modeLabel",gameMode==="team"?(currentTeam===0?teamAName:teamBName):(gameMode==="speed"?"SPEED":"CLASSIC"));
+ setText("modeLabel",gameMode==="team"?getCurrentTeamName():(gameMode==="speed"?"SPEED":"CLASSIC"));
  updateTeamBox();
  // Use the same lifeline state for every mode; avoids stale/undefined counters.
  updateLifelineUI();
@@ -2560,7 +2655,7 @@ function lockAnswer(){
   }
  },2100);
 }
-function nextQuestion(){if(!locked)return;current++;if(gameMode==="team")currentTeam=(currentTeam+1)%2;nextMode=false;document.getElementById("lock").classList.add("next-big");document.getElementById("lock").textContent="🔒 Lock Answer";loadQuestion()}
+function nextQuestion(){if(!locked)return;current++;if(gameMode==="team"){const a=getActiveMatchTeams();const p=a.indexOf(currentTeam);currentTeam=a[(p+1)%a.length];}nextMode=false;document.getElementById("lock").classList.add("next-big");document.getElementById("lock").textContent="🔒 Lock Answer";loadQuestion()}
 function continueAfterGameOver(){
   document.getElementById("wrongDecision").classList.add("hidden");
   clearTimeout(readTimer);
@@ -2619,7 +2714,7 @@ function nextAfterGameOver(){
   current++;
   // Advance only after the user manually presses NEXT QUESTION.
   // In Team Battle, the next question is then assigned to the other team.
-  if(gameMode==="team")currentTeam=(currentTeam+1)%2;
+  if(gameMode==="team"){const a=getActiveMatchTeams();const p=a.indexOf(currentTeam);currentTeam=a[(p+1)%a.length];}
   selected=-1;
   locked=false;
   nextMode=false;
@@ -2640,12 +2735,12 @@ document.getElementById("wrongEnd").addEventListener("click",closeAfterGameOver)
 document.getElementById("wrongContinue").addEventListener("click",continueAfterGameOver);
 document.getElementById("wrongNext").addEventListener("click",nextAfterGameOver);
 function getLifeState(){
- // HARD ONE-USE RULE: 50:50 and Teacher Support are ONE TIME for the ENTIRE game in ALL modes.
- const t=gameMode==="team"?currentTeam:0;
- const pollUsed=usedPollCount;
- const pollMax=3;
- return {team:t,fiftyUsed:!!used5050,pollUsed,pollMax,teacherUsed:!!usedTeacherSupport};
+ const isTeam=gameMode==="team";
+ const t=isTeam?currentTeam:0;
+ const pollUsed=isTeam?(Number(teamPollCount[t])||0):usedPollCount;
+ return {team:t,fiftyUsed:isTeam?!!teamUsed5050[t]:!!used5050,pollUsed,pollMax:3,teacherUsed:isTeam?!!teamUsedTeacher[t]:!!usedTeacherSupport};
 }
+
 function updateLifelineUI(){
  const st=getLifeState();
  const fiftyBtn=document.getElementById("fifty"),pollBtn=document.getElementById("poll"),teacherBtn=document.getElementById("teacherSupport");
@@ -2672,9 +2767,9 @@ function openLifelineChooser(){
    ? "🌓 50:50<br><small>Already Used</small>"
    : "🌓 50:50<br><small>1 time only</small>";
  bp.innerHTML="👥 AUDIENCE POLL<br><small>"+st.pollUsed+"/"+st.pollMax+" used</small>";
- document.getElementById("lifelineChoiceStatus").textContent =
-   "50:50 — पूरे game में केवल 1 बार। Teacher Support — पूरे game में केवल 1 बार। Audience Poll पूरे game में 3 बार।"+
-   " उपयोग किया जा सकता है।";
+ document.getElementById("lifelineChoiceStatus").textContent = gameMode==="team"
+   ? "हर Team को अपनी अलग lifelines मिलेंगी: 50:50 = 1 बार • Teacher Support = 1 बार • Audience Poll = 3 बार।"
+   : "50:50 = 1 बार • Teacher Support = 1 बार • Audience Poll = 3 बार।";
  m.classList.remove("hidden");
  setText("status","🆘 Lifeline चुनें।");
 }
@@ -2696,8 +2791,9 @@ function use5050(){
    updateLifelineUI();
    return;
  }
- // Consume the lifeline immediately so the same lifeline cannot be triggered twice.
- used5050=true;
+ // Team Battle में 50:50 current Team की अपनी lifeline है; दूसरे Teams की chance सुरक्षित रहती है.
+ if(gameMode==="team") teamUsed5050[currentTeam]=true;
+ else used5050=true;
  updateLifelineUI();
  const ans=Number(QUESTIONS[current].a);
 
@@ -2708,7 +2804,7 @@ function use5050(){
  });
 
  if(wrong.length<2){
-   used5050=false;
+   if(gameMode==="team") teamUsed5050[currentTeam]=false; else used5050=false;
    updateLifelineUI();
    setText("status","🌓 50:50 इस प्रश्न पर लागू नहीं हो सकता।");
    return;
@@ -2840,57 +2936,63 @@ function showRecordsAfterClose(){
 function getQuizDisplayName(){
  const key=String(selectedClass);
  if(key==='cs12') return 'Class 12 Computer Science';
+ if(key==='sf1') return 'Semi Final 01';
+ if(key==='sf2') return 'Semi Final 02';
+ if(key==='final') return 'Final Test';
  return 'Class '+key;
 }
-function getQuizShortName(){
- const key=String(selectedClass);
- if(key==='cs12') return 'COMPUTER SCIENCE';
- return 'CLASS '+key;
-}
+function getQuizShortName(){ return getQuizDisplayName().toUpperCase(); }
+function getTeamNames(){ return [teamAName,teamBName,teamCName,teamDName]; }
 function getTeamWinner(){
- if(teamScores[0]===teamScores[1]) return 'DRAW / TIE';
- return teamScores[0]>teamScores[1] ? (teamAName||'TEAM A') : (teamBName||'TEAM B');
+ const max=Math.max(...teamScores);
+ const winners=teamScores.map((s,i)=>s===max?i:-1).filter(i=>i>=0);
+ if(winners.length!==1)return 'DRAW / TIE';
+ return getTeamNames()[winners[0]]||('TEAM '+String.fromCharCode(65+winners[0]));
 }
-
 function endGame(won){
- stopContinuousBuzzer(); timeoutHeld=false;
- stopAllMusic();
- clearInterval(timer);stopBackground();
+ stopContinuousBuzzer(); timeoutHeld=false; stopAllMusic(); clearInterval(timer);stopBackground();
  const isTeamGame=gameMode==="team";
- const amount=isTeamGame ? formatPoints(Math.max(teamScores[0],teamScores[1])) : (earned||"0.00 Points");
- const displayName=isTeamGame ? ((teamAName||"TEAM A")+" vs "+(teamBName||"TEAM B")) : ((document.getElementById("player").textContent||"👤 प्रतियोगी").replace(/^👤\s*/,""));
- if(!currentRecordSaved){
-   saveRecord(displayName,amount,won);
-   currentRecordSaved=true;
- }
+ const activeForResult=getActiveMatchTeams();
+ const allNames=getTeamNames();
+ const resultNames=isTeamGame ? activeForResult.map(i=>allNames[i]||("TEAM "+String.fromCharCode(65+i))) : allNames;
+ const resultScores=isTeamGame ? activeForResult.map(i=>teamScores[i]||0) : teamScores;
+ const amount=isTeamGame ? formatPoints(Math.max(...resultScores)) : (earned||"0.00 Points");
+ const names=allNames;
+ const displayName=isTeamGame ? resultNames.join(" vs ") : ((document.getElementById("player").textContent||"👤 प्रतियोगी").replace(/^👤\s*/,""));
+ if(!currentRecordSaved){ saveRecord(displayName,amount,won); currentRecordSaved=true; }
  const quizName=getQuizDisplayName();
- const resultMessage=won?("आपने सभी "+QUESTIONS.length+" "+(selectedClass==="cs12"?"Computer Science ":"")+"प्रश्न सही किए!"):("आपने "+correctCount+" प्रश्न सही किए।");
- const records=getRecords();
- const rows=records.slice().reverse().map((r,i)=>'<tr><td style="padding:5px;border-bottom:1px solid rgba(255,255,255,.1)">'+(i+1)+'</td><td style="padding:5px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:800">'+escapeHtml(r.name)+'</td><td style="padding:5px;border-bottom:1px solid rgba(255,255,255,.1);color:#ffd85a;font-weight:900">'+escapeHtml(r.amount)+'</td></tr>').join('');
+ const resultMessage=won?("आपने सभी "+QUESTIONS.length+" प्रश्न पूरे किए!"):("आपने "+correctCount+" प्रश्न सही किए।");
  let teamResult='';
  if(isTeamGame){
-   const winner=getTeamWinner();
-   const winnerText=winner==='DRAW / TIE'?'🤝 FINAL RESULT: MATCH DRAW / TIE':('🏆 FINAL RESULT: '+escapeHtml(winner)+' — CHAMPION');
-   const prizeA=teamPrize(teamScores[0]), prizeB=teamPrize(teamScores[1]);
-   const winnerPrize=teamScores[0]===teamScores[1]?'0.00 Points':(teamScores[0]>teamScores[1]?prizeA:prizeB);
-   teamResult='<div class="final-team-result"><div class="final-team-title">⚔️ TEAM BATTLE FINAL SCORE</div><div class="final-team-grid">'+
-     '<div class="final-team-card '+(teamScores[0]>=teamScores[1]?'team-top':'')+'"><span>TEAM A</span><b>'+escapeHtml(teamAName||'TEAM A')+'</b><strong class="final-score-big">'+formatPoints(teamScores[0])+'</strong><em class="final-prize">⭐ POINTS: '+prizeA+'</em></div>'+ 
-     '<div class="final-team-vs">VS</div>'+ 
-     '<div class="final-team-card '+(teamScores[1]>=teamScores[0]?'team-top':'')+'"><span>TEAM B</span><b>'+escapeHtml(teamBName||'TEAM B')+'</b><strong class="final-score-big">'+formatPoints(teamScores[1])+'</strong><em class="final-prize">⭐ POINTS: '+prizeB+'</em></div></div>'+ 
-     '<div class="final-team-winner">'+winnerText+(winner!=='DRAW / TIE'?' • ⭐ WINNING POINTS: '+winnerPrize:'')+'</div></div>';
+   const active=getActiveMatchTeams();
+   const scores=active.map(i=>teamScores[i]||0);
+   const maxScore=Math.max(...scores);
+   const winners=active.filter(i=>(teamScores[i]||0)===maxScore);
+   const winner=winners.length===1?names[winners[0]]:'DRAW / TIE';
+   const winnerText=winner==='DRAW / TIE'?'🤝 MATCH DRAW / TIE':('🏆 WINNER: '+escapeHtml(winner));
+   if((selectedClass==='sf1'||selectedClass==='sf2') && winners.length===1){
+     let fs=[];try{fs=JSON.parse(localStorage.getItem('ajeetpura_kbc_finalists')||'[]');}catch(e){}
+     if(!Array.isArray(fs))fs=[];
+     if(!fs.includes(names[winners[0]])) fs.push(names[winners[0]]);
+     if(fs.length>2)fs=fs.slice(-2);
+     try{localStorage.setItem('ajeetpura_kbc_finalists',JSON.stringify(fs));}catch(e){}
+   }
+   teamResult='<div class="final-team-result"><div class="final-team-title">⚔️ '+escapeHtml(getQuizDisplayName())+' • '+escapeHtml((names[active[0]]||'TEAM A')+' VS '+(names[active[1]]||'TEAM B'))+'</div><div class="final-team-grid">'+
+     active.map(i=>'<div class="final-team-card '+((teamScores[i]||0)===maxScore?'team-top':'')+'"><span>TEAM '+String.fromCharCode(65+i)+'</span><b>'+escapeHtml(names[i]||('TEAM '+String.fromCharCode(65+i)))+'</b><strong class="final-score-big">'+formatPoints(teamScores[i]||0)+'</strong><em class="final-prize">⭐ POINTS: '+formatPoints(teamScores[i]||0)+'</em></div>').join('<div class="final-team-vs">VS</div>')+
+     '</div><div class="final-team-winner">'+winnerText+(winner!=='DRAW / TIE'?' • ⭐ WINNING POINTS: '+formatPoints(maxScore):'')+'</div></div>';
  }
  document.querySelector("#game .wrap").innerHTML='<div class="panel final-result-panel">'+
    '<h1 class="final-result-heading">PM SHRI GSSS AJEETPURA<br><span>CHAMPIONSHIP FINAL RESULT</span></h1>'+ 
-   '<p style="color:#ffd85a;font-weight:bold">'+(isTeamGame?'CLASS 10 • TEAM BATTLE':'CLASS 10 • SINGLE BATTLE')+'</p>'+ 
+   '<p style="color:#ffd85a;font-weight:bold">'+(isTeamGame?escapeHtml(getQuizDisplayName()+' • 2-TEAM MATCH'):'SINGLE BATTLE')+'</p>'+ 
    '<p style="font-size:20px;font-weight:900">📚 '+escapeHtml(quizName)+' • '+(gameMode==="speed"?"Speed Round":(isTeamGame?"Team Battle":"Classic"))+'</p>'+ 
    (isTeamGame?teamResult:'<p style="font-size:22px;font-weight:900">👤 '+escapeHtml(displayName)+'</p>')+
-   '<p>'+resultMessage+'</p><p class="earned-label-final">'+(isTeamGame?'कुल टीम स्कोर / FINAL TEAM SCORE':'कुल अर्जित POINTS / TOTAL EARNED POINTS')+'</p>'+ 
-   '<div style="font-size:46px;color:#ffd85a;font-weight:bold">'+(isTeamGame?(formatPoints(teamScores[0])+" : "+formatPoints(teamScores[1])):amount)+'</div>'+ 
+   '<p>'+resultMessage+'</p><p class="earned-label-final">'+(isTeamGame?'कुल टीम स्कोर / FINAL TEAM SCORES':'कुल अर्जित POINTS / TOTAL EARNED POINTS')+'</p>'+ 
+   '<div style="font-size:28px;color:#ffd85a;font-weight:bold">'+(isTeamGame?getActiveMatchTeams().map(i=>escapeHtml(allNames[i]||('TEAM '+String.fromCharCode(65+i)))+': '+formatPoints(teamScores[i])).join(' &nbsp;•&nbsp; '):amount)+'</div>'+ 
    '<div class="final-note">🏅 Result saved • Certificate नीचे Print Certificate से तैयार करें</div>'+ 
    '<div class="result-actions"><button id="certificateBtn" class="start" type="button">🎓 Print Certificate</button><button id="restart" class="start" type="button">🔄 फिर से खेलें</button></div></div>';
  document.getElementById("restart").addEventListener("click",()=>location.reload());
  const cert=document.getElementById("certificateBtn");
- if(cert)cert.addEventListener("click",()=>printCertificate(displayName,amount,correctCount,won,{quizName,isTeam:isTeamGame,teamA:teamAName,teamB:teamBName,scoreA:teamScores[0],scoreB:teamScores[1]}));
+ if(cert)cert.addEventListener("click",()=>printCertificate(displayName,amount,correctCount,won,{quizName,isTeam:isTeamGame,teamNames:isTeamGame?resultNames:names,teamScores:isTeamGame?resultScores:teamScores.slice()}));
  const pf=document.getElementById("pauseGameFloat");if(pf)pf.style.display="none";
  if(won){playCelebrationMusic();celebrate();}
 }
@@ -2927,13 +3029,14 @@ document.getElementById("confirmCloseAllBtn").addEventListener("click",confirmCl
 document.getElementById("computerScienceBtn").addEventListener("click",function(e){
  e.preventDefault(); e.stopPropagation(); selectQuizClass("cs12");
 });
-document.getElementById("class10Btn").addEventListener("click",function(e){
- e.preventDefault(); e.stopPropagation(); selectQuizClass("10");
-});
-for(let c=6;c<=12;c++){
+for(let c=6;c<=9;c++){
  const b=document.getElementById("class"+c+"Btn");
  if(b)b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();selectQuizClass(String(c));});
 }
+[["semiFinal01Btn","sf1"],["semiFinal02Btn","sf2"],["finalTestBtn","final"]].forEach(([id,key])=>{
+ const b=document.getElementById(id);
+ if(b)b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();selectQuizClass(key);});
+});
 document.getElementById("startBtn").addEventListener("click",(e)=>{
   e.preventDefault();
   e.stopPropagation();
@@ -2959,20 +3062,34 @@ document.getElementById("startBtn").addEventListener("click",(e)=>{
     }
 
     if(isTeamGame){
-      teamAName=(document.getElementById("teamA")?.value||"").trim()||"TEAM A";
-      teamBName=(document.getElementById("teamB")?.value||"").trim()||"TEAM B";
-      if(teamAName.toLowerCase()===teamBName.toLowerCase()){
-        const tb=document.getElementById("teamB");
-        if(tb) tb.focus();
-        alert("कृपया Team A और Team B के अलग-अलग नाम रखें।");
-        return;
+      const input1=(document.getElementById("teamA")?.value||"").trim();
+      const input2=(document.getElementById("teamB")?.value||"").trim();
+      if(selectedClass==="sf1"){
+        try{localStorage.removeItem("ajeetpura_kbc_finalists");}catch(e){}
+        if(!input1 || !input2){ alert("कृपया दोनों Team Names दर्ज करें।"); return; }
+        teamAName=input1; teamCName=input2;
+        teamBName="TEAM B"; teamDName="TEAM D";
+      }else if(selectedClass==="sf2"){
+        if(!input1 || !input2){ alert("कृपया दोनों Team Names दर्ज करें।"); return; }
+        teamBName=input1; teamDName=input2;
+        teamAName="TEAM A"; teamCName="TEAM C";
+      }else if(selectedClass==="final") {
+        // FINAL TEST: teacher will manually enter the two semifinal winners.
+        if(!input1 || !input2){ alert("कृपया Semi Final 01 और Semi Final 02 के दोनों winning Team Names दर्ज करें।"); return; }
+        teamAName=input1; teamBName=input2; teamCName=""; teamDName="";
+      }else{
+        if(!input1 || !input2){ alert("कृपया दोनों Team Names दर्ज करें।"); return; }
+        teamAName=input1; teamBName=input2; teamCName=""; teamDName="";
+      }
+      if(input1 && input2 && input1.toLowerCase()===input2.toLowerCase() && selectedClass!=="final"){
+        alert("दोनों Team Names अलग रखें।"); return;
       }
     }
 
     const questionBanks={
       cs12:COMPUTER_SCIENCE_QUESTIONS,
-      6:CLASS6_QUESTIONS,7:CLASS7_QUESTIONS,8:CLASS8_QUESTIONS,
-      9:CLASS9_QUESTIONS,10:CLASS10_QUESTIONS,11:CLASS11_QUESTIONS,12:CLASS12_QUESTIONS
+      6:CLASS6_QUESTIONS,7:CLASS7_QUESTIONS,8:CLASS8_QUESTIONS,9:CLASS9_QUESTIONS,
+      sf1:TEST_BANKS.sf1,sf2:TEST_BANKS.sf2,final:TEST_BANKS.final
     };
     let pool=(questionBanks[String(selectedClass)]||[]).slice();
     if(!pool.length){
@@ -2991,12 +3108,13 @@ document.getElementById("startBtn").addEventListener("click",(e)=>{
 
     current=0;
     currentTeam=0;
-    teamScores=[0,0];
+    teamScores=[0,0,0,0];
+    setMatchFromStage();
     used5050=false;
     usedPollCount=0;
-    teamUsed5050=[false,false];
-    teamPollCount=[0,0];
-    teamUsedTeacher=[false,false];
+    teamUsed5050=[false,false,false,false];
+    teamPollCount=[0,0,0,0];
+    teamUsedTeacher=[false,false,false,false];
     usedTeacherSupport=false;
     earned="0.00 Points";
     correctCount=0;
@@ -3072,6 +3190,13 @@ document.getElementById("closeResult").addEventListener("click",resumeAfterPoll)
 <button id="teacherSkip" class="btn blue" type="button">⏭️ Skip Question</button>
 <button id="teacherAward" class="btn green" type="button">⭐ Bonus Point</button>
 </div>
+<div style="margin-top:10px;border-top:1px solid rgba(255,216,90,.35);padding-top:10px">
+ <button id="teacherChangeAnswer" class="btn gold" type="button" style="width:100%">✏️ CHANGE CORRECT ANSWER</button>
+ <div id="teacherAnswerEditor" class="hidden" style="margin-top:8px">
+  <div style="font-size:12px;font-weight:900;color:#ffd85a;margin-bottom:6px">Select the correct option for this question:</div>
+  <div id="teacherAnswerOptions" class="teacher-grid"></div>
+ </div>
+</div>
 <p id="teacherInfo" class="teacher-info">Teacher tools are active only during a game.</p>
 </div></div>
 
@@ -3085,12 +3210,26 @@ document.getElementById("closeResult").addEventListener("click",resumeAfterPoll)
 <div id="rulesModal" class="modal hidden"><div class="modalbox">
 <h2>📋 CLASSROOM KBC RULES</h2>
 <div class="rules"><ol>
-<li>Hot Seat विद्यार्थी पहले 5 seconds में प्रश्न पढ़ेगा, फिर 20 seconds में answer चुनेगा।</li>
-<li>Lock करने से पहले Audience Poll/50:50 इस्तेमाल किया जा सकता है।</li>
-<li>गलत उत्तर = तुरंत Game Over.</li>
-<li>Time out = कोई उत्तर न देने पर तुरंत Game Over और शांत voice announcement होगा।</li>
-<li>हर सही उत्तर पर 5.00 Points मिलेंगे।</li>
-<li>Computer Science mode में कुल 50 bilingual प्रश्न हैं; सभी 50 सही = 250.00 Points.</li>
+<li><b>Question Format:</b> Competition Test में कुल 20 questions होंगे। Computer Science mode में 50 questions हैं।</li>
+<li><b>Language:</b> सभी questions और सभी options Hindi + English bilingual format में होंगे।</li>
+<li><b>Timing:</b> हर question में 5 seconds intro, 5 seconds reading phase और उसके बाद 20 seconds answer time मिलेगा। Speed Round में answer time 15 seconds है।</li>
+<li><b>Answer Lock:</b> Option चुनने के बाद <b>Lock Answer</b> करना जरूरी है। Lock के बाद answer बदला नहीं जा सकता।</li>
+<li><b>Correct Answer:</b> हर सही answer पर <b>+5.00 Points</b> मिलेंगे। एक question के points दोबारा नहीं जुड़ेंगे।</li>
+<li><b>Negative Marking — Team Battle:</b> गलत answer पर team score से <b>−1.67 Points</b> (5/3) कटेंगे और current question पर Game Over decision आएगा।</li>
+<li><b>Wrong Answer — Classic/Speed:</b> गलत answer पर Game Over decision आएगा; उस question के लिए कोई positive points नहीं मिलेंगे।</li>
+<li><b>Time Out:</b> समय समाप्त होने पर question unanswered माना जाएगा और Game Over decision आएगा।</li>
+<li><b>50:50 Lifeline:</b> प्रत्येक player/team को पूरे game में 1 बार। यह 4 में से 2 options हटाकर 1 correct + 1 incorrect option रखती है।</li>
+<li><b>Audience Poll:</b> प्रत्येक player/team को 3 बार। Poll के दौरान timer pause रहेगा; result देखने के बाद timer resume होगा।</li>
+<li><b>Teacher Support:</b> प्रत्येक player/team को 1 बार। Teacher केवल suggested option बताएंगे; final answer contestant को खुद select करके Lock करना होगा।</li>
+<li><b>Team Lifelines:</b> Team Battle में Team A/B/C/D की lifelines अलग-अलग track होती हैं; एक team की used lifeline दूसरी team की lifeline को consume नहीं करती।</li>
+<li><b>Teacher / Host Controls:</b> Teacher current question को Skip कर सकते हैं या Bonus Point देकर उसे correct award कर सकते हैं। Bonus Point = <b>+5.00 Points</b>.</li>
+<li><b>Skip Question:</b> Teacher Skip करने पर current question छोड़कर अगला question शुरू होगा और Team Battle में turn active match की अगली team को मिलेगा।</li>
+<li><b>Bonus Point:</b> Teacher Bonus देने पर current question correct माना जाएगा, +5.00 Points दिए जाएंगे और next-question action उपलब्ध होगा।</li>
+<li><b>Team Battle:</b> Semi Final 01 = Team A vs Team C; Semi Final 02 = Team B vs Team D; Final = दोनों semifinal winners का match.</li>
+<li><b>Team Turn:</b> सामान्यतः सही/गलत/next question के बाद active match की अगली team की turn आती है। Teacher आवश्यकता होने पर active team manually बदल सकते हैं।</li>
+<li><b>Projector Mode:</b> Projector button classroom display के लिए enlarged view toggle करता है। Normal View से वापस आया जा सकता है।</li>
+<li><b>Jump Question:</b> Teacher/host question jump buttons से किसी question पर जा सकते हैं। Revisited question पर पहले से awarded correct points दोबारा नहीं जुड़ेंगे।</li>
+<li><b>Final Decision:</b> Competition का result earned points/score के आधार पर होगा; tie होने पर score बराबर रहेगा और अलग tie-break question तभी लिया जाए जब आयोजक तय करें।</li>
 </ol></div>
 <button id="closeRules" class="start" type="button">समझ गया 👍</button>
 </div></div>
@@ -3188,6 +3327,60 @@ function celebrate(){
 @media(max-height:650px) and (min-width:701px){.final-result-panel{transform:scale(.82)}.final-team-card{min-height:82px!important}.final-score-big{font-size:21px!important}.final-prize{font-size:13px!important}.final-team-winner{font-size:17px!important}}
 @media(max-width:700px){.final-result-panel{padding:8px!important}.final-result-panel h1{font-size:25px!important}.final-result-panel p{margin:3px 0!important}.final-team-grid{grid-template-columns:1fr!important}.final-team-vs{margin:0!important}.final-team-card{min-height:95px}.final-score-big{font-size:23px!important}.final-prize{font-size:15px}.earned-label-final{font-size:15px!important}}
 </style>
+<style id="final-result-full-visibility-fix">
+/* FINAL RESULT ONLY: use the full game width and never clip the result/certificate controls. */
+#game .wrap:has(.final-result-panel){
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  height:calc(100vh - 74px)!important;
+  max-height:none!important;
+  align-items:stretch!important;
+  padding:10px 14px 110px!important;
+  box-sizing:border-box!important;
+}
+#game .final-result-panel{
+  width:min(1100px,96vw)!important;
+  max-width:1100px!important;
+  min-width:0!important;
+  min-height:calc(100vh - 105px)!important;
+  max-height:none!important;
+  height:auto!important;
+  margin:0 auto!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+  transform:none!important;
+  justify-content:flex-start!important;
+  padding:18px 20px 24px!important;
+}
+#game .final-result-panel .final-team-result{
+  width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+}
+#game .final-result-panel .final-team-grid{
+  width:100%!important;
+  grid-template-columns:minmax(0,1fr) 70px minmax(0,1fr)!important;
+  align-items:stretch!important;
+}
+#game .final-result-panel .final-team-card{
+  min-width:0!important;
+  min-height:145px!important;
+  overflow:visible!important;
+}
+#game .final-result-panel .final-team-winner{
+  width:100%!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+}
+@media(max-width:700px){
+  #game .wrap:has(.final-result-panel){height:auto!important;min-height:calc(100dvh - 58px)!important;padding:6px 8px 115px!important}
+  #game .final-result-panel{width:100%!important;min-height:0!important;padding:12px 10px 18px!important}
+  #game .final-result-panel .final-team-grid{grid-template-columns:1fr!important}
+  #game .final-result-panel .final-team-vs{margin:2px 0!important}
+  #game .final-result-panel .final-team-card{min-height:105px!important}
+}
+</style>
 <style id="game-mode-big-fix">
 /* GAME MODE ONLY — expand into the space freed by Question Order + Voice Host */
 #welcome .pro-settings{grid-template-columns:1fr!important;width:100%!important;gap:0!important;margin:8px 0!important}
@@ -3266,7 +3459,7 @@ function celebrate(){
      "Q "+(current+1)+"/"+QUESTIONS.length+
      " • Phase: "+gamePhase+
      " • Time: "+(time||0)+" sec"+
-     (gameMode==="team"?" • Turn: "+(currentTeam===0?teamAName:teamBName):"")
+     (gameMode==="team"?" • Turn: "+([teamAName,teamBName,teamCName,teamDName][currentTeam]||("TEAM "+String.fromCharCode(65+currentTeam))):"")
    );
  }
  if(tb)tb.addEventListener("click",openTeacher);
@@ -3291,7 +3484,7 @@ function celebrate(){
   if(locked)return;const st=getLifeState();if(st.teacherUsed)return;
   const btn=document.getElementById("o"+n);if(!btn)return;
   selected=n;for(let x=0;x<4;x++)document.getElementById("o"+x).classList.toggle("selected",x===n);
-  usedTeacherSupport=true;
+  if(gameMode==="team") teamUsedTeacher[currentTeam]=true; else usedTeacherSupport=true;
   updateLifelineUI();
   if(teacherSupportModal)teacherSupportModal.classList.add("hidden");
   document.getElementById("lock").disabled=false;
@@ -3315,7 +3508,7 @@ function celebrate(){
    closeTeacher();
    if(current>=QUESTIONS.length-1){ endGame(false); return; }
    current++;
-   if(gameMode==="team")currentTeam=(currentTeam+1)%2;
+   if(gameMode==="team"){const a=getActiveMatchTeams();const p=a.indexOf(currentTeam);currentTeam=a[(p+1)%a.length];}
    selected=-1;locked=false;nextMode=false;timerPaused=false;timeoutHeld=false;
    loadQuestion();
    if(gameMode==="team")updateTeamBox();
@@ -3345,29 +3538,344 @@ function celebrate(){
    document.getElementById("lock").disabled=false;
    document.getElementById("lock").textContent=current===QUESTIONS.length-1
       ?"🏆 FINISH & VIEW RESULT":"➡️ NEXT QUESTION";
-   teacherStatus("✅ Awarded as correct • "+(gameMode==="team"?(currentTeam===0?teamAName:teamBName)+" +5.00 Points":"+5.00 Points"));
+   teacherStatus("✅ Awarded as correct • "+(gameMode==="team"?([teamAName,teamBName,teamCName,teamDName][currentTeam]||("TEAM "+String.fromCharCode(65+currentTeam)))+" +5.00 Points":"+5.00 Points"));
  });
 
 
  // Certificate
- window.printCertificate=function(name,amount,count,won,meta={} ){
- const w=window.open("","_blank","width=1100,height=800");
+ window.printCertificate=function(name,amount,count,won,meta={}){
+ const w=window.open("","_blank","width=1200,height=850");
  if(!w)return;
  const safe=String(name||"प्रतियोगी").replace(/[<>]/g,"");
  const quiz=String(meta.quizName||getQuizDisplayName()).replace(/[<>]/g,"");
  const isTeam=!!meta.isTeam;
- const scoreA=Number(meta.scoreA||0), scoreB=Number(meta.scoreB||0);
- const prizeA=teamPrize(scoreA), prizeB=teamPrize(scoreB);
- const scoreAText=scoreA.toFixed(2), scoreBText=scoreB.toFixed(2);
- const teamWinner=scoreA===scoreB?'DRAW / TIE':(scoreA>scoreB?(meta.teamA||'TEAM A'):(meta.teamB||'TEAM B'));
- const subjectLine=isTeam ? ('Team Battle: '+String(meta.teamA||'TEAM A')+' vs '+String(meta.teamB||'TEAM B')) : ('Quiz: '+quiz);
- const resultLine=isTeam ? ('Final Score: '+scoreAText+' Points - '+scoreBText+' Points | '+(teamWinner==='DRAW / TIE'?'Result: DRAW / TIE':'Winner: '+teamWinner)) : ('Correct Answers: '+Number(count||0)+' | कुल अर्जित POINTS / Total Earned Points: '+String(amount||'0.00 Points'));
- const teamBlock=isTeam ? ('<div class="teams"><div class="team"><small>TEAM A</small><h2>'+escapeHtml(meta.teamA||'TEAM A')+'</h2><div class="score">'+scoreAText+'</div><b>FINAL SCORE</b><div class="prize">⭐ POINTS: '+prizeA+'</div></div><div class="vs">VS</div><div class="team"><small>TEAM B</small><h2>'+escapeHtml(meta.teamB||'TEAM B')+'</h2><div class="score">'+scoreBText+'</div><b>FINAL SCORE</b><div class="prize">⭐ POINTS: '+prizeB+'</div></div></div><h2 class="winner">'+(teamWinner==='DRAW / TIE'?'🤝 MATCH DRAW / TIE':'🏆 WINNER: '+escapeHtml(teamWinner)+'<br>⭐ WINNING POINTS: '+(scoreA>scoreB?prizeA:prizeB))+'</h2>') : ('<div class="amount">⭐ '+String(amount||'0.00 Points')+'</div>');
- w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Certificate - '+quiz+'</title><style>@page{size:A4 landscape;margin:.28in}*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;height:100%;font-family:Arial,"Noto Sans Devanagari",sans-serif;text-align:center;color:#17254d;background:#fff}.cert{width:100%;min-height:100%;height:100%;border:9px double #c99a25;padding:24px 34px;background:linear-gradient(135deg,#fffdf6,#fff,#fff9e8);display:flex;flex-direction:column;justify-content:center;align-items:center}.cert h1{font-size:34px;color:#8e6a0b;margin:0 0 4px;font-weight:1000}.cert h2{font-size:23px;margin:5px 0;color:#243b73}.cert p{font-size:16px;margin:5px 0;line-height:1.2}.school{font-weight:900;color:#6d5210;font-size:16px!important;margin-top:8px!important}.amount{font-size:42px;color:#9a7410;font-weight:900;margin:10px}.teams{width:92%;display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:center;margin:10px auto}.team{border:3px solid #d09b20;border-radius:16px;padding:12px 10px;background:#fffaf0;min-height:150px;display:flex;flex-direction:column;justify-content:center}.team small{font-size:13px;font-weight:900;color:#6d5210}.team h2{font-size:23px;margin:4px 0}.team .score{font-size:43px;font-weight:1000;color:#9a7410;line-height:1.05}.team b{font-size:12px;margin-top:3px}.team .prize{font-size:19px;font-weight:1000;color:#b12a2a;margin-top:6px}.vs{font-size:24px;font-weight:1000;color:#9a7410}.winner{color:#9a7410;font-size:23px!important;margin:7px 0!important}.cert .footer-note{font-size:14px;margin-top:5px}@media(max-width:800px){.cert{padding:14px}.cert h1{font-size:25px}.cert h2{font-size:19px}.teams{width:100%;grid-template-columns:1fr;gap:4px}.vs{margin:-1px}.team{min-height:100px}.team .score{font-size:34px}.winner{font-size:18px!important}}</style></head><body><div class="cert"><h1>🏆 PM SHRI SCHOOL CHAMPIONSHIP</h1><h2>Certificate of Achievement</h2><p>This certificate is proudly presented to</p><h2>'+safe+'</h2><p><b>'+subjectLine+'</b></p><p>'+resultLine+'</p>'+teamBlock+'<p class="footer-note">'+(won?'🏆 Successfully completed the challenge':'👏 Thank you for participating')+'</p><p class="school">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</p></div><script>window.onload=function(){window.print()}<\/script></body></html>');
+ const names=Array.isArray(meta.teamNames)?meta.teamNames.slice():[];
+ const scores=Array.isArray(meta.teamScores)?meta.teamScores.map(Number):[];
+ const scoreA=Number(scores[0]||0), scoreB=Number(scores[1]||0);
+ const max=Math.max(scoreA,scoreB);
+ const teamWinner=scoreA===scoreB?'DRAW / TIE':(scoreA>scoreB?(names[0]||'TEAM A'):(names[1]||'TEAM B'));
+ const subjectLine=isTeam ? ('Final Test • '+(names[0]||'TEAM A')+' VS '+(names[1]||'TEAM B')) : ('Quiz: '+quiz);
+ const resultLine=isTeam ? ('Final Score: '+scoreA.toFixed(2)+' Points • '+scoreB.toFixed(2)+' Points') : ('Correct Answers: '+Number(count||0)+' • Total Earned Points: '+String(amount||'0.00 Points'));
+ const teamBlock=isTeam ? (
+   '<div class="teams">'+
+   '<div class="team '+(scoreA===max?'top':'')+'"><small>TEAM A</small><h2>'+escapeHtml(names[0]||'TEAM A')+'</h2><div class="score">'+scoreA.toFixed(2)+' Points</div><b>FINAL SCORE</b><div class="prize">⭐ POINTS: '+teamPrize(scoreA)+'</div></div>'+
+   '<div class="team '+(scoreB===max?'top':'')+'"><small>TEAM B</small><h2>'+escapeHtml(names[1]||'TEAM B')+'</h2><div class="score">'+scoreB.toFixed(2)+' Points</div><b>FINAL SCORE</b><div class="prize">⭐ POINTS: '+teamPrize(scoreB)+'</div></div>'+
+   '</div><h2 class="winner">'+(teamWinner==='DRAW / TIE'?'🤝 MATCH DRAW / TIE':'🏆 WINNER: '+escapeHtml(teamWinner)+' • ⭐ WINNING POINTS: '+teamPrize(max))+'</h2>'
+ ) : '<div class="amount">⭐ '+String(amount||'0.00 Points')+'</div>';
+ const html='<!doctype html><html><head><meta charset="utf-8"><title>Certificate - '+escapeHtml(quiz)+'</title><style>'+ 
+ '@page{size:A4 landscape;margin:8mm}*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;min-height:100%;height:auto;overflow:visible;background:#fff;color:#17254d;font-family:Arial,"Noto Sans Devanagari",sans-serif;text-align:center}' +
+ '.cert{width:100%;min-height:180mm;border:6px double #c99a25;padding:9mm 12mm;background:linear-gradient(135deg,#fffdf6,#fff,#fff9e8);display:flex;flex-direction:column;justify-content:flex-start;align-items:center;overflow:visible;page-break-inside:avoid}' +
+ '.cert h1{font-size:30px;color:#8e6a0b;margin:0 0 3px;font-weight:900}.cert h2{font-size:21px;margin:4px 0;color:#243b73}.cert p{font-size:15px;margin:3px 0;line-height:1.2}.school{font-weight:900;color:#6d5210;font-size:16px!important;margin-top:7px!important}.amount{font-size:38px;color:#9a7410;font-weight:900;margin:8px}.teams{width:92%;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch;margin:8px auto}.team{border:3px solid #d09b20;border-radius:14px;padding:9px;background:#fffaf0;min-height:110px;display:flex;flex-direction:column;justify-content:center;overflow:visible}.team.top{box-shadow:0 0 14px rgba(210,150,20,.45)}.team small{font-size:11px;font-weight:900;color:#6d5210}.team h2{font-size:18px;margin:3px 0}.team .score{font-size:30px;font-weight:900;color:#9a7410;line-height:1.05}.team b{font-size:10px;margin-top:3px}.team .prize{font-size:15px;font-weight:900;color:#b12a2a;margin-top:4px}.winner{color:#9a7410;font-size:20px!important;margin:6px 0!important}.footer-note{font-size:12px!important;margin-top:4px!important}@media(max-width:800px){.cert{padding:7mm}.teams{grid-template-columns:1fr}.cert h1{font-size:24px}.cert h2{font-size:18px}.team .score{font-size:27px}.winner{font-size:17px!important}}'+
+ '</style></head><body><div class="cert"><h1>🏆 PM SHRI SCHOOL CHAMPIONSHIP</h1><h2>Certificate of Achievement</h2><p>This certificate is proudly presented to</p><h2>'+safe+'</h2><p><b>'+subjectLine+'</b></p><p>'+resultLine+'</p>'+teamBlock+'<p class="footer-note">'+(won?'🏆 Successfully completed the challenge':'👏 Thank you for participating')+'</p><p class="school">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</p></div></body></html>';
+ w.document.open();
+ w.document.write(html);
  w.document.close();
+ setTimeout(function(){try{w.focus();w.print();}catch(e){}},400);
 }
 })();
 </script>
+
+<style id="FINAL-KBC-REAL-MOBILE-FULLSCREEN-FIX">
+#teamBattleBox{grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr)!important;}
+#teamBattleBox #teamCardC,#teamBattleBox #teamCardD{display:none!important;}
+#teamBattleBox .team-vs{display:flex!important;align-items:center!important;justify-content:center!important;grid-column:auto!important;grid-row:auto!important;font-size:16px!important;color:#ffd85a!important;font-weight:1000!important;}
+#teamBattleBox .team-card{grid-column:auto!important;grid-row:auto!important;}
+@media(max-width:700px){
+  #teamBattleBox{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;gap:4px!important;}
+  #teamBattleBox .team-vs{font-size:12px!important;}
+  #game .wrap{overflow-y:auto!important;overflow-x:hidden!important;padding-bottom:150px!important;-webkit-overflow-scrolling:touch!important;}
+  #game .controls{position:relative!important;z-index:20!important;}
+  #game .controls #lock,#game .controls #next{position:sticky!important;bottom:54px!important;z-index:100!important;box-shadow:0 4px 16px rgba(0,0,0,.55)!important;}
+}
+html:fullscreen body{overflow:hidden!important;}
+@media(max-width:700px){
+  html:fullscreen #game{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;}
+  html:fullscreen #game .wrap{height:calc(100dvh - 58px)!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;padding:4px 7px 150px!important;box-sizing:border-box!important;-webkit-overflow-scrolling:touch!important;}
+  html:fullscreen #game .controls #lock,html:fullscreen #game .controls #next{position:sticky!important;bottom:54px!important;z-index:1000!important;min-height:54px!important;}
+  html:fullscreen #closeAllGroup,html:fullscreen #pauseGameFloat{bottom:4px!important;}
+}
+</style>
+
+
+<!-- FINAL HOME TEAM-INPUT RELIABILITY PATCH -->
+<style id="final-team-input-reliability">
+  #welcome #teamNames{
+    width:100%!important;
+    box-sizing:border-box!important;
+    grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:6px!important;
+    margin:7px 0!important;
+  }
+  #welcome #teamNames.force-show{display:grid!important;visibility:visible!important;opacity:1!important}
+  #welcome #teamNames input{
+    display:block!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    min-width:0!important;
+    height:42px!important;
+    padding:7px 8px!important;
+    text-align:center!important;
+  }
+  #welcome #teamNames .team-vs-input{display:flex!important;align-items:center!important;justify-content:center!important}
+  @media(max-width:700px){
+    #welcome #teamNames{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;gap:4px!important}
+    #welcome #teamNames input{height:40px!important;font-size:12px!important}
+    #welcome #teamNames .team-vs-input{font-size:12px!important}
+  }
+</style>
+<script id="final-team-input-reliability-js">
+(function(){
+  function syncTeamNameInputs(){
+    const mode=document.getElementById('gameMode');
+    const box=document.getElementById('teamNames');
+    const nameInput=document.getElementById('nameInput');
+    const nameLabel=document.getElementById('nameLabel');
+    const start=document.getElementById('startBtn');
+    if(!mode||!box)return;
+    const isTeam=mode.value==='team';
+    box.classList.toggle('force-show',isTeam);
+    box.classList.toggle('hidden',!isTeam);
+    if(isTeam){
+      box.style.display='grid';
+      box.style.visibility='visible';
+      box.style.opacity='1';
+      if(nameInput)nameInput.classList.add('hidden');
+      if(nameLabel)nameLabel.classList.add('hidden');
+      if(start)start.textContent='🚀 TEAM BATTLE शुरू करें';
+    }else{
+      box.style.display='none';
+      box.style.visibility='hidden';
+      if(nameInput)nameInput.classList.remove('hidden');
+      if(nameLabel)nameLabel.classList.remove('hidden');
+      if(start)start.textContent=mode.value==='speed'?'⚡ SPEED ROUND शुरू करें':'🚀 नाम दर्ज करें और खेल शुरू करें';
+    }
+  }
+  function install(){
+    const mode=document.getElementById('gameMode');
+    if(!mode)return;
+    mode.removeEventListener('change',syncTeamNameInputs);
+    mode.addEventListener('change',syncTeamNameInputs);
+    syncTeamNameInputs();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+  else install();
+  window.syncTeamNameInputs=syncTeamNameInputs;
+})();
+</script>
+<script id="final-bilingual-audit-v1">
+(function(){
+  // Final content audit: all competition/class MCQs are bilingual in both question and options.
+  // This does not alter scoring or game flow.
+  const banks=['COMPUTER_SCIENCE_QUESTIONS','CLASS6_QUESTIONS','CLASS7_QUESTIONS','CLASS8_QUESTIONS','CLASS9_QUESTIONS','SEMIFINAL01_QUESTIONS','SEMIFINAL02_QUESTIONS','FINAL_TEST_QUESTIONS'];
+  window.KBC_BILINGUAL_AUDIT={};
+  banks.forEach(n=>{
+    const a=window[n];
+    if(!Array.isArray(a)) return;
+    window.KBC_BILINGUAL_AUDIT[n]=a.every(x=>typeof x.q==='string' && x.q.includes(' / ') && Array.isArray(x.o) && x.o.length===4 && x.o.every(o=>typeof o==='string' && o.includes(' / ')));
+  });
+})();
+</script>
+
+<!-- FINAL BUTTON RELIABILITY PATCH: fixes only control wiring; no quiz/question data changes. -->
+<style id="final-button-reliability-css">
+  #teacherModal{z-index:2147483000!important}
+  #teacherSupportModal,#audienceModal,#rulesModal,#pauseModal,#lifelineChoiceModal,#resultModal,#wrongDecision{z-index:2147482000!important}
+  #game .controls{position:relative;z-index:100!important}
+  #game .controls .btn{position:relative;z-index:101!important;pointer-events:auto!important;touch-action:manipulation!important}
+  #teacherModal .teacher-box{max-height:88vh!important;overflow:auto!important}
+  #teacherModal .teacher-close-fix{margin-top:10px;width:100%;min-height:44px}
+  @media(max-width:700px){
+    #game .controls{position:relative!important;z-index:100!important;display:flex!important;flex-wrap:wrap!important}
+    #game .controls .btn{min-height:42px!important;line-height:1.15!important}
+    #teacherModal .teacher-box{width:94vw!important;max-height:86dvh!important;padding:12px!important}
+    #teacherModal .teacher-grid{grid-template-columns:1fr 1fr!important}
+  }
+</style>
+<script id="final-button-reliability-js">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function replaceButton(id){
+    const old=byId(id); if(!old||!old.parentNode)return null;
+    const fresh=old.cloneNode(true); old.parentNode.replaceChild(fresh,old); return fresh;
+  }
+
+  // Teacher HOST module: one reliable handler + a visible close button.
+  const teacherModal=byId('teacherModal');
+  if(teacherModal){
+    if(!byId('teacherCloseFix')){
+      const close=document.createElement('button');
+      close.id='teacherCloseFix'; close.type='button'; close.className='btn red teacher-close-fix';
+      close.textContent='✖ CLOSE / वापस';
+      const box=teacherModal.querySelector('.teacher-box'); if(box)box.appendChild(close);
+      close.addEventListener('click',function(){teacherModal.classList.add('hidden');});
+    }
+    const tb=replaceButton('teacherBtn');
+    if(tb)tb.addEventListener('click',function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(teacherModal.classList.contains('hidden')) teacherModal.classList.remove('hidden');
+      const info=byId('teacherInfo');
+      if(info){
+        const total=Array.isArray(window.QUESTIONS)?window.QUESTIONS.length:(typeof QUESTIONS!=='undefined'?QUESTIONS.length:0);
+        const q=(typeof current!=='undefined'?current+1:1);
+        const t=(typeof time!=='undefined'?time:0);
+        info.textContent='Q '+q+'/'+total+' • Time: '+t+' sec'+
+          ((typeof gameMode!=='undefined'&&gameMode==='team')?' • Current Team: '+(typeof getCurrentTeamName==='function'?getCurrentTeamName():'Team'):'');
+      }
+    },true);
+    teacherModal.addEventListener('click',function(e){if(e.target===teacherModal)teacherModal.classList.add('hidden')});
+  }
+
+  // Projector: reliable toggle. Also uses browser fullscreen when available.
+  const projector=replaceButton('projectorBtn');
+  if(projector)projector.addEventListener('click',async function(e){
+    e.preventDefault(); e.stopPropagation();
+    const on=!document.body.classList.contains('projector-mode');
+    document.body.classList.toggle('projector-mode',on);
+    this.textContent=on?'🖥️ Normal View':'🖥️ Projector';
+    if(on && !document.fullscreenElement && document.documentElement.requestFullscreen){
+      try{await document.documentElement.requestFullscreen();}catch(err){}
+    }else if(!on && document.fullscreenElement && document.exitFullscreen){
+      try{await document.exitFullscreen();}catch(err){}
+    }
+  },true);
+
+  // Teacher Support lifeline: keep its original function but guarantee the button is wired.
+  const ts=replaceButton('teacherSupport');
+  if(ts)ts.addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation();
+    if(typeof openTeacherSupport==='function')openTeacherSupport();
+  },true);
+
+  // Ensure the main answer controls stay above fixed mobile controls.
+  ['lock','next','fifty','poll','bg','timerToggle','full','rulesBtn'].forEach(function(id){
+    const b=byId(id); if(b){b.style.position='relative';b.style.zIndex='102';b.style.pointerEvents='auto';b.style.touchAction='manipulation';}
+  });
+})();
+</script>
+\n<style id="kbc-final-authoritative-fix">\n#teacherModal,#teacherSupportModal,#rulesModal{z-index:2147483647!important}\n#teacherModal .teacher-box{max-width:680px!important;max-height:88vh!important;overflow:auto!important}\n#teacherModal .teacher-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}\n#teacherModal button,#teacherSupportModal button{position:relative!important;z-index:2147483648!important;pointer-events:auto!important;touch-action:manipulation!important}\n@media(max-width:700px){#teacherModal .teacher-grid{grid-template-columns:1fr!important}#teacherModal .teacher-box{width:94vw!important}}\n</style>\n<script id="kbc-final-authoritative-fix-js">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function hide(id){const e=byId(id);if(e)e.classList.add('hidden')}
+  function stopRound(){try{clearInterval(timer);clearTimeout(readTimer);stopContinuousBuzzer();stopAllMusic()}catch(e){}}
+  function switchTeamAfterQuestion(){
+    if(gameMode!=='team') return;
+    const a=typeof getActiveMatchTeams==='function'?getActiveMatchTeams():[0,1];
+    const pos=a.indexOf(currentTeam); currentTeam=a[(pos+1+a.length)%a.length];
+  }
+  function resetAndLoad(){
+    selected=-1;locked=false;nextMode=false;timerPaused=false;timeoutHeld=false;reading=true;time=20;
+    const l=byId('lock'); if(l){l.disabled=true;l.textContent='🔒 Lock Answer';l.classList.add('next-big')}
+    const n=byId('next'); if(n){n.disabled=true;n.classList.add('hidden')}
+    loadQuestion();
+    if(gameMode==='team'&&typeof updateTeamBox==='function')updateTeamBox();
+    if(typeof updateLifelineUI==='function')updateLifelineUI();
+  }
+
+  // ----- Teacher / Host module -----
+  const tm=byId('teacherModal');
+  if(tm){
+    let close=byId('teacherCloseFinal');
+    if(!close){
+      close=document.createElement('button'); close.id='teacherCloseFinal'; close.type='button'; close.className='btn red';
+      close.textContent='✖ CLOSE / वापस'; close.style.cssText='width:100%;margin-top:10px;min-height:44px';
+      const box=tm.querySelector('.teacher-box'); if(box)box.appendChild(close);
+    }
+    close.onclick=function(){ hide('teacherModal'); if(!locked&&!reading){try{resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}catch(e){}} };
+
+    const tb=byId('teacherBtn');
+    if(tb){
+      const fresh=tb.cloneNode(true); tb.replaceWith(fresh);
+      fresh.addEventListener('click',function(e){
+        e.preventDefault();e.stopPropagation();
+        if(document.getElementById('game')?.classList.contains('hidden'))return;
+        if(!locked&&!reading)try{pauseTimer()}catch(err){}
+        const info=byId('teacherInfo');
+        if(info)info.textContent='Q '+(current+1)+'/'+QUESTIONS.length+' • Time: '+(time||0)+' sec'+(gameMode==='team'?' • Current Team: '+(typeof getCurrentTeamName==='function'?getCurrentTeamName():'Team'):'');
+        tm.classList.remove('hidden');
+      },true);
+    }
+
+    const skip=byId('teacherSkip');
+    if(skip){
+      const fresh=skip.cloneNode(true); skip.replaceWith(fresh);
+      fresh.addEventListener('click',function(e){
+        e.preventDefault();e.stopPropagation();
+        if(!QUESTIONS||!QUESTIONS.length)return;
+        stopRound(); hide('wrongDecision'); hide('teacherModal');
+        if(current>=QUESTIONS.length-1){endGame(false);return;}
+        current++; switchTeamAfterQuestion(); resetAndLoad();
+        byId('status').textContent='⏭️ Teacher Skip: current question skipped — next question started.';
+      },true);
+    }
+
+    const award=byId('teacherAward');
+    if(award){
+      const fresh=award.cloneNode(true); award.replaceWith(fresh);
+      fresh.addEventListener('click',function(e){
+        e.preventDefault();e.stopPropagation();
+        if(!QUESTIONS[current]||locked)return;
+        stopRound(); reading=false; selected=Number(QUESTIONS[current].a); locked=true; nextMode=true;
+        for(let n=0;n<4;n++){const b=byId('o'+n);if(b){b.disabled=true;b.classList.remove('selected','wrong','correct')}}
+        const ans=byId('o'+selected); if(ans)ans.classList.add('correct');
+        if(!correctQuestions.has(current)){
+          correctQuestions.add(current); correctCount=correctQuestions.size;
+          if(gameMode==='team'){teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)+5; if(typeof updateTeamBox==='function')updateTeamBox(); earned=formatPoints(teamScores[currentTeam]);}
+          else earned=formatPoints(correctCount*5);
+        }
+        setText('earned',gameMode==='team'?formatPoints(teamScores[currentTeam]):earned);
+        setText('status','⭐ Teacher Bonus: current question awarded CORRECT • +5.00 Points. Press NEXT/Lock to continue.');
+        const l=byId('lock'); if(l){l.disabled=false;l.textContent=current===QUESTIONS.length-1?'🏆 FINISH & VIEW RESULT':'➡️ NEXT QUESTION';l.classList.add('next-big')}
+        const info=byId('teacherInfo');if(info)info.textContent='✅ Bonus awarded: +5.00 Points';
+      },true);
+    }
+  }
+
+  // ----- Teacher Support lifeline: direct implementation, independent of local-scope function -----
+  const ts=byId('teacherSupport');
+  const modal=byId('teacherSupportModal');
+  const options=byId('teacherSupportOptions');
+  const closeTS=byId('closeTeacherSupport');
+  function openTS(){
+    if(locked||reading){setText('status','🧑‍🏫 Teacher Support केवल answer phase में इस्तेमाल करें।');return;}
+    const teamMode=gameMode==='team', t=teamMode?currentTeam:0;
+    const used=teamMode?!!teamUsedTeacher[t]:!!usedTeacherSupport;
+    if(used){setText('status','🧑‍🏫 Teacher Support इस Player/Team के लिए पहले ही इस्तेमाल हो चुका है।');updateLifelineUI();return;}
+    pauseTimer();
+    if(options){
+      options.innerHTML=QUESTIONS[current].o.map((txt,n)=>{
+        const b=byId('o'+n); if(!b||b.hidden||b.style.display==='none')return '';
+        return '<button type="button" class="vote teacher-support-option" data-ts-final="'+n+'"><span>'+String.fromCharCode(65+n)+'</span>'+renderOptionBI(txt)+'</button>';
+      }).join('');
+      options.querySelectorAll('[data-ts-final]').forEach(b=>b.addEventListener('click',function(){
+        const n=Number(this.dataset.tsFinal); if(locked)return;
+        selected=n; for(let x=0;x<4;x++){const ob=byId('o'+x);if(ob)ob.classList.toggle('selected',x===n)}
+        if(teamMode)teamUsedTeacher[t]=true;else usedTeacherSupport=true;
+        updateLifelineUI(); hide('teacherSupportModal');
+        const l=byId('lock');if(l)l.disabled=false;
+        setText('status','🧑‍🏫 Teacher Support: Option '+String.fromCharCode(65+n)+' suggested. अब Lock Answer करें।');
+        resumeTimer(gameMode==='speed'?15:20); playMusic('answerMusic');
+      }));
+    }
+    modal?.classList.remove('hidden');
+    setText('status','🧑‍🏫 Teacher Support खुला है — Teacher की राय लें।');
+  }
+  if(ts){const fresh=ts.cloneNode(true);ts.replaceWith(fresh);fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openTS()},true)}
+  if(closeTS){const fresh=closeTS.cloneNode(true);closeTS.replaceWith(fresh);fresh.addEventListener('click',function(){hide('teacherSupportModal');if(!locked&&!reading){resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}})}
+
+  // ----- Projector -----
+  const pb=byId('projectorBtn');
+  if(pb){const fresh=pb.cloneNode(true);pb.replaceWith(fresh);fresh.addEventListener('click',async function(e){
+    e.preventDefault();e.stopPropagation();
+    const on=!document.body.classList.contains('projector-mode');document.body.classList.toggle('projector-mode',on);this.textContent=on?'🖥️ Normal View':'🖥️ Projector';
+    if(on&&document.documentElement.requestFullscreen&&!document.fullscreenElement){try{await document.documentElement.requestFullscreen()}catch(err){}}
+    if(!on&&document.exitFullscreen&&document.fullscreenElement){try{await document.exitFullscreen()}catch(err){}}
+  },true)}
+})();
+</script>\n
+
+
+
 
 
 
@@ -3474,6 +3982,881 @@ function celebrate(){
   p.addEventListener('pointerup',trigger,{passive:false});
   p.addEventListener('touchend',trigger,{passive:false});
   p.addEventListener('click',trigger,{passive:false});
+})();
+</script>
+
+<!-- KBC TEAM LOTTERY SYSTEM: added without changing existing KBC game logic -->
+<style id="kbc-team-lottery-style">
+#kbcLotteryPage{position:fixed;inset:0;z-index:999999;background:radial-gradient(circle at 50% 10%,#172d63 0%,#07132f 48%,#020817 100%);color:#fff;display:none;overflow:auto;font-family:inherit}
+#kbcLotteryPage.show{display:block}
+.kbc-lottery-wrap{width:min(1180px,96vw);margin:0 auto;padding:18px 0 28px;text-align:center}
+.kbc-lottery-logo{font-weight:1000;color:#ffd85a;font-size:clamp(22px,4vw,42px);letter-spacing:1px;text-shadow:0 3px 16px rgba(255,216,90,.28)}
+.kbc-lottery-sub{margin:4px 0 16px;color:#dbe7ff;font-weight:800}
+.kbc-lottery-panel{background:linear-gradient(145deg,rgba(10,29,68,.97),rgba(7,18,45,.98));border:2px solid rgba(255,216,90,.65);border-radius:22px;box-shadow:0 0 28px rgba(255,216,90,.12),inset 0 0 24px rgba(255,255,255,.035);padding:16px}
+.kbc-lottery-input-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:left}
+.kbc-lottery-category{border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:11px;background:rgba(255,255,255,.045)}
+.kbc-lottery-category h3{margin:0 0 7px;text-align:center;color:#ffd85a;font-size:16px}
+.kbc-lottery-category textarea{width:100%;height:118px;resize:none;box-sizing:border-box;border:2px solid rgba(255,216,90,.35);border-radius:11px;background:#07142f;color:#fff;padding:9px;font-size:15px;font-weight:700;outline:none;line-height:1.55}
+.kbc-lottery-category textarea:focus{border-color:#ffd85a;box-shadow:0 0 10px rgba(255,216,90,.18)}
+.kbc-lottery-help{font-size:11px;color:#b9c9e8;text-align:center;margin-top:5px}
+.kbc-lottery-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin:14px 0 8px}
+.kbc-lottery-btn{border:2px solid #ffd85a;border-radius:13px;padding:11px 18px;font-size:15px;font-weight:1000;cursor:pointer;color:#07142f;background:linear-gradient(135deg,#ffd85a,#fff1a6);box-shadow:0 5px 18px rgba(255,216,90,.18)}
+.kbc-lottery-btn.secondary{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.3)}
+.kbc-lottery-btn:disabled{opacity:.45;cursor:not-allowed}
+#kbcLotteryStatus{min-height:24px;color:#ffe995;font-weight:900;margin:8px}
+.kbc-team-results{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}
+.kbc-team-card-lottery{position:relative;min-height:170px;border-radius:20px;padding:13px;background:linear-gradient(145deg,#102d68,#081631);border:2px solid rgba(255,216,90,.48);box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.kbc-team-card-lottery.reveal{animation:kbcTeamReveal .65s ease both}
+.kbc-team-title-lottery{font-size:21px;font-weight:1000;color:#ffd85a;margin-bottom:10px}
+.kbc-team-member-lottery{padding:7px 5px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;font-weight:900}
+.kbc-team-member-lottery span{display:block;color:#9fb4db;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.kbc-lottery-winner-note{margin-top:12px;color:#dbe7ff;font-weight:800;font-size:13px}
+.kbc-lottery-save{display:none;margin-top:12px}
+.kbc-lottery-save.show{display:flex}
+@media(max-width:700px){#kbcLotteryPage{font-size:14px}.kbc-lottery-wrap{width:94vw}.kbc-lottery-logo{font-size:24px}.kbc-lottery-sub{font-size:12px}.kbc-lottery-input-grid{grid-template-columns:1fr!important}.kbc-lottery-category textarea{font-size:16px;min-height:105px}.kbc-lottery-btn{font-size:14px;padding:10px 12px}.kbc-team-results{grid-template-columns:1fr!important}.kbc-team-card-lottery{min-height:125px}.kbc-team-title-lottery{font-size:20px}.kbc-team-member-lottery{font-size:14px}}
+@keyframes kbcTeamReveal{0%{opacity:0;transform:translateY(18px) scale(.94);filter:brightness(1.8)}60%{transform:translateY(-3px) scale(1.015)}100%{opacity:1;transform:translateY(0) scale(1);filter:none}}
+@media(max-width:850px){.kbc-lottery-input-grid,.kbc-team-results{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.kbc-lottery-wrap{padding:10px 0 20px}.kbc-lottery-panel{padding:10px;border-radius:17px}.kbc-lottery-input-grid,.kbc-team-results{grid-template-columns:1fr}.kbc-lottery-category textarea{height:105px}.kbc-team-card-lottery{min-height:145px}.kbc-lottery-btn{width:100%;max-width:360px}}
+</style>
+<script id="kbc-team-lottery-script">
+(function(){
+  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+  function namesFrom(id){return (document.getElementById(id)?.value||'').split(/\r?\n|,|;/).map(x=>x.trim()).filter(Boolean).slice(0,4);}
+  function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  const page=document.createElement('div');page.id='kbcLotteryPage';
+  page.innerHTML=`
+    <div class="kbc-lottery-wrap">
+      <div class="kbc-lottery-logo">🏆 PM SHRI SCHOOL CHAMPIONSHIP</div>
+      <div class="kbc-lottery-sub">🎲 KBC TEAM LOTTERY — 4 TEAMS • 16 PARTICIPANTS</div>
+      <div class="kbc-lottery-panel">
+        <div class="kbc-lottery-input-grid">
+          <div class="kbc-lottery-category"><h3>🎓 CLASS 10</h3><textarea id="lottery10" placeholder="हर लाइन में 1 नाम लिखें\nनाम 1\nनाम 2\nनाम 3\nनाम 4"></textarea><div class="kbc-lottery-help">Exactly 4 names</div></div>
+          <div class="kbc-lottery-category"><h3>🔬 SCIENCE</h3><textarea id="lotterySci" placeholder="हर लाइन में 1 नाम लिखें\n11th/12th Science"></textarea><div class="kbc-lottery-help">11th + 12th Science के 4</div></div>
+          <div class="kbc-lottery-category"><h3>🌾 AGRICULTURE</h3><textarea id="lotteryAgr" placeholder="हर लाइन में 1 नाम लिखें\n11th/12th Agriculture"></textarea><div class="kbc-lottery-help">11th + 12th Agriculture के 4</div></div>
+          <div class="kbc-lottery-category"><h3>📚 ARTS</h3><textarea id="lotteryArts" placeholder="हर लाइन में 1 नाम लिखें\n11th/12th Arts"></textarea><div class="kbc-lottery-help">11th + 12th Arts के 4</div></div>
+        </div>
+        <div class="kbc-lottery-actions">
+          <button class="kbc-lottery-btn" id="startKbcLottery">🎲 START LOTTERY</button>
+          <button class="kbc-lottery-btn secondary" id="clearKbcLottery">🧹 CLEAR</button>
+          <button class="kbc-lottery-btn secondary" id="backToKbc">⬅️ BACK TO GAME</button>
+          <button class="kbc-lottery-btn" id="saveLotteryPdf" style="display:none">🖨️ PRINT / SAVE TEAMS AS PDF</button>
+        </div>
+        <div id="kbcLotteryStatus">चारों categories में 4-4 नाम भरें और Lottery शुरू करें।</div>
+        <div class="kbc-team-results" id="kbcTeamResults"></div>
+        <div class="kbc-lottery-winner-note">हर Team में स्वतः 1 Class 10 + 1 Science + 1 Agriculture + 1 Arts रहेगा।</div>
+      </div>
+    </div>`;
+  document.body.appendChild(page);
+  const host=document.querySelector('#welcome .name-start')?.parentElement || document.querySelector('#welcome');
+  if(host && !document.getElementById('openKbcLottery')){
+    const b=document.createElement('button');b.id='openKbcLottery';b.type='button';b.className='start';
+    b.style.cssText='width:100%;margin-top:7px;font-size:15px;padding:9px;background:linear-gradient(135deg,#ffd85a,#fff0a0);color:#08152f;border:2px solid #ffd85a;';
+    b.textContent='🎲 TEAM LOTTERY — 4 TEAMS बनाएं';
+    const start=host.querySelector('.name-start');
+    if(start) start.insertAdjacentElement('afterend',b); else host.appendChild(b);
+    b.addEventListener('click',()=>{page.classList.add('show');location.hash='team-lottery';window.scrollTo(0,0);});
+  }
+  function applyLotteryTeamsToKbc(){
+    try{
+      const teams=JSON.parse(localStorage.getItem('ajeetpura_kbc_lottery_teams')||'[]');
+      if(teams.length===4){
+        ['A','B','C','D'].forEach((id,i)=>{const el=document.getElementById('team'+id);if(el)el.value=teams[i].name;});
+      }
+    }catch(e){}
+  }
+  const startBtn=document.getElementById('startKbcLottery'),clearBtn=document.getElementById('clearKbcLottery'),backBtn=document.getElementById('backToKbc'),status=document.getElementById('kbcLotteryStatus'),results=document.getElementById('kbcTeamResults');
+  function saveInputs(){try{localStorage.setItem('ajeetpura_kbc_lottery_names',JSON.stringify({c10:lottery10.value,sci:lotterySci.value,agr:lotteryAgr.value,arts:lotteryArts.value}));}catch(e){}}
+  function loadInputs(){try{const x=JSON.parse(localStorage.getItem('ajeetpura_kbc_lottery_names')||'null');if(!x)return;lottery10.value=x.c10||'';lotterySci.value=x.sci||'';lotteryAgr.value=x.agr||'';lotteryArts.value=x.arts||'';}catch(e){}}
+  const lottery10=document.getElementById('lottery10'),lotterySci=document.getElementById('lotterySci'),lotteryAgr=document.getElementById('lotteryAgr'),lotteryArts=document.getElementById('lotteryArts');loadInputs();
+  startBtn.addEventListener('click',async function(){
+    const groups={'CLASS 10':namesFrom('lottery10'),SCIENCE:namesFrom('lotterySci'),AGRICULTURE:namesFrom('lotteryAgr'),ARTS:namesFrom('lotteryArts')};
+    const bad=Object.entries(groups).filter(([,a])=>a.length!==4);if(bad.length){status.textContent='⚠️ '+bad.map(x=>x[0]).join(', ')+' में ठीक 4 नाम चाहिए।';return;}
+    saveInputs();startBtn.disabled=true;results.innerHTML='';status.textContent='🎲 Names shuffle हो रहे हैं...';await new Promise(r=>setTimeout(r,700));
+    const shuffled={};Object.keys(groups).forEach(k=>shuffled[k]=shuffle(groups[k]));const order=['CLASS 10','SCIENCE','AGRICULTURE','ARTS'];
+    const generatedTeams=Array.from({length:4},(_,team)=>({name:'TEAM '+String.fromCharCode(65+team),members:{'CLASS 10':shuffled['CLASS 10'][team],SCIENCE:shuffled.SCIENCE[team],AGRICULTURE:shuffled.AGRICULTURE[team],ARTS:shuffled.ARTS[team]}}));
+    try{localStorage.setItem('ajeetpura_kbc_lottery_teams',JSON.stringify(generatedTeams));window.kbcLotteryTeams=generatedTeams;}catch(e){window.kbcLotteryTeams=generatedTeams;}
+    applyLotteryTeamsToKbc();
+    for(let team=0;team<4;team++){const card=document.createElement('div');card.className='kbc-team-card-lottery';card.innerHTML='<div class="kbc-team-title-lottery">🏆 TEAM '+String.fromCharCode(65+team)+'</div>'+order.map(k=>'<div class="kbc-team-member-lottery"><span>'+esc(k)+'</span>'+esc(shuffled[k][team])+'</div>').join('');results.appendChild(card);await new Promise(r=>setTimeout(r,350));card.classList.add('reveal');}
+    status.textContent='🎉 LOTTERY COMPLETE — Teams successfully बन गईं! • PDF के लिए PRINT / SAVE दबाएँ और Print dialog में Save as PDF चुनें।';document.getElementById('saveLotteryPdf').style.display='inline-block';startBtn.disabled=false;
+  });
+  clearBtn.addEventListener('click',()=>{[lottery10,lotterySci,lotteryAgr,lotteryArts].forEach(x=>x.value='');results.innerHTML='';status.textContent='चारों categories में 4-4 नाम भरें और Lottery शुरू करें।';try{localStorage.removeItem('ajeetpura_kbc_lottery_names')}catch(e){}});
+  backBtn.addEventListener('click',(e)=>{
+    e.preventDefault(); e.stopPropagation();
+    page.classList.remove('show');
+    if(location.hash==='#team-lottery') history.replaceState(null,'',location.pathname+location.search);
+    window.scrollTo(0,0);
+    applyLotteryTeamsToKbc();
+  });
+  document.getElementById('saveLotteryPdf').addEventListener('click',(e)=>{
+    e.preventDefault(); e.stopPropagation();
+    const teams=window.kbcLotteryTeams||[];
+    if(!teams.length){status.textContent='⚠️ पहले Lottery चलाएँ।';return;}
+    const w=window.open('','_blank','width=1000,height=800');
+    if(!w){alert('Popup blocked है। Browser में popup allow करके फिर try करें।');return;}
+    const cards=teams.map(t=>'<div class="team"><h2>🏆 '+esc(t.name)+'</h2>'+Object.entries(t.members).map(([k,v])=>'<p><b>'+esc(k)+'</b><br>'+esc(v)+'</p>').join('')+'</div>').join('');
+    w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>PM SHRI Team Lottery</title><style>@page{size:A4 landscape;margin:12mm}body{font-family:Arial,"Noto Sans Devanagari",sans-serif;color:#111;text-align:center}.title{font-size:28px;font-weight:900;margin:8px}.sub{font-size:16px;margin-bottom:18px}.teams{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.team{border:3px solid #c99a25;border-radius:16px;padding:12px;min-height:150px}.team h2{margin:4px 0 10px;color:#8e6a0b}.team p{border-top:1px solid #ddd;padding:7px;margin:0}.team b{color:#555;font-size:12px}.note{margin-top:18px;font-size:13px}</style></head><body><div class="title">🏆 PM SHRI SCHOOL CHAMPIONSHIP</div><div class="sub">KBC TEAM LOTTERY — FINAL TEAM ALLOCATION</div><div class="teams">'+cards+'</div><div class="note">पीएम श्री राजकीय उच्च माध्यमिक विद्यालय अजीतपुरा</div><script>window.onload=function(){window.print()}<\/script>');
+    w.document.close();
+  });
+  function syncLotteryHash(){if(location.hash==='#team-lottery'){page.classList.add('show');window.scrollTo(0,0);}else{page.classList.remove('show');}}
+  window.addEventListener('hashchange',syncLotteryHash);
+  syncLotteryHash();
+})();
+</script>
+
+<!-- FINAL HOME TEAM-INPUT RELIABILITY PATCH -->
+<style id="final-team-input-reliability">
+  #welcome #teamNames{
+    width:100%!important;
+    box-sizing:border-box!important;
+    grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:6px!important;
+    margin:7px 0!important;
+  }
+  #welcome #teamNames.force-show{display:grid!important;visibility:visible!important;opacity:1!important}
+  #welcome #teamNames input{
+    display:block!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    min-width:0!important;
+    height:42px!important;
+    padding:7px 8px!important;
+    text-align:center!important;
+  }
+  #welcome #teamNames .team-vs-input{display:flex!important;align-items:center!important;justify-content:center!important}
+  @media(max-width:700px){
+    #welcome #teamNames{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;gap:4px!important}
+    #welcome #teamNames input{height:40px!important;font-size:12px!important}
+    #welcome #teamNames .team-vs-input{font-size:12px!important}
+  }
+</style>
+<script id="final-team-input-reliability-js">
+(function(){
+  function syncTeamNameInputs(){
+    const mode=document.getElementById('gameMode');
+    const box=document.getElementById('teamNames');
+    const nameInput=document.getElementById('nameInput');
+    const nameLabel=document.getElementById('nameLabel');
+    const start=document.getElementById('startBtn');
+    if(!mode||!box)return;
+    const isTeam=mode.value==='team';
+    box.classList.toggle('force-show',isTeam);
+    box.classList.toggle('hidden',!isTeam);
+    if(isTeam){
+      box.style.display='grid';
+      box.style.visibility='visible';
+      box.style.opacity='1';
+      if(nameInput)nameInput.classList.add('hidden');
+      if(nameLabel)nameLabel.classList.add('hidden');
+      if(start)start.textContent='🚀 TEAM BATTLE शुरू करें';
+    }else{
+      box.style.display='none';
+      box.style.visibility='hidden';
+      if(nameInput)nameInput.classList.remove('hidden');
+      if(nameLabel)nameLabel.classList.remove('hidden');
+      if(start)start.textContent=mode.value==='speed'?'⚡ SPEED ROUND शुरू करें':'🚀 नाम दर्ज करें और खेल शुरू करें';
+    }
+  }
+  function install(){
+    const mode=document.getElementById('gameMode');
+    if(!mode)return;
+    mode.removeEventListener('change',syncTeamNameInputs);
+    mode.addEventListener('change',syncTeamNameInputs);
+    syncTeamNameInputs();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+  else install();
+  window.syncTeamNameInputs=syncTeamNameInputs;
+})();
+</script>
+<script id="final-bilingual-audit-v1">
+(function(){
+  // Final content audit: all competition/class MCQs are bilingual in both question and options.
+  // This does not alter scoring or game flow.
+  const banks=['COMPUTER_SCIENCE_QUESTIONS','CLASS6_QUESTIONS','CLASS7_QUESTIONS','CLASS8_QUESTIONS','CLASS9_QUESTIONS','SEMIFINAL01_QUESTIONS','SEMIFINAL02_QUESTIONS','FINAL_TEST_QUESTIONS'];
+  window.KBC_BILINGUAL_AUDIT={};
+  banks.forEach(n=>{
+    const a=window[n];
+    if(!Array.isArray(a)) return;
+    window.KBC_BILINGUAL_AUDIT[n]=a.every(x=>typeof x.q==='string' && x.q.includes(' / ') && Array.isArray(x.o) && x.o.length===4 && x.o.every(o=>typeof o==='string' && o.includes(' / ')));
+  });
+})();
+</script>
+
+<!-- FINAL BUTTON RELIABILITY PATCH: fixes only control wiring; no quiz/question data changes. -->
+<style id="final-button-reliability-css">
+  #teacherModal{z-index:2147483000!important}
+  #teacherSupportModal,#audienceModal,#rulesModal,#pauseModal,#lifelineChoiceModal,#resultModal,#wrongDecision{z-index:2147482000!important}
+  #game .controls{position:relative;z-index:100!important}
+  #game .controls .btn{position:relative;z-index:101!important;pointer-events:auto!important;touch-action:manipulation!important}
+  #teacherModal .teacher-box{max-height:88vh!important;overflow:auto!important}
+  #teacherModal .teacher-close-fix{margin-top:10px;width:100%;min-height:44px}
+  @media(max-width:700px){
+    #game .controls{position:relative!important;z-index:100!important;display:flex!important;flex-wrap:wrap!important}
+    #game .controls .btn{min-height:42px!important;line-height:1.15!important}
+    #teacherModal .teacher-box{width:94vw!important;max-height:86dvh!important;padding:12px!important}
+    #teacherModal .teacher-grid{grid-template-columns:1fr 1fr!important}
+  }
+</style>
+<script id="final-button-reliability-js">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function replaceButton(id){
+    const old=byId(id); if(!old||!old.parentNode)return null;
+    const fresh=old.cloneNode(true); old.parentNode.replaceChild(fresh,old); return fresh;
+  }
+
+  // Teacher HOST module: one reliable handler + a visible close button.
+  const teacherModal=byId('teacherModal');
+  if(teacherModal){
+    if(!byId('teacherCloseFix')){
+      const close=document.createElement('button');
+      close.id='teacherCloseFix'; close.type='button'; close.className='btn red teacher-close-fix';
+      close.textContent='✖ CLOSE / वापस';
+      const box=teacherModal.querySelector('.teacher-box'); if(box)box.appendChild(close);
+      close.addEventListener('click',function(){teacherModal.classList.add('hidden');});
+    }
+    const tb=replaceButton('teacherBtn');
+    if(tb)tb.addEventListener('click',function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(teacherModal.classList.contains('hidden')) teacherModal.classList.remove('hidden');
+      const info=byId('teacherInfo');
+      if(info){
+        const total=Array.isArray(window.QUESTIONS)?window.QUESTIONS.length:(typeof QUESTIONS!=='undefined'?QUESTIONS.length:0);
+        const q=(typeof current!=='undefined'?current+1:1);
+        const t=(typeof time!=='undefined'?time:0);
+        info.textContent='Q '+q+'/'+total+' • Time: '+t+' sec'+
+          ((typeof gameMode!=='undefined'&&gameMode==='team')?' • Current Team: '+(typeof getCurrentTeamName==='function'?getCurrentTeamName():'Team'):'');
+      }
+    },true);
+    teacherModal.addEventListener('click',function(e){if(e.target===teacherModal)teacherModal.classList.add('hidden')});
+  }
+
+  // Projector: reliable toggle. Also uses browser fullscreen when available.
+  const projector=replaceButton('projectorBtn');
+  if(projector)projector.addEventListener('click',async function(e){
+    e.preventDefault(); e.stopPropagation();
+    const on=!document.body.classList.contains('projector-mode');
+    document.body.classList.toggle('projector-mode',on);
+    this.textContent=on?'🖥️ Normal View':'🖥️ Projector';
+    if(on && !document.fullscreenElement && document.documentElement.requestFullscreen){
+      try{await document.documentElement.requestFullscreen();}catch(err){}
+    }else if(!on && document.fullscreenElement && document.exitFullscreen){
+      try{await document.exitFullscreen();}catch(err){}
+    }
+  },true);
+
+  // Teacher Support lifeline: keep its original function but guarantee the button is wired.
+  const ts=replaceButton('teacherSupport');
+  if(ts)ts.addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation();
+    if(typeof openTeacherSupport==='function')openTeacherSupport();
+  },true);
+
+  // Ensure the main answer controls stay above fixed mobile controls.
+  ['lock','next','fifty','poll','bg','timerToggle','full','rulesBtn'].forEach(function(id){
+    const b=byId(id); if(b){b.style.position='relative';b.style.zIndex='102';b.style.pointerEvents='auto';b.style.touchAction='manipulation';}
+  });
+})();
+</script>
+
+
+
+
+
+
+<style id="final-mobile-answer-and-team-fix-v12">
+/* FINAL MOBILE FIX v12: keep the active two-team match readable and make Lock/Next reachable. */
+#teamBattleBox .team-tag{display:none!important}
+#teamBattleBox .team-card b{font-size:clamp(14px,4.2vw,18px)!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#teamBattleBox .team-vs{font-size:15px!important}
+@media(max-width:700px){
+  html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important}
+  body{padding-bottom:0!important}
+  #game{height:auto!important;min-height:100dvh!important;overflow:visible!important}
+  #game .wrap{height:auto!important;min-height:calc(100dvh - 70px)!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;padding:5px 8px 125px!important;box-sizing:border-box!important;-webkit-overflow-scrolling:touch!important}
+  #game .meta{min-height:48px!important}
+  #game .team-battle-box{grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;gap:4px!important;padding:6px!important;margin:5px 0 7px!important}
+  #game .team-card{min-height:68px!important;padding:7px 5px!important;border-radius:12px!important}
+  #game .team-card small{font-size:9px!important}
+  #game .team-card strong{font-size:12px!important}
+  #game .team-prize{font-size:9px!important;line-height:1.05!important}
+  #game .team-turn{grid-column:1/-1!important;font-size:10px!important;padding:6px 4px!important;line-height:1.15!important}
+  #game .team-manual-note{font-size:8px!important;line-height:1.1!important}
+  #game .scorecard{grid-template-columns:1fr 1fr 1fr!important;display:grid!important;gap:4px!important}
+  #game .scorecard .earned-big{grid-column:1/-1!important}
+  #game .scorecard .score{min-height:48px!important;padding:5px!important}
+  #game .score b{font-size:14px!important}
+  #game .questionbox{margin:5px 0!important;padding:10px 9px!important;min-height:0!important}
+  #game #question{font-size:clamp(16px,4.7vw,21px)!important;line-height:1.2!important}
+  #game .qnum{font-size:11px!important}
+  #game .options{grid-template-columns:1fr!important;gap:7px!important;margin:6px 0 10px!important}
+  #game .option{width:100%!important;min-height:50px!important;height:auto!important;padding:9px 11px!important;font-size:14px!important;line-height:1.2!important;text-align:left!important;box-sizing:border-box!important}
+  #game .controls{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:6px 0 8px!important;padding-bottom:4px!important}
+  #game .controls .btn{min-height:42px!important;padding:8px 9px!important;font-size:11px!important;flex:1 1 calc(33.333% - 6px)!important;box-sizing:border-box!important}
+  #game .controls #lock,#game .controls #next{flex:1 1 100%!important;min-height:52px!important;font-size:17px!important;margin-top:3px!important;order:20!important}
+  #game .controls #lock.next-big{min-width:0!important}
+  #game .status{font-size:11px!important;line-height:1.2!important;margin:4px 0!important}
+  #game .jumpbox,#game .ladder{margin-bottom:12px!important}
+  #closeAllGroup{left:6px!important;right:6px!important;bottom:max(5px,env(safe-area-inset-bottom))!important;gap:5px!important;z-index:2147483646!important}
+  #closeAllGroup button,#pauseGameFloat{height:42px!important;min-height:42px!important;font-size:11px!important;border-radius:12px!important}
+  #pauseGameFloat{right:6px!important;bottom:max(5px,env(safe-area-inset-bottom))!important}
+  #pauseGameFloat span{font-size:10px!important}
+  #fullscreenFloat{top:max(6px,env(safe-area-inset-top))!important;right:6px!important;min-height:40px!important;min-width:94px!important;font-size:10px!important}
+}
+@media(max-width:430px){
+  #game .controls .btn{font-size:10px!important;padding:7px 5px!important}
+  #game .controls #lock,#game .controls #next{font-size:16px!important}
+  #game .team-battle-box{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important}
+}
+</style>
+
+
+<style id="FINAL-KBC-v13-mobile-fix">
+/* v13: definitive phone layout — no overlap, two active teams only */
+@media (max-width:700px){
+  html,body{overflow-x:hidden!important;overflow-y:auto!important}
+  #game{overflow:visible!important;height:auto!important;min-height:100dvh!important}
+  #game .wrap{overflow:visible!important;height:auto!important;max-height:none!important;min-height:0!important;padding:6px 8px 115px!important}
+  #game .meta{display:grid!important;grid-template-columns:1fr 58px!important;gap:6px!important;align-items:center!important}
+  #game .student-card{min-width:0!important}
+  #game .timer{width:52px!important;height:52px!important;font-size:24px!important}
+  #game .team-battle-box{display:grid!important;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;gap:5px!important;width:100%!important;box-sizing:border-box!important;padding:6px!important;margin:5px 0 7px!important;overflow:hidden!important}
+  #game .team-battle-box .team-card{display:flex!important;min-width:0!important;min-height:72px!important;padding:7px 5px!important;border-radius:12px!important;box-sizing:border-box!important;overflow:hidden!important}
+  #game .team-battle-box .team-card b{font-size:clamp(13px,4vw,17px)!important;max-width:100%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #game .team-battle-box .team-card small{font-size:9px!important;white-space:nowrap!important}
+  #game .team-battle-box .team-prize{font-size:8px!important;white-space:nowrap!important}
+  #game .team-turn,#game .team-manual-note{grid-column:1/-1!important}
+  #game .team-turn{font-size:10px!important;padding:6px!important}
+  #game .team-manual-note{font-size:8px!important}
+  #game .hostbar{gap:4px!important;flex-wrap:wrap!important}
+  #game .scorecard{display:grid!important;grid-template-columns:1fr 1fr 1fr!important;gap:4px!important}
+  #game .scorecard .earned-big{grid-column:1/-1!important}
+  #game .score{min-width:0!important;padding:6px 4px!important}
+  #game .score b{font-size:14px!important;line-height:1.15!important}
+  #game .questionbox{width:100%!important;box-sizing:border-box!important;margin:6px 0!important;padding:10px!important}
+  #game .question{font-size:clamp(16px,4.8vw,21px)!important;line-height:1.22!important;overflow-wrap:anywhere!important}
+  #game .qnum{font-size:11px!important}
+  #game .options{display:grid!important;grid-template-columns:1fr!important;gap:7px!important;margin:7px 0 10px!important;width:100%!important}
+  #game .option{display:block!important;width:100%!important;min-width:0!important;min-height:54px!important;height:auto!important;box-sizing:border-box!important;padding:10px 12px!important;font-size:15px!important;line-height:1.25!important;white-space:normal!important;overflow-wrap:anywhere!important}
+  #game .controls{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important;margin:7px 0 10px!important;padding:0!important;width:100%!important}
+  #game .controls .btn{width:100%!important;min-width:0!important;min-height:44px!important;padding:8px 5px!important;font-size:11px!important;box-sizing:border-box!important}
+  #game .controls #lock,#game .controls #next{grid-column:1/-1!important;display:block!important;width:100%!important;min-height:56px!important;margin:2px 0!important;font-size:17px!important;order:99!important}
+  #game .controls #lock[disabled]{opacity:.65!important}
+  #game .status{font-size:11px!important;line-height:1.25!important}
+  #game .jumpbox{margin-bottom:12px!important}
+  #closeAllGroup{position:fixed!important;left:6px!important;right:6px!important;bottom:max(5px,env(safe-area-inset-bottom))!important;z-index:2147483646!important}
+  #closeAllGroup button{min-height:44px!important;font-size:11px!important}
+  #pauseGameFloat{position:fixed!important;right:6px!important;bottom:max(5px,env(safe-area-inset-bottom))!important;z-index:2147483647!important}
+}
+</style>
+<script id="FINAL-KBC-v13-fix">
+(function(){
+  function forceCompetition20(){
+    if(typeof selectedClass==='undefined') return;
+    if(!['sf1','sf2','final'].includes(String(selectedClass))) return;
+    try{
+      const source = selectedClass==='sf1' ? SEMIFINAL01_QUESTIONS : selectedClass==='sf2' ? SEMIFINAL02_QUESTIONS : FINAL_TEST_QUESTIONS;
+      let fixed = (typeof buildCompetitionBank==='function') ? buildCompetitionBank(source) : source.slice(0,20);
+      if(!Array.isArray(fixed) || fixed.length < 20) fixed = source.slice(0,20);
+      QUESTIONS = fixed.slice(0,20);
+      current=0;
+      const mini=document.getElementById('miniQ'); if(mini) mini.textContent='1/20';
+      const qn=document.getElementById('qnum'); if(qn) qn.textContent='प्रश्न / Question 1 / 20';
+      const money=document.getElementById('money'); if(money) money.innerHTML=PRIZE.slice(0,20).map((p,n)=>'<div class="'+(n===0?'current':'')+'">'+(n+1)+'. '+p+'</div>').join('');
+    }catch(e){console.warn('Competition 20Q fix',e)}
+  }
+  const start=document.getElementById('startBtn');
+  if(start) start.addEventListener('click',function(){setTimeout(forceCompetition20,30);},true);
+  window.addEventListener('load',forceCompetition20);
+})();
+</script>
+
+
+
+<!-- FINAL HOME TEAM-INPUT RELIABILITY PATCH -->
+<style id="final-team-input-reliability">
+  #welcome #teamNames{
+    width:100%!important;
+    box-sizing:border-box!important;
+    grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr)!important;
+    align-items:center!important;
+    gap:6px!important;
+    margin:7px 0!important;
+  }
+  #welcome #teamNames.force-show{display:grid!important;visibility:visible!important;opacity:1!important}
+  #welcome #teamNames input{
+    display:block!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    min-width:0!important;
+    height:42px!important;
+    padding:7px 8px!important;
+    text-align:center!important;
+  }
+  #welcome #teamNames .team-vs-input{display:flex!important;align-items:center!important;justify-content:center!important}
+  @media(max-width:700px){
+    #welcome #teamNames{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;gap:4px!important}
+    #welcome #teamNames input{height:40px!important;font-size:12px!important}
+    #welcome #teamNames .team-vs-input{font-size:12px!important}
+  }
+</style>
+<script id="final-team-input-reliability-js">
+(function(){
+  function syncTeamNameInputs(){
+    const mode=document.getElementById('gameMode');
+    const box=document.getElementById('teamNames');
+    const nameInput=document.getElementById('nameInput');
+    const nameLabel=document.getElementById('nameLabel');
+    const start=document.getElementById('startBtn');
+    if(!mode||!box)return;
+    const isTeam=mode.value==='team';
+    box.classList.toggle('force-show',isTeam);
+    box.classList.toggle('hidden',!isTeam);
+    if(isTeam){
+      box.style.display='grid';
+      box.style.visibility='visible';
+      box.style.opacity='1';
+      if(nameInput)nameInput.classList.add('hidden');
+      if(nameLabel)nameLabel.classList.add('hidden');
+      if(start)start.textContent='🚀 TEAM BATTLE शुरू करें';
+    }else{
+      box.style.display='none';
+      box.style.visibility='hidden';
+      if(nameInput)nameInput.classList.remove('hidden');
+      if(nameLabel)nameLabel.classList.remove('hidden');
+      if(start)start.textContent=mode.value==='speed'?'⚡ SPEED ROUND शुरू करें':'🚀 नाम दर्ज करें और खेल शुरू करें';
+    }
+  }
+  function install(){
+    const mode=document.getElementById('gameMode');
+    if(!mode)return;
+    mode.removeEventListener('change',syncTeamNameInputs);
+    mode.addEventListener('change',syncTeamNameInputs);
+    syncTeamNameInputs();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});
+  else install();
+  window.syncTeamNameInputs=syncTeamNameInputs;
+})();
+</script>
+<script id="final-bilingual-audit-v1">
+(function(){
+  // Final content audit: all competition/class MCQs are bilingual in both question and options.
+  // This does not alter scoring or game flow.
+  const banks=['COMPUTER_SCIENCE_QUESTIONS','CLASS6_QUESTIONS','CLASS7_QUESTIONS','CLASS8_QUESTIONS','CLASS9_QUESTIONS','SEMIFINAL01_QUESTIONS','SEMIFINAL02_QUESTIONS','FINAL_TEST_QUESTIONS'];
+  window.KBC_BILINGUAL_AUDIT={};
+  banks.forEach(n=>{
+    const a=window[n];
+    if(!Array.isArray(a)) return;
+    window.KBC_BILINGUAL_AUDIT[n]=a.every(x=>typeof x.q==='string' && x.q.includes(' / ') && Array.isArray(x.o) && x.o.length===4 && x.o.every(o=>typeof o==='string' && o.includes(' / ')));
+  });
+})();
+</script>
+
+<!-- FINAL BUTTON RELIABILITY PATCH: fixes only control wiring; no quiz/question data changes. -->
+<style id="final-button-reliability-css">
+  #teacherModal{z-index:2147483000!important}
+  #teacherSupportModal,#audienceModal,#rulesModal,#pauseModal,#lifelineChoiceModal,#resultModal,#wrongDecision{z-index:2147482000!important}
+  #game .controls{position:relative;z-index:100!important}
+  #game .controls .btn{position:relative;z-index:101!important;pointer-events:auto!important;touch-action:manipulation!important}
+  #teacherModal .teacher-box{max-height:88vh!important;overflow:auto!important}
+  #teacherModal .teacher-close-fix{margin-top:10px;width:100%;min-height:44px}
+  @media(max-width:700px){
+    #game .controls{position:relative!important;z-index:100!important;display:flex!important;flex-wrap:wrap!important}
+    #game .controls .btn{min-height:42px!important;line-height:1.15!important}
+    #teacherModal .teacher-box{width:94vw!important;max-height:86dvh!important;padding:12px!important}
+    #teacherModal .teacher-grid{grid-template-columns:1fr 1fr!important}
+  }
+</style>
+<script id="final-button-reliability-js">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function replaceButton(id){
+    const old=byId(id); if(!old||!old.parentNode)return null;
+    const fresh=old.cloneNode(true); old.parentNode.replaceChild(fresh,old); return fresh;
+  }
+
+  // Teacher HOST module: one reliable handler + a visible close button.
+  const teacherModal=byId('teacherModal');
+  if(teacherModal){
+    if(!byId('teacherCloseFix')){
+      const close=document.createElement('button');
+      close.id='teacherCloseFix'; close.type='button'; close.className='btn red teacher-close-fix';
+      close.textContent='✖ CLOSE / वापस';
+      const box=teacherModal.querySelector('.teacher-box'); if(box)box.appendChild(close);
+      close.addEventListener('click',function(){teacherModal.classList.add('hidden');});
+    }
+    const tb=replaceButton('teacherBtn');
+    if(tb)tb.addEventListener('click',function(e){
+      e.preventDefault(); e.stopPropagation();
+      if(teacherModal.classList.contains('hidden')) teacherModal.classList.remove('hidden');
+      const info=byId('teacherInfo');
+      if(info){
+        const total=Array.isArray(window.QUESTIONS)?window.QUESTIONS.length:(typeof QUESTIONS!=='undefined'?QUESTIONS.length:0);
+        const q=(typeof current!=='undefined'?current+1:1);
+        const t=(typeof time!=='undefined'?time:0);
+        info.textContent='Q '+q+'/'+total+' • Time: '+t+' sec'+
+          ((typeof gameMode!=='undefined'&&gameMode==='team')?' • Current Team: '+(typeof getCurrentTeamName==='function'?getCurrentTeamName():'Team'):'');
+      }
+    },true);
+    teacherModal.addEventListener('click',function(e){if(e.target===teacherModal)teacherModal.classList.add('hidden')});
+  }
+
+  // Projector: reliable toggle. Also uses browser fullscreen when available.
+  const projector=replaceButton('projectorBtn');
+  if(projector)projector.addEventListener('click',async function(e){
+    e.preventDefault(); e.stopPropagation();
+    const on=!document.body.classList.contains('projector-mode');
+    document.body.classList.toggle('projector-mode',on);
+    this.textContent=on?'🖥️ Normal View':'🖥️ Projector';
+    if(on && !document.fullscreenElement && document.documentElement.requestFullscreen){
+      try{await document.documentElement.requestFullscreen();}catch(err){}
+    }else if(!on && document.fullscreenElement && document.exitFullscreen){
+      try{await document.exitFullscreen();}catch(err){}
+    }
+  },true);
+
+  // Teacher Support lifeline: keep its original function but guarantee the button is wired.
+  const ts=replaceButton('teacherSupport');
+  if(ts)ts.addEventListener('click',function(e){
+    e.preventDefault(); e.stopPropagation();
+    if(typeof openTeacherSupport==='function')openTeacherSupport();
+  },true);
+
+  // Ensure the main answer controls stay above fixed mobile controls.
+  ['lock','next','fifty','poll','bg','timerToggle','full','rulesBtn'].forEach(function(id){
+    const b=byId(id); if(b){b.style.position='relative';b.style.zIndex='102';b.style.pointerEvents='auto';b.style.touchAction='manipulation';}
+  });
+})();
+</script>
+
+<!-- FINAL USER-REQUESTED FIX v2: Teacher Skip, Rules reader, Final Test preview -->
+<style id="kbc-final-user-fix-v2">
+#rulesModal .modalbox{max-height:92vh!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;width:min(900px,96vw)!important;padding:18px!important}
+#rulesModal .rules{flex:1 1 auto!important;min-height:0!important;max-height:calc(92vh - 125px)!important;overflow-y:auto!important;overflow-x:hidden!important;text-align:left!important;padding:14px 18px!important;line-height:1.35!important;-webkit-overflow-scrolling:touch!important}
+#rulesModal .rules ol{margin:0!important;padding-left:24px!important}
+#rulesModal .rules li{margin:8px 0!important;font-size:15px!important}
+#rulesModal #closeRules{flex:0 0 auto!important;position:relative!important;z-index:999999!important;pointer-events:auto!important;touch-action:manipulation!important;margin-top:10px!important;min-height:48px!important;width:100%!important}
+</style>
+<script id="kbc-final-user-fix-v2-js">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function hide(id){const e=byId(id);if(e)e.classList.add('hidden')}
+  function show(id){const e=byId(id);if(e)e.classList.remove('hidden')}
+  function stopRoundSafe(){try{clearInterval(timer);clearTimeout(readTimer);stopContinuousBuzzer();stopAllMusic()}catch(e){}}
+  function activeTeams(){return typeof getActiveMatchTeams==='function'?getActiveMatchTeams():[0,1]}
+  function rotateTeam(){
+    if(typeof gameMode==='undefined'||gameMode!=='team')return;
+    const a=activeTeams(); if(!a.length)return;
+    let pos=a.indexOf(currentTeam); if(pos<0)pos=0;
+    currentTeam=a[(pos+1)%a.length];
+  }
+  function restoreCompetitionBank(){
+    try{
+      if(typeof selectedClass==='undefined')return;
+      if(selectedClass==='sf1'||selectedClass==='sf2'||selectedClass==='final'){
+        const raw=selectedClass==='sf1'?SEMIFINAL01_QUESTIONS:(selectedClass==='sf2'?SEMIFINAL02_QUESTIONS:FINAL_TEST_QUESTIONS);
+        QUESTIONS=(typeof buildCompetitionBank==='function'?buildCompetitionBank(raw):raw.slice(0,20)).slice(0,20);
+      }
+    }catch(e){console.warn('Bank restore failed',e)}
+  }
+
+  // ---------- FINAL, deterministic TEACHER SKIP ----------
+  function teacherSkipFinal(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    try{
+      restoreCompetitionBank();
+      if(!Array.isArray(QUESTIONS)||!QUESTIONS.length){setText('status','⚠️ Question bank unavailable.');return;}
+      stopRoundSafe(); hide('wrongDecision'); hide('teacherModal');
+      // If the current question is not the last question, ALWAYS advance exactly one question.
+      if(current < QUESTIONS.length-1){
+        current = current + 1;
+        rotateTeam();
+        selected=-1; locked=false; nextMode=false; timerPaused=false; timeoutHeld=false; reading=true; time=20;
+        if(typeof loadQuestion==='function')loadQuestion();
+        if(gameMode==='team'&&typeof updateTeamBox==='function')updateTeamBox();
+        setText('status','⏭️ Teacher Skip: अगला question शुरू हो गया है। / Next question started.');
+        return;
+      }
+      // On Q20 there is no further question. Do NOT jump straight to a score screen because of a broken counter.
+      setText('status','⏭️ यह अंतिम प्रश्न है। Skip के बाद अब FINISH & VIEW RESULT चुनें। / This is the last question.');
+      selected=-1;locked=false;nextMode=true;reading=false;timerPaused=false;
+      const l=byId('lock');if(l){l.disabled=false;l.textContent='🏆 FINISH & VIEW RESULT';l.classList.add('next-big')}
+    }catch(err){console.error('Teacher Skip failed',err);setText('status','⚠️ Skip failed — question सुरक्षित रखा गया।')}
+  }
+  const skip=byId('teacherSkip');
+  if(skip){const fresh=skip.cloneNode(true);skip.replaceWith(fresh);fresh.addEventListener('click',teacherSkipFinal,true)}
+
+  // ---------- RULES: readable scroll + reliable close ----------
+  const rules=byId('rulesModal'), closeRules=byId('closeRules'), rulesBtn=byId('rulesBtn');
+  if(rulesBtn){const fresh=rulesBtn.cloneNode(true);rulesBtn.replaceWith(fresh);fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();show('rulesModal')},true)}
+  if(closeRules){const fresh=closeRules.cloneNode(true);closeRules.replaceWith(fresh);fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();hide('rulesModal')},true)}
+  if(rules)rules.addEventListener('click',function(e){if(e.target===rules)hide('rulesModal')});
+
+})();
+</script>
+
+<!-- FINAL SCORE + TEAM NAME RELIABILITY FIX -->
+<script id="kbc-teacher-correct-answer-editor">
+(function(){
+  const btn=document.getElementById('teacherChangeAnswer');
+  const editor=document.getElementById('teacherAnswerEditor');
+  const box=document.getElementById('teacherAnswerOptions');
+  const info=document.getElementById('teacherInfo');
+  if(!btn||!editor||!box)return;
+  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function renderEditor(){
+    if(!Array.isArray(QUESTIONS)||!QUESTIONS[current])return;
+    const q=QUESTIONS[current];
+    box.innerHTML=(q.o||[]).map((opt,i)=>{
+      const active=Number(q.a)===i;
+      return '<button type="button" class="btn '+(active?'green':'blue')+' teacher-answer-choice" data-correct-option="'+i+'" style="text-align:left;min-height:44px;padding:8px;font-size:12px">'+(active?'✅ ':'')+String.fromCharCode(65+i)+'. '+esc(opt)+'</button>';
+    }).join('');
+    box.querySelectorAll('[data-correct-option]').forEach(b=>b.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(locked){
+        if(info)info.textContent='⚠️ Answer already locked. Change the correct answer before Lock Answer.';
+        return;
+      }
+      const n=Number(this.dataset.correctOption);
+      if(!Number.isInteger(n)||n<0||n>3)return;
+      QUESTIONS[current].a=n;
+      selected=-1;
+      for(let i=0;i<4;i++){const ob=document.getElementById('o'+i);if(ob){ob.hidden=false;ob.style.display='';ob.style.visibility='visible';ob.style.pointerEvents='auto';ob.classList.remove('selected','correct','wrong');ob.disabled=false;}}
+      const l=document.getElementById('lock');if(l)l.disabled=true;
+      renderEditor();
+      if(info)info.textContent='✅ Correct answer changed to Option '+String.fromCharCode(65+n)+'. Now Lock Answer can be used normally.';
+      setText('status','✏️ Teacher changed the correct answer to Option '+String.fromCharCode(65+n)+'.');
+    }));
+  }
+  btn.addEventListener('click',function(e){
+    e.preventDefault();e.stopPropagation();
+    if(!Array.isArray(QUESTIONS)||!QUESTIONS[current])return;
+    if(locked){if(info)info.textContent='⚠️ Answer already locked. Use this control before Lock Answer.';return;}
+    const show=editor.classList.toggle('hidden');
+    if(!show)renderEditor();
+    if(info)info.textContent=show?'Teacher tools are active only during a game.':'✏️ Select the option that should be treated as correct.';
+  },true);
+  const teacherBtn=document.getElementById('teacherBtn');
+  if(teacherBtn)teacherBtn.addEventListener('click',function(){
+    editor.classList.add('hidden');
+  });
+})();
+</script>
+<script id="kbc-final-score-team-fix">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function txt(id,v){const e=byId(id);if(e)e.textContent=v}
+  function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  function names(){return [teamAName,teamBName,teamCName,teamDName]}
+  function active(){return typeof getActiveMatchTeams==='function'?getActiveMatchTeams():[0,1]}
+
+  // Always read the two visible Team Name inputs before the original Start handler runs.
+  const start=byId('startBtn');
+  if(start){
+    start.addEventListener('click',function(){
+      if(gameMode!=='team' && byId('gameMode')?.value!=='team') return;
+      const a=(byId('teamA')?.value||'').trim();
+      const b=(byId('teamB')?.value||'').trim();
+      if(!a||!b)return;
+      if(String(selectedClass)==='sf1'){
+        teamAName=a; teamCName=b; teamBName='TEAM B'; teamDName='TEAM D';
+      }else if(String(selectedClass)==='sf2'){
+        teamBName=a; teamDName=b; teamAName='TEAM A'; teamCName='TEAM C';
+      }else if(String(selectedClass)==='final'){
+        // Finalists are intentionally controlled by the semifinal result.
+      }else{
+        teamAName=a; teamBName=b; teamCName=''; teamDName='';
+      }
+      currentTeam=active()[0]??0;
+      setTimeout(function(){
+        if(typeof updateTeamBox==='function')updateTeamBox();
+        if(typeof updateLiveScore==='function')updateLiveScore();
+      },0);
+    },true);
+  }
+
+  // One authoritative team-name resolver. Never fall back to TEAM A when a custom name exists.
+  getCurrentTeamName=function(){
+    const n=names();
+    const v=String(n[currentTeam]||'').trim();
+    return v||('TEAM '+String.fromCharCode(65+Number(currentTeam||0)));
+  };
+
+  // One authoritative Team Battle display: both cards + turn + marquee use the entered names.
+  updateTeamBox=function(){
+    const box=byId('teamBattleBox'); if(!box)return;
+    const isTeam=gameMode==='team'; box.classList.toggle('hidden',!isTeam); if(!isTeam)return;
+    const n=names(), a=active(); const left=a[0]??0, right=a[1]??1;
+    const lc=byId('teamCardA'), rc=byId('teamCardB');
+    if(lc){lc.style.display='flex';lc.classList.toggle('active',currentTeam===left);txt('gameTeamA',n[left]||('TEAM '+String.fromCharCode(65+left)));txt('teamScoreA',formatPoints(teamScores[left]||0));txt('teamPrizeA','⭐ Points '+formatPoints(teamScores[left]||0));}
+    if(rc){rc.style.display='flex';rc.classList.toggle('active',currentTeam===right);txt('gameTeamB',n[right]||('TEAM '+String.fromCharCode(65+right)));txt('teamScoreB',formatPoints(teamScores[right]||0));txt('teamPrizeB','⭐ Points '+formatPoints(teamScores[right]||0));}
+    const match=(n[left]||('TEAM '+String.fromCharCode(65+left)))+' VS '+(n[right]||('TEAM '+String.fromCharCode(65+right)));
+    txt('teamTurn','🎯 '+getCurrentTeamName()+' की बारी • '+match);
+    updateLiveScore();
+  };
+
+  updateLiveScore=function(){
+    const el=byId('liveScoreMarquee');if(!el)return;
+    const q=Math.min(current+1,QUESTIONS.length), n=names();
+    if(gameMode==='team'){
+      const a=active();
+      const html=a.map(i=>'<span class="live-'+String.fromCharCode(97+i)+'">👥 '+esc(n[i]||('TEAM '+String.fromCharCode(65+i)))+': '+esc(formatPoints(teamScores[i]||0))+'</span>').join('<span class="live-sep"> • </span>');
+      el.className='live-score-marquee team-mode';
+      el.innerHTML=html+'<span class="live-sep"> • </span><span>प्रश्न '+q+'/'+QUESTIONS.length+'</span><span class="live-sep"> • </span><span>🎯 '+esc(getCurrentTeamName())+' की बारी</span>';
+    }else{
+      const nm=(byId('player')?.textContent||'👤 प्रतियोगी').replace(/^👤\s*/,'').trim()||'प्रतियोगी';
+      el.className='live-score-marquee single-mode';
+      el.innerHTML='<span class="live-single">📊 LIVE SCORE • 👤 '+esc(nm)+': '+esc(formatPoints(correctCount*5))+'</span><span class="live-sep"> • </span><span>सही उत्तर: '+correctCount+'</span><span class="live-sep"> • </span><span>प्रश्न '+q+'/'+QUESTIONS.length+'</span>';
+    }
+  };
+
+  // Replace the old lock listener so every correct answer has exactly one deterministic score transaction.
+  const oldLock=byId('lock');
+  if(oldLock){
+    const lock=oldLock.cloneNode(true); oldLock.replaceWith(lock);
+    lock.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(nextMode){
+        if(current>=QUESTIONS.length-1){ if(typeof endGame==='function')endGame(false); return; }
+        current++;
+        if(gameMode==='team'){const a=active();let p=a.indexOf(currentTeam);if(p<0)p=0;currentTeam=a[(p+1)%a.length];}
+        nextMode=false;selected=-1;locked=false;reading=true;timerPaused=false;timeoutHeld=false;time=20;
+        loadQuestion(); updateTeamBox(); updateLiveScore();
+        return;
+      }
+      if(selected<0||locked||reading)return;
+      locked=true; clearInterval(timer); clearTimeout(readTimer); stopContinuousBuzzer(); stopAllMusic(); lock.disabled=true;
+      const ans=Number(QUESTIONS[current].a), chosen=Number(selected);
+      for(let i=0;i<4;i++){const b=byId('o'+i);if(b){b.classList.remove('selected');b.disabled=true;}}
+      const chosenBtn=byId('o'+chosen), ansBtn=byId('o'+ans);
+      if(chosenBtn)chosenBtn.classList.add(chosen===ans?'correct':'wrong');
+      if(ansBtn)ansBtn.classList.add('correct');
+      if(chosen!==ans){
+        if(gameMode==='team'&&!teamWrongQuestions.has(current)){
+          teamWrongQuestions.add(current); teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)-(5/3);
+        }
+        if(gameMode==='team'){txt('earned',formatPoints(teamScores[currentTeam]));updateTeamBox();}
+        updateLiveScore();
+        txt('status',gameMode==='team'?'❌ गलत उत्तर — -1.67 Points. GAME OVER!':'❌ गलत उत्तर — GAME OVER!');
+        setTimeout(()=>byId('wrongDecision')?.classList.remove('hidden'),500);
+        return;
+      }
+      // Award +5 exactly once for this question.
+      if(!correctQuestions.has(current)){
+        correctQuestions.add(current); correctCount=correctQuestions.size;
+        if(gameMode==='team')teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)+5;
+      }
+      earned=gameMode==='team'?formatPoints(teamScores[currentTeam]):formatPoints(correctCount*5);
+      txt('earned',earned); updateTeamBox(); updateLiveScore();
+      txt('status','🎉 सही उत्तर! '+(gameMode==='team'?getCurrentTeamName()+' को +5.00 Points':' +5.00 Points')+' • अब NEXT QUESTION दबाएँ।');
+      nextMode=true;lock.disabled=false;lock.textContent=current===QUESTIONS.length-1?'🏆 FINISH & VIEW RESULT':'➡️ NEXT QUESTION';lock.classList.add('next-big');
+      try{playNamedSound('correctAnswerMusic',.95);applause();celebrate();}catch(err){}
+    },true);
+  }
+
+  // Make Teacher Bonus use the same score transaction and custom team name.
+  const award=byId('teacherAward');
+  if(award){
+    const fresh=award.cloneNode(true);award.replaceWith(fresh);
+    fresh.addEventListener('click',function(e){
+      e.preventDefault();e.stopPropagation();
+      if(locked||!QUESTIONS[current])return;
+      clearInterval(timer);clearTimeout(readTimer);stopContinuousBuzzer();stopAllMusic();
+      selected=Number(QUESTIONS[current].a);locked=true;nextMode=true;
+      for(let i=0;i<4;i++){const b=byId('o'+i);if(b){b.disabled=true;b.classList.remove('selected','wrong','correct')}}
+      byId('o'+selected)?.classList.add('correct');
+      if(!correctQuestions.has(current)){
+        correctQuestions.add(current);correctCount=correctQuestions.size;
+        if(gameMode==='team')teamScores[currentTeam]=(Number(teamScores[currentTeam])||0)+5;
+      }
+      earned=gameMode==='team'?formatPoints(teamScores[currentTeam]):formatPoints(correctCount*5);
+      txt('earned',earned);updateTeamBox();updateLiveScore();
+      txt('status','⭐ Teacher Bonus: '+getCurrentTeamName()+' को +5.00 Points.');
+      const l=byId('lock');if(l){l.disabled=false;l.textContent=current===QUESTIONS.length-1?'🏆 FINISH & VIEW RESULT':'➡️ NEXT QUESTION';l.classList.add('next-big')}
+      byId('teacherModal')?.classList.add('hidden');
+    },true);
+  }
+})();
+</script>
+
+<!-- FINAL TEACHER SUPPORT + CLEAN DISPLAY OVERRIDE -->
+<script id="kbc-final-teacher-support-clean-fix">
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function hide(id){const e=byId(id);if(e)e.classList.add('hidden')}
+  function show(id){const e=byId(id);if(e)e.classList.remove('hidden')}
+  function status(v){const e=byId('status');if(e)e.textContent=v}
+
+  const btn=byId('teacherSupport');
+  const modal=byId('teacherSupportModal');
+  const opts=byId('teacherSupportOptions');
+  const close=byId('closeTeacherSupport');
+
+  function openSupport(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    if(typeof locked!=='undefined' && locked){status('🧑‍🏫 Teacher Support: यह प्रश्न पहले ही Lock हो चुका है।');return;}
+    if(typeof reading!=='undefined' && reading){status('🧑‍🏫 Teacher Support: पहले 5-second reading phase पूरा होने दें।');return;}
+    const teamMode=typeof gameMode!=='undefined' && gameMode==='team';
+    const t=teamMode?(Number(currentTeam)||0):0;
+    const used=teamMode?!!teamUsedTeacher[t]:!!usedTeacherSupport;
+    if(used){status('🧑‍🏫 Teacher Support इस Player/Team के लिए पहले ही इस्तेमाल हो चुका है।');if(typeof updateLifelineUI==='function')updateLifelineUI();return;}
+    try{pauseTimer()}catch(err){}
+    if(opts && typeof QUESTIONS!=='undefined' && QUESTIONS[current]){
+      opts.innerHTML=QUESTIONS[current].o.map(function(v,n){
+        const ob=byId('o'+n);
+        if(!ob || ob.hidden || ob.style.display==='none')return '';
+        return '<button type="button" class="vote teacher-support-option" data-clean-teacher="'+n+'"><span>'+String.fromCharCode(65+n)+'</span>'+renderOptionBI(v)+'</button>';
+      }).join('');
+      opts.querySelectorAll('[data-clean-teacher]').forEach(function(o){
+        o.addEventListener('click',function(ev){
+          ev.preventDefault();ev.stopPropagation();
+          const n=Number(this.getAttribute('data-clean-teacher'));
+          if(typeof locked!=='undefined' && locked)return;
+          selected=n;
+          for(let x=0;x<4;x++){const ob=byId('o'+x);if(ob)ob.classList.toggle('selected',x===n);}
+          if(teamMode)teamUsedTeacher[t]=true;else usedTeacherSupport=true;
+          if(typeof updateLifelineUI==='function')updateLifelineUI();
+          hide('teacherSupportModal');
+          const lock=byId('lock');if(lock)lock.disabled=false;
+          status('🧑‍🏫 Teacher Support: Teacher ने Option '+String.fromCharCode(65+n)+' suggest किया है। अब Lock Answer करें।');
+          try{resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}catch(err){}
+        },{once:true});
+      });
+    }
+    show('teacherSupportModal');
+    const info=byId('teacherSupportInfo');if(info)info.textContent='Teacher केवल opinion देंगे — final answer आपको Lock Answer से देना है।';
+    status('🧑‍🏫 Teacher Support खुला है — Teacher की राय चुनें।');
+  }
+
+  if(btn){
+    const fresh=btn.cloneNode(true);btn.replaceWith(fresh);
+    fresh.addEventListener('click',openSupport,true);
+  }
+  if(close){
+    const fresh=close.cloneNode(true);close.replaceWith(fresh);
+    fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();hide('teacherSupportModal');try{if(!locked&&!reading){resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}}catch(err){}},true);
+  }
+})();
+</script>
+
+
+
+<script id="kbc-final-manual-winner-inputs">
+(function(){
+  function setPlaceholders(){
+    const a=document.getElementById('teamA'), b=document.getElementById('teamB');
+    if(!a||!b||typeof selectedClass==='undefined')return;
+    const finalMode=String(selectedClass)==='final';
+    a.placeholder=finalMode?'SEMI FINAL 01 WINNER':'TEAM NAME';
+    b.placeholder=finalMode?'SEMI FINAL 02 WINNER':'TEAM NAME';
+  }
+  ['semiFinal01Btn','semiFinal02Btn','finalTestBtn'].forEach(function(id){
+    const b=document.getElementById(id);
+    if(b)b.addEventListener('click',function(){setTimeout(setPlaceholders,0)},true);
+  });
+  setPlaceholders();
 })();
 </script>
 </body>
