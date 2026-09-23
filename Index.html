@@ -4762,6 +4762,7 @@ html:fullscreen body{overflow:hidden!important;}
         }
         if(gameMode==='team'){txt('earned',formatPoints(teamScores[currentTeam]));updateTeamBox();}
         updateLiveScore();
+        try{playNamedSound('gameOverMusic',.95);}catch(err){}
         txt('status',gameMode==='team'?'❌ गलत उत्तर — -1.67 Points. GAME OVER!':'❌ गलत उत्तर — GAME OVER!');
         setTimeout(()=>byId('wrongDecision')?.classList.remove('hidden'),500);
         return;
