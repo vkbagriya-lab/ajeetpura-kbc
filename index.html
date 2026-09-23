@@ -2024,7 +2024,7 @@ let finalistNames=[];
 const PRIZE=Array.from({length:50},(_,i)=>((i+1)*5).toFixed(2)+" Points");
 
 let nextMode=false;
-let current=0,selected=-1,locked=false,time=20,timer=null,earned="0.00 Points",audio=null,bgOn=false,bgTimer=null,readTimer=null,reading=true,musicEnabled=true,currentMusicId=null;
+let current=0,selected=-1,locked=false,time=30,timer=null,earned="0.00 Points",audio=null,bgOn=false,bgTimer=null,readTimer=null,reading=true,musicEnabled=true,currentMusicId=null;
 let correctQuestions=new Set(),correctCount=0;
 let teamWrongQuestions=new Set();
 let used5050=false,usedPollCount=0,votes=[0,0,0,0];
@@ -2137,17 +2137,17 @@ function resumeGame(){
        readTimer=setTimeout(()=>{
          if(gamePaused || locked)return;
          gamePhase="answer"; reading=false;
-         setText("timer","20");
-         startQuestionTimer(20);
-         setText("status",gameMode==="speed"?"⚡ अब 15 seconds में उत्तर दें":"⏱️ अब 20 seconds में उत्तर दें");
+         setText("timer","30");
+         startQuestionTimer(30);
+         setText("status","⏱️ अब 30 seconds में उत्तर दें");
          document.querySelectorAll(".option").forEach(b=>b.disabled=false);
          playMusic("answerMusic");
        },5000);
      }else{
        gamePhase="answer"; reading=false;
-       setText("timer","20");
-       startQuestionTimer(20);
-       setText("status",gameMode==="speed"?"⚡ अब 15 seconds में उत्तर दें":"⏱️ अब 20 seconds में उत्तर दें");
+       setText("timer","30");
+       startQuestionTimer(30);
+       setText("status","⏱️ अब 30 seconds में उत्तर दें");
        document.querySelectorAll(".option").forEach(b=>b.disabled=false);
        playMusic("answerMusic");
      }
@@ -2358,7 +2358,10 @@ function startGame(){
  correctCount=0;
  earned="0.00 Points";
  teamScores=[0,0,0,0];
- currentTeam=0;
+ // IMPORTANT: in Semi Final 02 the first active team is TEAM B, and in Semi Final 01 it is TEAM A.
+ // Do not reset currentTeam to TEAM A here; the Start handler already resolved the active match.
+ const activeStart=getActiveMatchTeams();
+ currentTeam=activeStart[0]??0;
  used5050=false; usedPollCount=0; usedPollCount=0;
  teamUsed5050=[false,false,false,false]; teamPollCount=[0,0,0,0]; teamUsedTeacher=[false,false,false,false]; usedTeacherSupport=false;
  setText("player","👤 "+name);
@@ -2540,7 +2543,7 @@ function loadQuestion(){
  stopContinuousBuzzer(); timeoutHeld=false;
  const ca=document.getElementById("correctAnswerMusic"); if(ca){ca.pause();ca.currentTime=0;}
  document.getElementById("timerToggle").disabled=false;
- clearInterval(timer); clearTimeout(readTimer); reading=true; time=20;
+ clearInterval(timer); clearTimeout(readTimer); reading=true; time=30;
  if(current>=QUESTIONS.length){stopAllMusic();endGame(true);return}
  selected=-1;locked=false;timerPaused=false;
  setText("timer","");
@@ -2576,9 +2579,9 @@ function loadQuestion(){
    readTimer=setTimeout(()=>{
      if(gamePaused || locked)return;
      gamePhase="answer"; reading=false;
-     setText("timer",gameMode==="speed"?"15":"20");
-     startQuestionTimer(gameMode==="speed"?15:20);
-     setText("status",gameMode==="speed"?"⚡ अब 15 seconds में उत्तर दें":"⏱️ अब 20 seconds में उत्तर दें");
+     setText("timer","30");
+     startQuestionTimer(30);
+     setText("status","⏱️ अब 30 seconds में उत्तर दें");
      document.querySelectorAll(".option").forEach(b=>b.disabled=false);
      // IMPORTANT: lifeline buttons were staying disabled because updateLifelineUI()
      // ran while reading=true. Refresh them exactly when answer phase begins.
@@ -2670,7 +2673,7 @@ function continueAfterGameOver(){
   reading=false;
   timerPaused=false;
   timeoutHeld=false;
-  time=(gameMode==="speed"?15:20);
+  time=(30);
 
   for(let n=0;n<4;n++){
     const b=document.getElementById("o"+n);
@@ -2691,10 +2694,10 @@ function continueAfterGameOver(){
     b.style.pointerEvents="auto"; b.removeAttribute("aria-hidden");
   }
   updateLifelineUI();
-  setText("timer",gameMode==="speed"?"15":"20");
-  setText("status",gameMode==="speed"?"🔄 उसी प्रश्न पर वापस — 15 seconds में उत्तर दें।":"🔄 उसी प्रश्न पर वापस — 20 seconds में उत्तर दें।");
+  setText("timer","30");
+  setText("status","🔄 उसी प्रश्न पर वापस — 30 seconds में उत्तर दें।");
   playMusic("answerMusic");
-  startQuestionTimer(gameMode==="speed"?15:20);
+  startQuestionTimer(30);
   renderQuestionJump();
 }
 
@@ -2721,7 +2724,7 @@ function nextAfterGameOver(){
   reading=true;
   timerPaused=false;
   timeoutHeld=false;
-  time=20;
+  time=30;
   loadQuestion();
   setText("status","➡️ अगला प्रश्न शुरू हो रहा है...");
 }
@@ -2776,7 +2779,7 @@ function openLifelineChooser(){
 function closeLifelineChooser(resume=true){
  document.getElementById("lifelineChoiceModal").classList.add("hidden");
  if(resume && !locked && !reading){
-   resumeTimer(gameMode==="speed"?15:20);
+   resumeTimer(30);
    playMusic("answerMusic");
  }
 }
@@ -2847,7 +2850,7 @@ function use5050(){
  if(selected<0) document.getElementById("lock").disabled=true;
  setText("status","🌓 50:50 used — केवल 2 OPTIONS बचे हैं: 1 RIGHT + 1 WRONG.");
  updateLifelineUI();
- resumeTimer(gameMode==="speed"?15:20);
+ resumeTimer(30);
  playMusic("answerMusic");
 }
 
@@ -2893,7 +2896,7 @@ function resumeAfterPoll(){
  document.getElementById("resultModal").classList.add("hidden");
  if(!locked){
    timerPaused=false;
-   resumeTimer(gameMode==="speed"?15:20);
+   resumeTimer(30);
    playMusic("answerMusic");
    setText("status","👥 Audience Poll पूरा — timer फिर से शुरू।");
  }
@@ -3007,7 +3010,7 @@ function continueCurrentGame(){
   if(m)m.classList.add("hidden");
   if(!document.getElementById("game").classList.contains("hidden")){
     gamePaused=false;
-    if(!locked && !reading) startQuestionTimer(Math.max(1,time||20));
+    if(!locked && !reading) startQuestionTimer(Math.max(1,time||30));
     setText("status","▶️ Game continue हो गया।");
   }
 }
@@ -3179,7 +3182,7 @@ document.getElementById("audienceModal").addEventListener("click",e=>e.stopPropa
 document.getElementById("closeAudience").addEventListener("click",()=>{
  document.getElementById("audienceModal").classList.add("hidden");
  const st=getLifeState();
- if(!locked && !reading){ resumeTimer(gameMode==="speed"?15:20); playMusic("answerMusic"); setText("status","👥 Audience Poll बंद — timer फिर से शुरू।"); }
+ if(!locked && !reading){ resumeTimer(30); playMusic("answerMusic"); setText("status","👥 Audience Poll बंद — timer फिर से शुरू।"); }
 });
 document.getElementById("closeResult").addEventListener("click",resumeAfterPoll);
 </script>
@@ -3489,11 +3492,11 @@ function celebrate(){
   if(teacherSupportModal)teacherSupportModal.classList.add("hidden");
   document.getElementById("lock").disabled=false;
   setText("status","🧑‍🏫 Teacher Support: Teacher ने Option "+String.fromCharCode(65+n)+" suggest किया है। अब केवल Lock Answer करें।");
-  updateLifelineUI();resumeTimer(gameMode==="speed"?15:20);playMusic("answerMusic");
+  updateLifelineUI();resumeTimer(30);playMusic("answerMusic");
  }
  const tsb=document.getElementById("teacherSupport");if(tsb)tsb.addEventListener("click",openTeacherSupport);
  const closeTeacherSupport=document.getElementById("closeTeacherSupport");
- if(closeTeacherSupport)closeTeacherSupport.addEventListener("click",()=>{if(teacherSupportModal)teacherSupportModal.classList.add("hidden");if(!locked&&!reading){resumeTimer(gameMode==="speed"?15:20);playMusic("answerMusic");}});
+ if(closeTeacherSupport)closeTeacherSupport.addEventListener("click",()=>{if(teacherSupportModal)teacherSupportModal.classList.add("hidden");if(!locked&&!reading){resumeTimer(30);playMusic("answerMusic");}});
 
  const closeTeacher=()=>{if(tm)tm.classList.add("hidden")};
  const tc=document.getElementById("teacherClose");
@@ -3764,7 +3767,7 @@ html:fullscreen body{overflow:hidden!important;}
     const pos=a.indexOf(currentTeam); currentTeam=a[(pos+1+a.length)%a.length];
   }
   function resetAndLoad(){
-    selected=-1;locked=false;nextMode=false;timerPaused=false;timeoutHeld=false;reading=true;time=20;
+    selected=-1;locked=false;nextMode=false;timerPaused=false;timeoutHeld=false;reading=true;time=30;
     const l=byId('lock'); if(l){l.disabled=true;l.textContent='🔒 Lock Answer';l.classList.add('next-big')}
     const n=byId('next'); if(n){n.disabled=true;n.classList.add('hidden')}
     loadQuestion();
@@ -3781,7 +3784,7 @@ html:fullscreen body{overflow:hidden!important;}
       close.textContent='✖ CLOSE / वापस'; close.style.cssText='width:100%;margin-top:10px;min-height:44px';
       const box=tm.querySelector('.teacher-box'); if(box)box.appendChild(close);
     }
-    close.onclick=function(){ hide('teacherModal'); if(!locked&&!reading){try{resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}catch(e){}} };
+    close.onclick=function(){ hide('teacherModal'); if(!locked&&!reading){try{resumeTimer(30);playMusic('answerMusic')}catch(e){}} };
 
     const tb=byId('teacherBtn');
     if(tb){
@@ -3854,14 +3857,14 @@ html:fullscreen body{overflow:hidden!important;}
         updateLifelineUI(); hide('teacherSupportModal');
         const l=byId('lock');if(l)l.disabled=false;
         setText('status','🧑‍🏫 Teacher Support: Option '+String.fromCharCode(65+n)+' suggested. अब Lock Answer करें।');
-        resumeTimer(gameMode==='speed'?15:20); playMusic('answerMusic');
+        resumeTimer(30); playMusic('answerMusic');
       }));
     }
     modal?.classList.remove('hidden');
     setText('status','🧑‍🏫 Teacher Support खुला है — Teacher की राय लें।');
   }
   if(ts){const fresh=ts.cloneNode(true);ts.replaceWith(fresh);fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openTS()},true)}
-  if(closeTS){const fresh=closeTS.cloneNode(true);closeTS.replaceWith(fresh);fresh.addEventListener('click',function(){hide('teacherSupportModal');if(!locked&&!reading){resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}})}
+  if(closeTS){const fresh=closeTS.cloneNode(true);closeTS.replaceWith(fresh);fresh.addEventListener('click',function(){hide('teacherSupportModal');if(!locked&&!reading){resumeTimer(30);playMusic('answerMusic')}})}
 
   // ----- Projector -----
   const pb=byId('projectorBtn');
@@ -4367,7 +4370,7 @@ html:fullscreen body{overflow:hidden!important;}
     }catch(e){console.warn('Competition 20Q fix',e)}
   }
   const start=document.getElementById('startBtn');
-  if(start) start.addEventListener('click',function(){setTimeout(forceCompetition20,30);},true);
+  if(start) start.addEventListener('click',function(){/* 20-question guard: do not overwrite the randomized question/answer mapping. */},true);
   window.addEventListener('load',forceCompetition20);
 })();
 </script>
@@ -4554,6 +4557,7 @@ html:fullscreen body{overflow:hidden!important;}
   }
   function restoreCompetitionBank(){
     try{
+      if(Array.isArray(QUESTIONS) && QUESTIONS.length===20) return;
       if(typeof selectedClass==='undefined')return;
       if(selectedClass==='sf1'||selectedClass==='sf2'||selectedClass==='final'){
         const raw=selectedClass==='sf1'?SEMIFINAL01_QUESTIONS:(selectedClass==='sf2'?SEMIFINAL02_QUESTIONS:FINAL_TEST_QUESTIONS);
@@ -4573,7 +4577,7 @@ html:fullscreen body{overflow:hidden!important;}
       if(current < QUESTIONS.length-1){
         current = current + 1;
         rotateTeam();
-        selected=-1; locked=false; nextMode=false; timerPaused=false; timeoutHeld=false; reading=true; time=20;
+        selected=-1; locked=false; nextMode=false; timerPaused=false; timeoutHeld=false; reading=true; time=30;
         if(typeof loadQuestion==='function')loadQuestion();
         if(gameMode==='team'&&typeof updateTeamBox==='function')updateTeamBox();
         setText('status','⏭️ Teacher Skip: अगला question शुरू हो गया है। / Next question started.');
@@ -4722,7 +4726,7 @@ html:fullscreen body{overflow:hidden!important;}
         if(current>=QUESTIONS.length-1){ if(typeof endGame==='function')endGame(false); return; }
         current++;
         if(gameMode==='team'){const a=active();let p=a.indexOf(currentTeam);if(p<0)p=0;currentTeam=a[(p+1)%a.length];}
-        nextMode=false;selected=-1;locked=false;reading=true;timerPaused=false;timeoutHeld=false;time=20;
+        nextMode=false;selected=-1;locked=false;reading=true;timerPaused=false;timeoutHeld=false;time=30;
         loadQuestion(); updateTeamBox(); updateLiveScore();
         return;
       }
@@ -4821,7 +4825,7 @@ html:fullscreen body{overflow:hidden!important;}
           hide('teacherSupportModal');
           const lock=byId('lock');if(lock)lock.disabled=false;
           status('🧑‍🏫 Teacher Support: Teacher ने Option '+String.fromCharCode(65+n)+' suggest किया है। अब Lock Answer करें।');
-          try{resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}catch(err){}
+          try{resumeTimer(30);playMusic('answerMusic')}catch(err){}
         },{once:true});
       });
     }
@@ -4836,7 +4840,7 @@ html:fullscreen body{overflow:hidden!important;}
   }
   if(close){
     const fresh=close.cloneNode(true);close.replaceWith(fresh);
-    fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();hide('teacherSupportModal');try{if(!locked&&!reading){resumeTimer(gameMode==='speed'?15:20);playMusic('answerMusic')}}catch(err){}},true);
+    fresh.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();hide('teacherSupportModal');try{if(!locked&&!reading){resumeTimer(30);playMusic('answerMusic')}}catch(err){}},true);
   }
 })();
 </script>
@@ -4859,5 +4863,90 @@ html:fullscreen body{overflow:hidden!important;}
   setPlaceholders();
 })();
 </script>
+</body>
+</html>
+
+<!-- FINAL MOBILE + WRONG-ANSWER AUDIO STABILITY FIX -->
+<style id="kbc-final-mobile-stability-fix">
+@media (max-width:760px){
+  /* Compact Team Battle so it never pushes the question/lifelines off-screen. */
+  #game #teamBattleBox{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;
+    grid-template-rows:64px auto auto!important;
+    gap:4px!important;
+    padding:5px!important;
+    margin:3px 0 5px!important;
+    min-height:0!important;
+    height:auto!important;
+    overflow:visible!important;
+  }
+  #game #teamBattleBox .team-card{
+    min-height:64px!important;
+    height:64px!important;
+    padding:5px 4px!important;
+    border-radius:11px!important;
+  }
+  #game #teamBattleBox .team-card b{font-size:15px!important;line-height:1.1!important}
+  #game #teamBattleBox .team-card small{font-size:9px!important;line-height:1.05!important;margin-top:1px!important}
+  #game #teamBattleBox .team-prize{font-size:8px!important;line-height:1!important;margin-top:2px!important}
+  #game #teamBattleBox .team-vs{font-size:12px!important}
+  #game #teamBattleBox .team-turn{font-size:10px!important;line-height:1.1!important;padding:5px 3px!important;min-height:25px!important}
+  #game #teamBattleBox .team-manual-note{font-size:8px!important;line-height:1.05!important;padding:1px!important}
+
+  /* There is only ONE action button: Lock Answer changes into Next Question.
+     The old separate #next button must never overlay it on mobile. */
+  #game .controls #next{display:none!important;position:static!important}
+  #game .controls #lock{
+    display:flex!important;
+    position:static!important;
+    flex:1 1 100%!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:56px!important;
+    margin:4px 0 2px!important;
+    order:100!important;
+    align-items:center!important;
+    justify-content:center!important;
+    line-height:1.05!important;
+    white-space:normal!important;
+    overflow:visible!important;
+  }
+  #game .controls #lock.next-big{min-width:0!important}
+}
+@media (max-width:430px){
+  #game #teamBattleBox{grid-template-columns:minmax(0,1fr) 26px minmax(0,1fr)!important;grid-template-rows:58px auto auto!important}
+  #game #teamBattleBox .team-card{min-height:58px!important;height:58px!important}
+  #game #teamBattleBox .team-card b{font-size:14px!important}
+  #game #teamBattleBox .team-card small{font-size:8px!important}
+  #game #teamBattleBox .team-prize{font-size:7px!important}
+  #game .controls #lock{min-height:52px!important;font-size:16px!important}
+}
+</style>
+<script id="kbc-final-wrong-answer-buzzer-fix">
+(function(){
+  /* Wrong-answer and timeout must both produce an immediate audible buzzer.
+     The existing gameOverMusic remains intact; this only adds a deterministic
+     WebAudio buzzer before it, using the user's Lock/Timer interaction. */
+  if(typeof window.playNamedSound==='function'){
+    const originalPlayNamedSound=window.playNamedSound;
+    window.playNamedSound=function(id,volume){
+      if(id==='gameOverMusic'){
+        try{
+          if(typeof initAudio==='function')initAudio();
+          const seq=[220,165,110,82.4];
+          seq.forEach(function(f,i){
+            setTimeout(function(){
+              try{tone(f,.22,'sawtooth',.18)}catch(e){}
+            },i*115);
+          });
+        }catch(e){}
+      }
+      return originalPlayNamedSound(id,volume);
+    };
+  }
+})();
+</script>
+
 </body>
 </html>
